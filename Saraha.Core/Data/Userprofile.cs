@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -7,10 +8,15 @@ namespace Saraha.Core.Data
 {
     public partial class Userprofile
     {
-      
-        public decimal Userid { get; set; }
+        [Key]
+        public int Userid { get; set; }
+        [Required]
         public string Username { get; set; }
+
+        [DataType(dataType: DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [DataType(dataType: DataType.PhoneNumber)]
         public string Phonenumber { get; set; }
         public string Gender { get; set; }
         public DateTime? Birthdate { get; set; }
