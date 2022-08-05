@@ -18,7 +18,7 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public void delete(int id)
+        public void Delete(int id)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@postIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -27,13 +27,13 @@ namespace Saraha.Infra.Repository
 
         }
 
-        public List<Post> getall()
+        public List<Post> GetAll()
         {
             IEnumerable<Post> result = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
-        public void insert(Post post)
+        public void Insert(Post post)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@postDatee", post.Postdate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
@@ -44,7 +44,7 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
         }
 
-        public void update(Post post)
+        public void Update(Post post)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@postIdd", post.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);

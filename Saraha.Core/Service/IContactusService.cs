@@ -8,11 +8,11 @@ namespace Saraha.Core.Service
 {
     public interface IContactusService
     {
-        public void insert(Contactus contactus);
-        public void update(Contactus contactus);
+        public void Insert(Contactus contactus);
+        public void Update(Contactus contactus);
 
-        public void delete(int id);
+        public void Delete(int id);
 
-        public List<Contactus> getall();
+        public List<Contactus> GetAll();
     }
 }

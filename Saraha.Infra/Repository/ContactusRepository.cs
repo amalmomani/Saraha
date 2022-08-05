@@ -18,7 +18,7 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public void delete(int id)
+        public void Delete(int id)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@ContactUsidd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -26,13 +26,13 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.Execute("ContactUs_Package.deleteContactUs", parameter, commandType: CommandType.StoredProcedure);
         }
 
-        public List<Contactus> getall()
+        public List<Contactus> GetAll()
         {
             IEnumerable<Contactus> result = dbContext.Connection.Query<Contactus>("ContactUs_Package.getallContactUs", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
-        public void insert(Contactus contactus)
+        public void Insert(Contactus contactus)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@ContactUsidd", contactus.Contactusid, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -43,7 +43,7 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.Execute("ContactUs_Package.createContactUs", parameter, commandType: CommandType.StoredProcedure);
 
         }
-        public void update(Contactus contactus)
+        public void Update(Contactus contactus)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@ContactUsidd", contactus.Contactusid, dbType: DbType.Int32, direction: ParameterDirection.Input);

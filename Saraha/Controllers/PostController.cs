@@ -20,29 +20,29 @@ namespace Saraha.Controllers
         }
         [HttpGet]
         [ProducesResponseType(typeof(List<Post>), StatusCodes.Status200OK)]
-        public List<Post> getallPost()
+        public List<Post> GetAllPost()
         {
 
-            return postService.getall();
+            return postService.GetAll();
         }
         [HttpPost]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         public void createPost([FromBody] Post aboutus)
         {
-            postService.insert(aboutus);
+            postService.Insert(aboutus);
         }
 
         [HttpPut]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         public void UpdatePost([FromBody] Post aboutus)
         {
-            postService.update(aboutus);
+            postService.Update(aboutus);
         }
 
         [HttpDelete("delete/{id}")]
-        public void deletePost(int id)
+        public void DeletePost(int id)
         {
-            postService.delete(id);
+            postService.Delete(id);
         }
 
     }

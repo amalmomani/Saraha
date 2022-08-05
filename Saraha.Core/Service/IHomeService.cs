@@ -8,11 +8,11 @@ namespace Saraha.Core.Service
 {
     public interface IHomeService
     {
-        public void insert(Home home);
-        public void update(Home home);
+        public void Insert(Home home);
+        public void Update(Home home);
 
-        public void delete(int id);
+        public void Delete(int id);
 
-        public List<Home> getall();
+        public List<Home> GetAll();
     }
 }

@@ -20,29 +20,29 @@ namespace Saraha.Controllers
         }
         [HttpGet]
         [ProducesResponseType(typeof(List<Home>), StatusCodes.Status200OK)]
-        public List<Home> getallHome()
+        public List<Home> GetAllHome()
         {
 
-            return homeService.getall();
+            return homeService.GetAll();
         }
         [HttpPost]
         [ProducesResponseType(typeof(Home), StatusCodes.Status200OK)]
-        public void createHome([FromBody] Home aboutus)
+        public void CreateHome([FromBody] Home aboutus)
         {
-            homeService.insert(aboutus);
+            homeService.Insert(aboutus);
         }
 
         [HttpPut]
         [ProducesResponseType(typeof(Home), StatusCodes.Status200OK)]
         public void UpdateHome([FromBody] Home aboutus)
         {
-            homeService.update(aboutus);
+            homeService.Update(aboutus);
         }
 
         [HttpDelete("delete/{id}")]
-        public void deleteHome(int id)
+        public void DeleteHome(int id)
         {
-            homeService.delete(id);
+            homeService.Delete(id);
         }
 
     }

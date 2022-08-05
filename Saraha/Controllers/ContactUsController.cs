@@ -20,29 +20,29 @@ namespace Saraha.Controllers
         }
         [HttpGet]
         [ProducesResponseType(typeof(List<Contactus>), StatusCodes.Status200OK)]
-        public List<Contactus> getallContactus()
+        public List<Contactus> GetAllContactus()
         {
 
-            return ContactUsService.getall();
+            return ContactUsService.GetAll();
         }
         [HttpPost]
         [ProducesResponseType(typeof(Contactus), StatusCodes.Status200OK)]
-        public void createContactus([FromBody] Contactus aboutus)
+        public void CreateContactus([FromBody] Contactus aboutus)
         {
-            ContactUsService.insert(aboutus);
+            ContactUsService.Insert(aboutus);
         }
 
         [HttpPut]
         [ProducesResponseType(typeof(Contactus), StatusCodes.Status200OK)]
         public void UpdateContactus([FromBody] Contactus aboutus)
         {
-            ContactUsService.update(aboutus);
+            ContactUsService.Update(aboutus);
         }
 
         [HttpDelete("delete/{id}")]
-        public void deleteContactus(int id)
+        public void DeleteContactus(int id)
         {
-            ContactUsService.delete(id);
+            ContactUsService.Delete(id);
         }
 
     }

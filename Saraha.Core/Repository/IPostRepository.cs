@@ -8,11 +8,12 @@ namespace Saraha.Core.Repository
 {
     public interface IPostRepository
     {
-        public void insert(Post post);
-        public void update(Post post);
+        public void Insert(Post post);
+        public void Update(Post post);
 
-        public void delete(int id);
+        public void Delete(int id);
 
-        public List<Post> getall();
+        public List<Post> GetAll();
+        public void PinPost(Post post);
     }
 }

@@ -18,7 +18,7 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public void delete(int id)
+        public void Delete(int id)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@Homeidd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -27,13 +27,13 @@ namespace Saraha.Infra.Repository
 
         }
 
-        public List<Home> getall()
+        public List<Home> GetAll()
         {
             IEnumerable<Home> result = dbContext.Connection.Query<Home>("Home_Package.getallHome", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
-        public void insert(Home home)
+        public void Insert(Home home)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@Homeidd", home.Homeid, dbType: DbType.String, direction: ParameterDirection.Input);
@@ -47,7 +47,7 @@ namespace Saraha.Infra.Repository
 
         }
 
-        public void update(Home home)
+        public void Update(Home home)
         {
  var parameter = new DynamicParameters();
             parameter.Add("@Homeidd", home.Homeid, dbType: DbType.String, direction: ParameterDirection.Input);
