@@ -14,5 +14,7 @@ namespace Saraha.Core.Data
         public decimal? Userid { get; set; }
         public decimal? Serviceid { get; set; }
 
+        public virtual Service Service { get; set; }
+        public virtual Userprofile User { get; set; }
     }
 }

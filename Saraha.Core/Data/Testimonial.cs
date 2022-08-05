@@ -13,5 +13,6 @@ namespace Saraha.Core.Data
         public bool? IsAccepted { get; set; }
         public decimal? Userid { get; set; }
 
+        public virtual Userprofile User { get; set; }
     }
 }

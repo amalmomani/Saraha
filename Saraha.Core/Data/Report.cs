@@ -12,7 +12,10 @@ namespace Saraha.Core.Data
         public int reportID { get; set; }
         public string message { get; set; }
         public int userFrom { get; set; }
-       
+        [ForeignKey("userFrom")]
+        public virtual UserProfile userFrom { get; set; }
         public int userTo { get; set; }
+        [ForeignKey("userTo")]
+        public virtual UserProfile userTo { get; set; }
     }
 }

@@ -6,14 +6,22 @@ using System.Text;
 
 namespace Saraha.Core.Data
 {
-    public class Activity
+   public class Activity
     {
         [Key]
         public int activityID { get; set; }
-        public string message { get; set; }
+        public string message { get; set; } 
         public int userID { get; set; }
+        [ForeignKey("userID")]
+        public virtual Userprofile user { get; set; }
         public int likeID { get; set; }
+        [ForeignKey("likeID")]
+        public virtual Postlike like { get; set; }
         public int commentID { get; set; }
+        [ForeignKey("commentID")]
+        public virtual Postcomment comment { get; set; }
         public int postID { get; set; }
+        [ForeignKey("postID")]
+        public virtual Post post { get; set; }
     }
 }
