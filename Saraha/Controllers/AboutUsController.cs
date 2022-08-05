@@ -4,6 +4,7 @@ using Saraha.Core.Data;
 using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,6 +44,35 @@ namespace Saraha.Controllers
         public void DeleteAboutus(int id)
         {
             AboutUsService.Delete(id);
+        }
+        [HttpPost("uploadeimage")]
+        public Aboutus uploadeimage()
+        {
+
+            try
+            {
+                var file = Request.Form.Files[0];
+                byte[] fileContent;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    fileContent = ms.ToArray();
+                }
+                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"(fileName).{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("resc", attachmentFileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Aboutus item = new Aboutus();
+                item.Imagepath = attachmentFileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
     }
