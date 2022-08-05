@@ -44,6 +44,11 @@ namespace Saraha.Controllers
         {
             postService.Delete(id);
         }
+        [HttpDelete("PinPost/{id}")]
+        public void PinPost(int id)
+        {
+            postService.PinPost(id);
+        }
 
     }
 }

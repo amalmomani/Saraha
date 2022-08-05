@@ -14,5 +14,7 @@ namespace Saraha.Core.Service
         public void Delete(int id);
 
         public List<Post> GetAll();
+        public void PinPost(int id);
+
     }
 }

@@ -44,6 +44,15 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
         }
 
+        public void PinPost(int id)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@postIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = dbContext.Connection.Execute("Post_package.PinPost", parameter, commandType: CommandType.StoredProcedure);
+
+        }
+
         public void Update(Post post)
         {
             var parameter = new DynamicParameters();

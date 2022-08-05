@@ -29,6 +29,11 @@ namespace Saraha.Infra.Service
             repo.Insert(post);
         }
 
+        public void PinPost(int id)
+        {
+            repo.PinPost(id);
+        }
+
         public void Update(Post post)
         {
             repo.Update(post);
