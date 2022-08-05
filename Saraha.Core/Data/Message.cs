@@ -14,7 +14,14 @@ namespace Saraha.Core.Data
     
         public string status { get; set; }
         public DateTime messageDate { get; set; }
-        public int userFrom { get; set; }       
+        public int userFrom { get; set; }
+        [ForeignKey("userFrom")]
+        public virtual Userprofile Userprofile { get; set; }
         public int userTo { get; set; }
+        [ForeignKey("userTo")]
+        public virtual Userprofile Userprofile { get; set; }
+
+
+
     }
 }

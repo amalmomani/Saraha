@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Saraha.Core.Data
 {
-    public class Role
+    public partial class Role
     {
-       [Key]
+      
         public decimal Roleid { get; set; }
         public string Rolename { get; set; }
     }

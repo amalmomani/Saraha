@@ -22,6 +22,5 @@ namespace Saraha.Core.Data
         public string Imagepath { get; set; }
         public bool? IsPremium { get; set; }
 
-      
     }
 }
