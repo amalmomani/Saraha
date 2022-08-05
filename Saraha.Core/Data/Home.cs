@@ -15,7 +15,5 @@ namespace Saraha.Core.Data
         public decimal? Aboutusid { get; set; }
         public decimal? Contactusid { get; set; }
 
-        public virtual Aboutus Aboutus { get; set; }
-        public virtual Contactus Contactus { get; set; }
     }
 }

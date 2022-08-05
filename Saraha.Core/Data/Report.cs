@@ -13,9 +13,9 @@ namespace Saraha.Core.Data
         public string message { get; set; }
         public int userFrom { get; set; }
         [ForeignKey("userFrom")]
-        public virtual UserProfile userFrom { get; set; }
+        public virtual Userprofile UserFrom { get; set; }
         public int userTo { get; set; }
         [ForeignKey("userTo")]
-        public virtual UserProfile userTo { get; set; }
+        public virtual Userprofile UserTo { get; set; }
     }
 }

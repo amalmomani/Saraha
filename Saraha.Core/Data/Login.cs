@@ -17,7 +17,5 @@ namespace Saraha.Core.Data
         public bool? IsBlocked { get; set; }
         public decimal? Roleid { get; set; }
 
-        public virtual Role Role { get; set; }
-        public virtual Userprofile User { get; set; }
     }
 }
