@@ -21,8 +21,9 @@ namespace Saraha.Infra.Repository
         public bool createMessage(Message message)
         {
             var parameter = new DynamicParameters();
+            parameter.Add("@MessageIDD", message.messageID, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@MessageContentt", message.messageContent, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@statuss", message.status, dbType: DbType.Boolean, direction: ParameterDirection.Input);
+            parameter.Add("@statuss", message.status, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@MessageDatee", message.messageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("@UserFromm", message.userFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@UserToo", message.userTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
