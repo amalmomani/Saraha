@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Saraha.Core.Data
 {
-      public  class Userprofile
+    public partial class Userprofile
     {
         [Key]
         public int Userid { get; set; }

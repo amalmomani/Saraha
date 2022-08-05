@@ -9,19 +9,19 @@ namespace Saraha.Core.Data
    public class Activity
     {
         [Key]
-        public int activityID { get; set; }
-        public string message { get; set; } 
-        public int userID { get; set; }
-        [ForeignKey("userID")]
-        public virtual Userprofile user { get; set; }
-        public int likeID { get; set; }
-        [ForeignKey("likeID")]
-        public virtual Postlike like { get; set; }
-        public int commentID { get; set; }
-        [ForeignKey("commentID")]
-        public virtual Postcomment comment { get; set; }
-        public int postID { get; set; }
-        [ForeignKey("postID")]
-        public virtual Post post { get; set; }
+        public int ActivityID { get; set; }
+        public string Message { get; set; } 
+        public int UserID { get; set; }
+        [ForeignKey("UserID")]
+        public virtual UserProfile UserProfile { get; set; }
+        public int LikeId { get; set; }
+        [ForeignKey("LikeId")]
+        public virtual Postlike Like { get; set; }
+        public int CommentId { get; set; }
+        [ForeignKey("CommentId")]
+        public virtual Postcomment Postcomment { get; set; }
+        public int PostId { get; set; }
+        [ForeignKey("PostId")]
+        public virtual Post Post { get; set; }
     }
 }

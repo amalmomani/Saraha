@@ -14,9 +14,6 @@ namespace Saraha.Core.Data
         public string Content { get; set; }
         public int? Stars { get; set; }
         public bool? IsAccepted { get; set; }
-        public int? Userid { get; set; }
-        [ForeignKey("Userid")]
-        public virtual Userprofile Userprofile { get; set; }
-
+        public decimal? Userid { get; set; }
     }
 }

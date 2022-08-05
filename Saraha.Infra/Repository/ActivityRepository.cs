@@ -21,11 +21,11 @@ namespace Saraha.Infra.Repository
         public bool createActivity(Activity activity)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@Messagee", activity.message, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@UserIDD", activity.userID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@LikeIDD", activity.likeID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@CommentIDD", activity.commentID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@PostIDD", activity.postID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@Messagee", activity.Message, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@UserIDD", activity.UserID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@LikeIDD", activity.LikeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@CommentIDD", activity.CommentId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@PostIDD", activity.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Activity_package_api.createActivity", parameter, commandType: CommandType.StoredProcedure);
             return true;
@@ -50,12 +50,12 @@ namespace Saraha.Infra.Repository
         public bool UpdateActivity(Activity activity)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@ActivityIDD", activity.activityID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@Messagee", activity.message, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@UserIDD", activity.userID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@LikeIDD", activity.likeID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@CommentIDD", activity.commentID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@PostIDD", activity.postID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@ActivityIDD", activity.ActivityID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@Messagee", activity.Message, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@UserIDD", activity.UserID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@LikeIDD", activity.LikeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@CommentIDD", activity.CommentId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@PostIDD", activity.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Activity_package_api.UpdateActivity", parameter, commandType: CommandType.StoredProcedure);
             return true;

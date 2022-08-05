@@ -21,10 +21,10 @@ namespace Saraha.Infra.Repository
         public bool createReport(Report report)
         {
             var parameter = new DynamicParameters();
-            
-            parameter.Add("@Messagee", report.message, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@UserFromm", report.userFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@UserToo", report.userTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            parameter.Add("@Messagee", report.Message, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@UserFromm", report.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@UserToo", report.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Report_package_api.createReport", parameter, commandType: CommandType.StoredProcedure);
             return true;
@@ -49,10 +49,10 @@ namespace Saraha.Infra.Repository
         public bool UpdateReport(Report report)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@ReportIDD", report.reportID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@Messagee", report.message, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@UserFromm", report.userFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@UserToo", report.userTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@ReportIDD", report.ReportId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@Messagee", report.Message, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@UserFromm", report.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@UserToo", report.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Report_package_api.UpdateReport", parameter, commandType: CommandType.StoredProcedure);
             return true;

@@ -21,12 +21,12 @@ namespace Saraha.Infra.Repository
         public bool createMessage(Message message)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@MessageIDD", message.messageID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@MessageContentt", message.messageContent, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@statuss", message.status, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@MessageDatee", message.messageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            parameter.Add("@UserFromm", message.userFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@UserToo", message.userTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+        
+            parameter.Add("@MessageContentt", message.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@statuss", message.Status, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@MessageDatee", message.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@UserFromm", message.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@UserToo", message.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Message_package_api.createMessage", parameter, commandType: CommandType.StoredProcedure);
             return true;
@@ -51,12 +51,12 @@ namespace Saraha.Infra.Repository
         public bool UpdateMessage(Message message)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@MessageIDD", message.messageID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@MessageContentt", message.messageContent, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@statuss", message.status, dbType: DbType.Boolean, direction: ParameterDirection.Input);
-            parameter.Add("@MessageDatee", message.messageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            parameter.Add("@UserFromm", message.userFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@UserToo", message.userTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@MessageIDD", message.MessageID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@MessageContentt", message.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@statuss", message.Status, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@MessageDatee", message.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@UserFromm", message.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@UserToo", message.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Message_package_api.UpdateMessage", parameter, commandType: CommandType.StoredProcedure);
             return true;
