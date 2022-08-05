@@ -9,17 +9,21 @@ namespace Saraha.Core.Data
     public class Message
     {
         [Key]
-        public int messageID { get; set; }
-        public string messageContent { get; set; }
+        public int MessageID { get; set; }
+        public string MessageContent { get; set; }
     
-        public string status { get; set; }
-        public DateTime messageDate { get; set; }
-        public int userFrom { get; set; }
+        public string Status { get; set; }
+        public DateTime MessageDate { get; set; }
+        public int UserFrom { get; set; }
         [ForeignKey("userFrom")]
-        public virtual Userprofile UserFrom { get; set; }
+        public virtual Userprofile Userfrom { get; set; }
         public int userTo { get; set; }
         [ForeignKey("userTo")]
         public virtual Userprofile UserTo { get; set; }
+        public virtual Userprofile UserProfileFrom { get; set; }
+        public int Userto { get; set; }
+        [ForeignKey("userTo")]
+        public virtual Userprofile UserprofileFrom { get; set; }
 
 
 
