@@ -17,7 +17,7 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public bool CreateUserProfile(UserProfile userProfile)
+        public bool CreateUserProfile(Userprofile userProfile)
         {
             var p = new DynamicParameters();
        
@@ -47,10 +47,9 @@ namespace Saraha.Infra.Repository
             return true;
         }
 
-        public List<UserProfile> GetallUserProfile()
+        public List<Userprofile> GetallUserProfile()
         {
-            IEnumerable<UserProfile> result = dbContext.Connection.Query<UserProfile>
-                ("User_Package.GetAllUsers", commandType: CommandType.StoredProcedure);
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>("User_Package.GetAllUsers", commandType: CommandType.StoredProcedure);
 
             return result.ToList();
         }
@@ -80,7 +79,7 @@ namespace Saraha.Infra.Repository
             return true;
         }
 
-        public bool UpdateUserProfile(UserProfile userProfile)
+        public bool UpdateUserProfile(Userprofile userProfile)
         {
             var p = new DynamicParameters();
 

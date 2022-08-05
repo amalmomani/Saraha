@@ -13,7 +13,7 @@ namespace Saraha.Core.Data
         public string Message { get; set; } 
         public int UserID { get; set; }
         [ForeignKey("UserID")]
-        public virtual UserProfile UserProfile { get; set; }
+        public virtual Userprofile UserProfile { get; set; }
         public int LikeId { get; set; }
         [ForeignKey("LikeId")]
         public virtual Postlike Like { get; set; }

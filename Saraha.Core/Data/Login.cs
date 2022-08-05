@@ -27,7 +27,7 @@ namespace Saraha.Core.Data
         public int? Userid { get; set; }
 
         [ForeignKey("Userid")]
-        public virtual UserProfile Userprofile { get; set; }
+        public virtual Userprofile Userprofile { get; set; }
 
 
     }
