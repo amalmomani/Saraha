@@ -7,10 +7,10 @@ using System.Text;
 
 namespace Saraha.Infra.Service
 {
-    public class ContactusService : IContactusService
+    public class PostService : IPostService
     {
-        private readonly IContactusRepository repo;
-        public ContactusService(IContactusRepository repo)
+        private readonly IPostRepository repo;
+        public PostService(IPostRepository repo)
         {
             this.repo = repo;
         }
@@ -19,19 +19,19 @@ namespace Saraha.Infra.Service
             repo.delete(id);
         }
 
-        public List<Contactus> getall()
+        public List<Post> getall()
         {
             return repo.getall();
         }
 
-        public void insert(Contactus contactus)
+        public void insert(Post post)
         {
-            repo.insert(contactus);
+            repo.insert(post);
         }
 
-        public void update(Contactus contactus)
+        public void update(Post post)
         {
-            repo.update(contactus);
+            repo.update(post);
         }
     }
 }

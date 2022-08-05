@@ -36,10 +36,18 @@ namespace Saraha
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IActivityRepository, ActivityRepository>();
             services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<IAboutUsRepository, AboutUsRepository>();
+            services.AddScoped<IContactusRepository, ContactusRepository>();
+            services.AddScoped<IHomeRepository, HomeRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
 
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IActivityService, ActivityService>();
             services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IAboutUsService, AboutUsService>();
+            services.AddScoped<IContactusService, ContactusService>();
+            services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<IPostService, PostService>();
 
         }
 
