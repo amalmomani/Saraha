@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Saraha.Core.Data
 {
-    public partial class Login
+    public  class Login
     {
         [Key]
         public int Loginid { get; set; }
@@ -26,7 +26,7 @@ namespace Saraha.Core.Data
         public int? Userid { get; set; }
 
         [ForeignKey("Userid")]
-        public virtual Userprofile Userprofile { get; set; }
+        public virtual UserProfile Userprofile { get; set; }
 
 
     }

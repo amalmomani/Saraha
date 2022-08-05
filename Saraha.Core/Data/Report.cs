@@ -9,10 +9,10 @@ namespace Saraha.Core.Data
    public  class Report
     {
         [Key]
-        public int reportID { get; set; }
-        public string message { get; set; }
-        public int userFrom { get; set; }
+        public int ReportId { get; set; }
+        public string Message { get; set; }
+        public int UserFrom { get; set; }
        
-        public int userTo { get; set; }
+        public int UserTo { get; set; }
     }
 }

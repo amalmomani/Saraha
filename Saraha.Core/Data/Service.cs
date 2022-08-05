@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Saraha.Core.Data
 {
-    public partial class Service
+    public class Service
     {
       
         public decimal Serviceid { get; set; }

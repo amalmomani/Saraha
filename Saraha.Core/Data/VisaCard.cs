@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Saraha.Core.Data
 {
-    public interface VisaCard
+    public class VisaCard
     {
         [Key]
-        public int paymentID { get; set; }
+        public int PaymentID { get; set; }
         public string CVV { get; set; }
-        public string cardNumber { get; set; }
-        public double balance { get; set; }
-        public DateTime expirationDate { get; set; }
+        public string CardNumber { get; set; }
+        public double Balance { get; set; }
+        public DateTime ExpirationDate { get; set; }
     }
 }

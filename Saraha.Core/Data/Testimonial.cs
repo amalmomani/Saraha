@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Saraha.Core.Data
 {
-    public partial class Testimonial
+    public  class Testimonial
     {
         [Key]
         public int Testimonialid { get; set; }
@@ -16,7 +16,7 @@ namespace Saraha.Core.Data
         public bool? IsAccepted { get; set; }
         public int? Userid { get; set; }
         [ForeignKey("Userid")]
-        public virtual Userprofile Userprofile { get; set; }
+        public virtual UserProfile Userprofile { get; set; }
 
     }
 }
