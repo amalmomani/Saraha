@@ -17,7 +17,7 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public bool CreateUserProfile(Userprofile userProfile)
+        public void CreateUserProfile(Userprofile userProfile)
         {
             var p = new DynamicParameters();
        
@@ -31,11 +31,9 @@ namespace Saraha.Infra.Repository
 
             var result = dbContext.Connection.ExecuteAsync("User_Package.CreateUser", p,
                 commandType: CommandType.StoredProcedure);
-
-            return true;
         }
 
-        public bool DeleteUserProfile(int? id)
+        public void DeleteUserProfile(int? id)
         {
             var p = new DynamicParameters();
 
@@ -44,7 +42,6 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.ExecuteAsync("User_Package.DeleteUser", p,
               commandType: CommandType.StoredProcedure);
 
-            return true;
         }
 
         public List<Userprofile> GetallUserProfile()
@@ -79,7 +76,7 @@ namespace Saraha.Infra.Repository
             return true;
         }
 
-        public bool UpdateUserProfile(Userprofile userProfile)
+        public void UpdateUserProfile(Userprofile userProfile)
         {
             var p = new DynamicParameters();
 
@@ -95,7 +92,14 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.ExecuteAsync("User_Package.UpdateUser", p,
                 commandType: CommandType.StoredProcedure);
 
-            return true;
+        }
+
+        public int UsersCount()
+        {
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>("User_Package.GetAllUsers", commandType: CommandType.StoredProcedure);
+
+            int count= result.ToList().Count();
+            return count;
         }
     }
 }

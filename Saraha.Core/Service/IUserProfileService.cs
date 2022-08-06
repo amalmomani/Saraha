@@ -3,17 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Saraha.Core.Repository
+namespace Saraha.Core.Service
 {
-     public interface IUserProfileRepository
+    public interface IUserProfileService
     {
         public List<Userprofile> GetallUserProfile();
         public void CreateUserProfile(Userprofile userProfile);
         public void UpdateUserProfile(Userprofile userProfile);
         public void DeleteUserProfile(int? id);
         public bool IsEmailExist(string email);
-        public bool UpdatePremium(int isPremium,int userId);
+        public bool UpdatePremium(int isPremium, int userId);
         public int UsersCount();
-
     }
 }

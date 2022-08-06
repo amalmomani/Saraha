@@ -40,6 +40,7 @@ namespace Saraha
             services.AddScoped<IContactusRepository, ContactusRepository>();
             services.AddScoped<IHomeRepository, HomeRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IActivityService, ActivityService>();
@@ -48,6 +49,7 @@ namespace Saraha
             services.AddScoped<IContactusService, ContactusService>();
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
 
         }
 
