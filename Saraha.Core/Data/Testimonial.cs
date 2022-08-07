@@ -12,8 +12,8 @@ namespace Saraha.Core.Data
         [Key]
         public int Testimonialid { get; set; }
         public string Content { get; set; }
-        public int? Stars { get; set; }
-        public bool? IsAccepted { get; set; }
-        public decimal? Userid { get; set; }
+        public int Stars { get; set; }
+        public bool Is_Accepted { get; set; }
+        public int Userid { get; set; }
     }
 }

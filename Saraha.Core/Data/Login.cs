@@ -16,9 +16,9 @@ namespace Saraha.Core.Data
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
-        public bool? IsVerified { get; set; }
-        public bool? IsActive { get; set; }
-        public bool? IsBlocked { get; set; }
+        public bool? Is_Verified { get; set; }
+        public bool? Is_Active { get; set; }
+        public bool? Is_Blocked { get; set; }
         public int? Roleid { get; set; }
 
         [ForeignKey("Roleid")]

@@ -41,6 +41,9 @@ namespace Saraha
             services.AddScoped<IHomeRepository, HomeRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<ITestimonialRepository, TestimonialRepository>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IActivityService, ActivityService>();
@@ -50,6 +53,9 @@ namespace Saraha
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<ITestimonialService, TestimonialService>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IRoleService, RoleService>();
 
         }
 
