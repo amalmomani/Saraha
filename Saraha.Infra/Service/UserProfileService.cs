@@ -48,5 +48,11 @@ namespace Saraha.Infra.Service
         {
             return repo.UsersCount();
         }
+        public List<Userprofile> GetActiveUsers()
+
+        {
+
+            return repo.GetActiveUsers();
+        }
     }
 }

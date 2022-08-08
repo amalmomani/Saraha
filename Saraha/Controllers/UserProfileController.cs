@@ -50,5 +50,11 @@ namespace Saraha.Controllers
         {
             return UserProfileService.UsersCount();
         }
+        [HttpGet("GetActiveUsers")]
+        public List<Userprofile> GetActiveUsers()
+        {
+
+            return UserProfileService.GetActiveUsers();
+        }
     }
 }
