@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,7 @@ namespace Saraha.Controllers
             this.featureservice = featureservice;
         }
 
-        [HttpGet]
-        [ProducesResponseType(typeof(List<Feature>), StatusCodes.Status200OK)]
+        [HttpGet("GetFeatures")]
 
         public List<Feature> GetFeatures()
         {
@@ -43,6 +43,13 @@ namespace Saraha.Controllers
         public void DeleteComment(int id)
         {
             featureservice.DeleteFeature(id);
+        }
+        [HttpGet("GetFeatureSales")]
+
+        public List<FeatureSalesDTO> GetFeatureSales()
+        {
+
+            return featureservice.FeatureSales();
         }
 
     }

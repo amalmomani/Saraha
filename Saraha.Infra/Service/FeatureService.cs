@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using Saraha.Core.Service;
 using System;
@@ -31,5 +32,12 @@ namespace Saraha.Infra.Service
         {
             repo.UpdateFeature(feature, id);
         }
+        public List<FeatureSalesDTO> FeatureSales()
+        {
+           return repo.FeatureSales();
+
+
+        }
+
     }
 }

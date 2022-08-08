@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,11 @@ namespace Saraha.Infra.Repository
 
 
             var result = dbContext.Connection.Execute("Feature_package.updateFeature", parameter, commandType: CommandType.StoredProcedure);
+        }
+        public List<FeatureSalesDTO> FeatureSales()
+        {
+            IEnumerable<FeatureSalesDTO> result = dbContext.Connection.Query<FeatureSalesDTO>("Feature_package.getFeatureSales", commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
 
 
