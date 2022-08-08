@@ -47,6 +47,8 @@ namespace Saraha
             services.AddScoped<IPostlikeRepository, PostlikeRepository>();
             services.AddScoped<IPurchaseRepository, PurchaseRepository>();
             services.AddScoped<IPostcommentRepository, PostcommentRepository>();
+            services.AddScoped<IFeatureRepository, FeatureRepository>();
+
 
 
 
@@ -65,6 +67,8 @@ namespace Saraha
             services.AddScoped<IPostlikeService, PostlikeService>();
             services.AddScoped<IPurchaseService, PurchaseService>();
             services.AddScoped<IPostcommentService, PostcommentService>();
+            services.AddScoped<IFeatureService, FeatureService>();
+
 
 
 
