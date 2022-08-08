@@ -54,7 +54,7 @@ namespace Saraha.Infra.Repository
         {
             var parameter = new DynamicParameters();
             parameter.Add("@commentIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@commentText", Comment.Commenttext, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@commentTextt", Comment.Commenttext, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@imagePathh", Comment.Imagepath, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Comment_package.UpdateComment", parameter, commandType: CommandType.StoredProcedure);

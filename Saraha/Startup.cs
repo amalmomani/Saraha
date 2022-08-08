@@ -44,6 +44,12 @@ namespace Saraha
             services.AddScoped<ITestimonialRepository, TestimonialRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IPostlikeRepository, PostlikeRepository>();
+            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+            services.AddScoped<IPostcommentRepository, PostcommentRepository>();
+
+
+
 
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IActivityService, ActivityService>();
@@ -56,6 +62,12 @@ namespace Saraha
             services.AddScoped<ITestimonialService, TestimonialService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IPostlikeService, PostlikeService>();
+            services.AddScoped<IPurchaseService, PurchaseService>();
+            services.AddScoped<IPostcommentService, PostcommentService>();
+
+
+
 
         }
 

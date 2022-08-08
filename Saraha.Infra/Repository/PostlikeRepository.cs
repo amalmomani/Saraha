@@ -25,17 +25,17 @@ namespace Saraha.Infra.Repository
         {
             var parameter = new DynamicParameters();
             parameter.Add("@likeDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            parameter.Add("@userIdd", post.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@postIdd", post.Likeid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@userIdd", post.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@postIdd", post.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
-            var result = dbContext.Connection.Execute("PostLike_package.createLike", parameter, commandType: CommandType.StoredProcedure);
+            var result = dbContext.Connection.Execute("Like_package.createLike", parameter, commandType: CommandType.StoredProcedure);
 
         }
 
         public List<Postlike> GetAllLikes()
         {
-            IEnumerable<Postlike> result = dbContext.Connection.Query<Postlike>("PostLik_package.getallLikes", commandType: CommandType.StoredProcedure);
+            IEnumerable<Postlike> result = dbContext.Connection.Query<Postlike>("Like_package.getallLikes", commandType: CommandType.StoredProcedure);
             return result.ToList();
 
         }
@@ -43,8 +43,8 @@ namespace Saraha.Infra.Repository
         public void DeleteLike(int id)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@likeIdd", id, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            var result = dbContext.Connection.Execute("PostLike_package.DeleteLike", parameter, commandType: CommandType.StoredProcedure);
+            parameter.Add("@likeIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = dbContext.Connection.Execute("Like_package.DeleteLike", parameter, commandType: CommandType.StoredProcedure);
         }
 
     }
