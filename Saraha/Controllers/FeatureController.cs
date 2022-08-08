@@ -19,7 +19,7 @@ namespace Saraha.Controllers
             this.featureservice = featureservice;
         }
 
-        [HttpGet("GetFeatures")]
+        [HttpGet]
         [ProducesResponseType(typeof(List<Feature>), StatusCodes.Status200OK)]
 
         public List<Feature> GetFeatures()
