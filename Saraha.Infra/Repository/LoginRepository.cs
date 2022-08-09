@@ -110,5 +110,14 @@ namespace Saraha.Infra.Repository
 
             return true;
         }
+        public Login auth(Login  login)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("UserNamee", login.Username, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("Passwordd", login.Password, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            IEnumerable<Login> result = dbContext.Connection.Query<Login>("Login_Package.UserLogin", parameter, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
     }
 }

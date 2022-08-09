@@ -26,7 +26,7 @@ namespace Saraha.Infra.Service
 
         public List<Userprofile> GetallUserProfile()
         {
-            return GetallUserProfile();
+            return repo.GetallUserProfile();
         }
 
         public bool IsEmailExist(string email)
