@@ -45,8 +45,8 @@ namespace Saraha.Controllers
         {
             homeService.Delete(id);
         }
-        [HttpPost("uploadeimage")]
-        public Home uploadeimage()
+        [HttpPost("UploadeBackground")]
+        public Home UploadeBackground()
         {
 
             try
@@ -67,6 +67,35 @@ namespace Saraha.Controllers
                 }
                Home  item = new Home();
                 item.Background = attachmentFileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+        [HttpPost("UploadeLogo")]
+        public Home UploadeLogo()
+        {
+
+            try
+            {
+                var file = Request.Form.Files[0];
+                byte[] fileContent;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    fileContent = ms.ToArray();
+                }
+                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"(fileName).{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("resc", attachmentFileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Home item = new Home();
+                item.Logo = attachmentFileName;
                 return item;
             }
             catch (Exception e)
