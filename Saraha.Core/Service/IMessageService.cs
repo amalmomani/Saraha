@@ -7,9 +7,10 @@ namespace Saraha.Core.Service
 {
     public interface IMessageService
     {
-        public List<Message> getallMessage();
-        public bool createMessage(Message message);
-        public bool UpdateMessage(Message message);
-        public bool deleteMessage(int? id);
+
+        public List<Message> GetallMessage();
+        public void CreateMessage(Message message);
+        public void UpdateMessage(Message message);
+        public void DeleteMessage(int? id);
     }
 }

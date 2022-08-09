@@ -20,7 +20,7 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public bool createReport(Report report)
+        public void CreateReport(Report report)
         {
             IEnumerable<Report> reports = dbContext.Connection.Query<Report>("Report_package_api.getallReport", commandType: CommandType.StoredProcedure);
             bool exist = reports.Any(r => r.UserFrom == report.UserFrom && r.UserTo == report.UserTo);
@@ -34,7 +34,7 @@ namespace Saraha.Infra.Repository
                 parameter1.Add("@ReportIDD", details.ReportId, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 dbContext.Connection.Execute("Report_package_api.updateReportCount", parameter1, commandType: CommandType.StoredProcedure);
                 SendEmail(details.ReportedName, details.Report, details.ReportedEmail);
-                return true;
+               
            
             }
 
@@ -48,28 +48,27 @@ namespace Saraha.Infra.Repository
                 var result = dbContext.Connection.Execute("Report_package_api.createReport", parameter, commandType: CommandType.StoredProcedure);
                 SendEmail(details.ReportedName, details.Report, details.ReportedEmail);
 
-                return true;
+              
             }
            
         }
 
-        public bool deleteReport(int? id)
+        public void DeleteReport(int? id)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@ReportIDD", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Report_package_api.deleteReport", parameter, commandType: CommandType.StoredProcedure);
 
-            return true;
         }
 
-        public List<Report> getallReport()
+        public List<Report> GetallReport()
         {
             IEnumerable<Report> result = dbContext.Connection.Query<Report>("Report_package_api.getallReport", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
-        public bool UpdateReport(Report report)
+        public void UpdateReport(Report report)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@ReportIDD", report.ReportId, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -78,13 +77,7 @@ namespace Saraha.Infra.Repository
             parameter.Add("@UserToo", report.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Report_package_api.UpdateReport", parameter, commandType: CommandType.StoredProcedure);
-            return true;
-      
-        
-        
-        
-        
-        
+ 
         }
 
 

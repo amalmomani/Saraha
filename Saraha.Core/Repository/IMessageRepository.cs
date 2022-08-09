@@ -7,9 +7,9 @@ namespace Saraha.Core.Repository
 {
     public interface IMessageRepository
     {
-        public List<Message> getallMessage();
-        public bool createMessage(Message message);
-        public bool UpdateMessage(Message message);
-        public bool deleteMessage(int? id);
+        public List<Message> GetallMessage();
+        public void CreateMessage(Message message);
+        public void UpdateMessage(Message message);
+        public void DeleteMessage(int? id);
     }
 }

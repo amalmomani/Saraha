@@ -14,24 +14,24 @@ namespace Saraha.Infra.Service
         {
             this.repo = repo;
         }
-        public bool createActivity(Activity activity)
+        public void CreateActivity(Activity activity)
         {
-            return repo.createActivity(activity);
+             repo.CreateActivity(activity);
         }
 
-        public bool deleteActivity(int? id)
+        public void DeleteActivity(int? id)
         {
-            return repo.deleteActivity(id);
+             repo.DeleteActivity(id);
         }
 
-        public List<Activity> getallActivity()
+        public List<Activity> GetallActivity()
         {
-            return repo.getallActivity();
+            return repo.GetallActivity();
         }
 
-        public bool UpdateActivity(Activity activity)
+        public void UpdateActivity(Activity activity)
         {
-            return repo.UpdateActivity(activity);
+             repo.UpdateActivity(activity);
         }
     }
 }

@@ -20,29 +20,29 @@ namespace Saraha.Controllers
         }
         [HttpGet]
         [ProducesResponseType(typeof(List<Activity>), StatusCodes.Status200OK)]
-        public List<Activity> getallActivity()
+        public List<Activity> GetallActivity()
         {
 
-            return activityService.getallActivity();
+            return activityService.GetallActivity();
         }
         [HttpPost]
         [ProducesResponseType(typeof(Activity), StatusCodes.Status200OK)]
-        public bool createActivity([FromBody] Activity activity)
+        public void CreateActivity([FromBody] Activity activity)
         {
-            return activityService.createActivity(activity);
+             activityService.CreateActivity(activity);
         }
 
         [HttpPut]
         [ProducesResponseType(typeof(Activity), StatusCodes.Status200OK)]
-        public bool UpdateActivity([FromBody] Activity activity)
+        public void UpdateActivity([FromBody] Activity activity)
         {
-            return activityService.UpdateActivity(activity);
+             activityService.UpdateActivity(activity);
         }
 
         [HttpDelete("delete/{id}")]
-        public bool deleteActivity(int? id)
+        public void DeleteActivity(int? id)
         {
-            return activityService.deleteActivity(id);
+             activityService.DeleteActivity(id);
         }
 
 
