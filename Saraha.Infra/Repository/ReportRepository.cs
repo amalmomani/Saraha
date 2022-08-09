@@ -31,7 +31,7 @@ namespace Saraha.Infra.Repository
             {
                 var parameter1 = new DynamicParameters();
 
-                parameter1.Add("@ReportIDD", details.ReportId, dbType: DbType.String, direction: ParameterDirection.Input);
+                parameter1.Add("@ReportIDD", details.ReportId, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 dbContext.Connection.Execute("Report_package_api.updateReportCount", parameter1, commandType: CommandType.StoredProcedure);
                 SendEmail(details.ReportedName, details.Report, details.ReportedEmail);
                 return true;
