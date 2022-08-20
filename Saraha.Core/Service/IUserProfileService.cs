@@ -14,5 +14,7 @@ namespace Saraha.Core.Service
         public bool IsEmailExist(string email);
         public bool UpdatePremium(int isPremium, int userId);
         public int UsersCount();
+        public List<Userprofile> GetActiveUsers();
+
     }
 }

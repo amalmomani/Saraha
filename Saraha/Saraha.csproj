@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="3.3.0" />
+    <PackageReference Include="MimeKit" Version="3.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Saraha.Core\Saraha.Core.csproj" />
     <ProjectReference Include="..\Saraha.Infra\Saraha.Infra.csproj" />
   </ItemGroup>

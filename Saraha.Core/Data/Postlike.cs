@@ -8,10 +8,11 @@ namespace Saraha.Core.Data
     public partial class Postlike
     {
       
-        public decimal Likeid { get; set; }
-        public DateTime? Likedate { get; set; }
-        public decimal? Userid { get; set; }
-        public decimal? Postid { get; set; }
+        public decimal LikeId { get; set; }
+
+        public DateTime? LikeDate { get; set; }
+        public decimal? UserId { get; set; }
+        public decimal? PostId { get; set; }
 
     }
 }

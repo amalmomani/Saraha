@@ -31,6 +31,23 @@ namespace Saraha
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(corsOptions =>
+
+            {
+
+                corsOptions.AddPolicy("policy",
+
+                builder =>
+
+                {
+
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+
+                });
+
+            });
+
+
             services.AddControllers();
             services.AddScoped<IDbcontext, Dbcontext>();
             services.AddScoped<IMessageRepository, MessageRepository>();
@@ -44,6 +61,14 @@ namespace Saraha
             services.AddScoped<ITestimonialRepository, TestimonialRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IPostlikeRepository, PostlikeRepository>();
+            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+            services.AddScoped<IPostcommentRepository, PostcommentRepository>();
+            services.AddScoped<IFeatureRepository, FeatureRepository>();
+
+
+
+
 
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IActivityService, ActivityService>();
@@ -56,6 +81,14 @@ namespace Saraha
             services.AddScoped<ITestimonialService, TestimonialService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IPostlikeService, PostlikeService>();
+            services.AddScoped<IPurchaseService, PurchaseService>();
+            services.AddScoped<IPostcommentService, PostcommentService>();
+            services.AddScoped<IFeatureService, FeatureService>();
+
+
+
+
 
             services.AddCors(corsOptions =>
 

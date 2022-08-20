@@ -7,9 +7,9 @@ namespace Saraha.Core.Service
 {
    public interface IActivityService
     {
-        public List<Activity> getallActivity();
-        public bool createActivity(Activity activity);
-        public bool UpdateActivity(Activity activity);
-        public bool deleteActivity(int? id);
+        public List<Activity> GetallActivity();
+        public void CreateActivity(Activity activity);
+        public void UpdateActivity(Activity activity);
+        public void DeleteActivity(int? id);
     }
 }

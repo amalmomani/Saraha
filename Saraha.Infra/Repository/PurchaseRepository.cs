@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace Saraha.Infra.Repository
 {
-   public class PurchaseRepository
+   public class PurchaseRepository : IPurchaseRepository
     {
         private readonly IDbcontext dbContext;
 
@@ -22,15 +23,15 @@ namespace Saraha.Infra.Repository
         public void CreatePurchase(Purchase purchase)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@dateFromm", purchase.Datefrom, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            parameter.Add("@datetoo", purchase.Dateto, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            parameter.Add("@PurchaseCostt", purchase.Purchasecost, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@userIdd", purchase.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@serviceIdd", purchase.Serviceid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@dateFromm", purchase.DateFrom, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@datetoo", purchase.DateTo, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@PurchaseCostt", purchase.PurchaseCost, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@userIdd", purchase.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@featureIdd", purchase.FeatureId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
 
-            var result = dbContext.Connection.Execute("Purchase_package.createLike", parameter, commandType: CommandType.StoredProcedure);
+            var result = dbContext.Connection.Execute("Purchase_package.createPurchase", parameter, commandType: CommandType.StoredProcedure);
 
         }
 
@@ -44,7 +45,7 @@ namespace Saraha.Infra.Repository
         public void DeletePurchase(int id)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@purchaseIdd", id, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@purchaseIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = dbContext.Connection.Execute("Purchase_package.deletePurchase", parameter, commandType: CommandType.StoredProcedure);
         }
 

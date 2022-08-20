@@ -7,12 +7,12 @@ namespace Saraha.Core.Data
 {
     public partial class Purchase
     {
-        public decimal Purchaseid { get; set; }
-        public DateTime? Datefrom { get; set; }
-        public DateTime? Dateto { get; set; }
-        public decimal? Purchasecost { get; set; }
-        public decimal? Userid { get; set; }
-        public decimal? Serviceid { get; set; }
+        public decimal PurchaseID { get; set; }
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
+        public decimal? PurchaseCost { get; set; }
+        public decimal? UserId { get; set; }
+        public decimal? FeatureId { get; set; }
 
     }
 }

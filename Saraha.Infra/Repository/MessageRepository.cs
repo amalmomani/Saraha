@@ -18,10 +18,12 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public bool createMessage(Message message)
+       
+
+        public void CreateMessage(Message message)
         {
             var parameter = new DynamicParameters();
-        
+
             parameter.Add("@MessageContentt", message.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@statuss", message.Status, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@MessageDatee", message.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
@@ -29,26 +31,29 @@ namespace Saraha.Infra.Repository
             parameter.Add("@UserToo", message.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Message_package_api.createMessage", parameter, commandType: CommandType.StoredProcedure);
-            return true;
+           
         }
 
-        public bool deleteMessage(int? id)
+      
+
+        public void DeleteMessage(int? id)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@MessageIDD", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Message_package_api.deleteMessage", parameter, commandType: CommandType.StoredProcedure);
 
-            return true;
         }
 
-        public List<Message> getallMessage()
+       
+
+        public List<Message> GetallMessage()
         {
             IEnumerable<Message> result = dbContext.Connection.Query<Message>("Message_package_api.getallMessage", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
-        public bool UpdateMessage(Message message)
+        public void UpdateMessage(Message message)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@MessageIDD", message.MessageID, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -59,7 +64,9 @@ namespace Saraha.Infra.Repository
             parameter.Add("@UserToo", message.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Message_package_api.UpdateMessage", parameter, commandType: CommandType.StoredProcedure);
-            return true;
+      
         }
+
+     
     }
 }

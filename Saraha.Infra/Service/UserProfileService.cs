@@ -26,7 +26,7 @@ namespace Saraha.Infra.Service
 
         public List<Userprofile> GetallUserProfile()
         {
-            return GetallUserProfile();
+            return repo.GetallUserProfile();
         }
 
         public bool IsEmailExist(string email)
@@ -47,6 +47,12 @@ namespace Saraha.Infra.Service
         public int UsersCount()
         {
             return repo.UsersCount();
+        }
+        public List<Userprofile> GetActiveUsers()
+
+        {
+
+            return repo.GetActiveUsers();
         }
     }
 }

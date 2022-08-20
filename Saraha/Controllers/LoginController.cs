@@ -65,5 +65,19 @@ namespace Saraha.Controllers
         {
             return loginService.UpdateBlockedStatus(isBlocked, loginId);
         }
+        [HttpPost("Login")]
+        public IActionResult auth([FromBody] Login login)
+        {
+            var RESULT = loginService.auth(login);
+
+            if (RESULT == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                return Ok(RESULT);
+            }
+        }
     }
 }

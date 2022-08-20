@@ -101,5 +101,14 @@ namespace Saraha.Infra.Repository
             int count= result.ToList().Count();
             return count;
         }
+        public List<Userprofile> GetActiveUsers()
+        {
+
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>("User_Package.GetActiveUsers", commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+
+        }
+
     }
 }

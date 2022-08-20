@@ -20,7 +20,7 @@ namespace Saraha.Core.Data
         public DateTime? Birthdate { get; set; }
         public string Country { get; set; }
         public string Imagepath { get; set; }
-        public bool? IsPremium { get; set; }
+        public bool? Is_Premium { get; set; }
 
     }
 }

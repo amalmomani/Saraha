@@ -18,7 +18,7 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public bool createActivity(Activity activity)
+        public void CreateActivity(Activity activity)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@Messagee", activity.Message, dbType: DbType.String, direction: ParameterDirection.Input);
@@ -28,26 +28,26 @@ namespace Saraha.Infra.Repository
             parameter.Add("@PostIDD", activity.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Activity_package_api.createActivity", parameter, commandType: CommandType.StoredProcedure);
-            return true;
+           
         }
 
-        public bool deleteActivity(int? id)
+        public void DeleteActivity(int? id)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@ActivityIDD", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Activity_package_api.deleteActivity", parameter, commandType: CommandType.StoredProcedure);
 
-            return true;
+          
         }
 
-        public List<Activity> getallActivity()
+        public List<Activity> GetallActivity()
         {
             IEnumerable<Activity> result = dbContext.Connection.Query<Activity>("Activity_package_api.getallActivity", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
-        public bool UpdateActivity(Activity activity)
+        public void UpdateActivity(Activity activity)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@ActivityIDD", activity.ActivityID, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -58,7 +58,7 @@ namespace Saraha.Infra.Repository
             parameter.Add("@PostIDD", activity.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Activity_package_api.UpdateActivity", parameter, commandType: CommandType.StoredProcedure);
-            return true;
+      
         }
     }
 }

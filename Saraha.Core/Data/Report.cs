@@ -14,5 +14,6 @@ namespace Saraha.Core.Data
         public int UserFrom { get; set; }
        
         public int UserTo { get; set; }
+        public int ReportCount { get; set; }
     }
 }

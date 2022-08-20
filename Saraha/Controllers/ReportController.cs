@@ -21,29 +21,29 @@ namespace Saraha.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(List<Report>), StatusCodes.Status200OK)]
-        public List<Report> getallReport()
+        public List<Report> GetallReport()
         {
 
-            return reportService.getallReport();
+            return reportService.GetallReport();
         }
         [HttpPost]
         //[ProducesResponseType(typeof(Report), StatusCodes.Status200OK)]
-        public bool createReport([FromBody] Report report)
+        public void CreateReport([FromBody] Report report)
         {
-            return reportService.createReport(report);
+             reportService.CreateReport(report);
         }
 
         [HttpPut]
         [ProducesResponseType(typeof(Report), StatusCodes.Status200OK)]
-        public bool UpdateReport([FromBody] Report report)
+        public void UpdateReport([FromBody] Report report)
         {
-            return reportService.UpdateReport(report);
+             reportService.UpdateReport(report);
         }
 
         [HttpDelete("delete/{id}")]
-        public bool deleteReport(int? id)
+        public void DeleteReport(int? id)
         {
-            return reportService.deleteReport(id);
+             reportService.DeleteReport(id);
         }
 
     }
