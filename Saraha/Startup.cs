@@ -57,6 +57,22 @@ namespace Saraha
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRoleService, RoleService>();
 
+            services.AddCors(corsOptions =>
+
+            {
+
+                corsOptions.AddPolicy("policy",
+
+                builder =>
+
+                {
+
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+
+                });
+
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,7 +86,7 @@ namespace Saraha
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("policy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
