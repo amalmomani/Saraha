@@ -16,24 +16,24 @@ namespace Saraha.Infra.Service
             this.repo = repo;
         }
 
-        public bool createMessage(Message message)
+        public void CreateMessage(Message message)
         {
-            return repo.createMessage(message);
+             repo.CreateMessage(message);
         }
 
-        public bool deleteMessage(int? id)
+        public void DeleteMessage(int? id)
         {
-            return repo.deleteMessage(id);
+             repo.DeleteMessage(id);
         }
 
-        public List<Message> getallMessage()
+        public List<Message> GetallMessage()
         {
-            return repo.getallMessage();
+            return repo.GetallMessage();
         }
 
-        public bool UpdateMessage(Message message)
+        public void UpdateMessage(Message message)
         {
-            return repo.UpdateMessage(message);
+             repo.UpdateMessage(message);
         }
     }
 }

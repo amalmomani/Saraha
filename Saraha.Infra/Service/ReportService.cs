@@ -14,24 +14,24 @@ namespace Saraha.Infra.Service
         {
             this.repo = repo;
         }
-        public bool createReport(Report report)
+        public void CreateReport(Report report)
         {
-            return repo.createReport(report);
+             repo.CreateReport(report);
         }
 
-        public bool deleteReport(int? id)
+        public void DeleteReport(int? id)
         {
-            return repo.deleteReport(id);
+             repo.DeleteReport(id);
         }
 
-        public List<Report> getallReport()
+        public List<Report> GetallReport()
         {
-            return repo.getallReport();
+            return repo.GetallReport();
         }
 
-        public bool UpdateReport(Report report)
+        public void UpdateReport(Report report)
         {
-            return repo.UpdateReport(report);
+             repo.UpdateReport(report);
         }
     }
 }

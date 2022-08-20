@@ -20,29 +20,29 @@ namespace Saraha.Controllers
         }
         [HttpGet]
         [ProducesResponseType(typeof(List<Message>), StatusCodes.Status200OK)]
-        public List<Message> getallMessage()
+        public List<Message> GetallMessage()
         {
 
-            return messageService.getallMessage();
+            return messageService.GetallMessage();
         }
         [HttpPost]
         [ProducesResponseType(typeof(Message), StatusCodes.Status200OK)]
-        public bool createMessage([FromBody] Message message)
+        public void CreateMessage([FromBody] Message message)
         {
-            return messageService.createMessage(message);
+             messageService.CreateMessage(message);
         }
 
         [HttpPut]
         [ProducesResponseType(typeof(Message), StatusCodes.Status200OK)]
-        public bool UpdateMessage([FromBody] Message message)
+        public void UpdateMessage([FromBody] Message message)
         {
-            return messageService.UpdateMessage(message);
+             messageService.UpdateMessage(message);
         }
 
         [HttpDelete("delete/{id}")]
-        public bool deleteMessage(int? id)
+        public void DeleteMessage(int? id)
         {
-            return messageService.deleteMessage(id);
+             messageService.DeleteMessage(id);
         }
 
 

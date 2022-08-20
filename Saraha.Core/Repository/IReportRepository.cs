@@ -7,9 +7,9 @@ namespace Saraha.Core.Repository
 {
     public interface IReportRepository
     {
-        public List<Report> getallReport();
-        public bool createReport(Report report);
-        public bool UpdateReport(Report report);
-        public bool deleteReport(int? id);
+        public List<Report> GetallReport();
+        public void CreateReport(Report report);
+        public void UpdateReport(Report report);
+        public void DeleteReport(int? id);
     }
 }
