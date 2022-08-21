@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
 using Saraha.Core.DTO;
@@ -49,10 +50,10 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.Execute("Feature_package.createFeature", parameter, commandType: CommandType.StoredProcedure);
         }
 
-        public void UpdateFeature(Feature feature , int id )
+        public void UpdateFeature(Feature feature  )
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@featureIdd", feature.FeatureName, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@featureIdd", feature.FeatureId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@featureNamee", feature.FeatureName, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@featurePricee", feature.FeaturePrice, dbType: DbType.Double, direction: ParameterDirection.Input);
             parameter.Add("@featureDurationn", feature.FeatureDuration, dbType: DbType.Int32, direction: ParameterDirection.Input);

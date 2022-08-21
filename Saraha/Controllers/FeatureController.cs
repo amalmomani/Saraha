@@ -33,10 +33,10 @@ namespace Saraha.Controllers
             featureservice.CreateFeature(feature);
         }
 
-        [HttpPut("UpdateFeature{id}")]
-        public void UpdateFeature([FromBody] Feature feature, int id)
+        [HttpPut("UpdateFeature")]
+        public void UpdateFeature([FromBody] Feature feature)
         {
-            featureservice.UpdateFeature(feature, id);
+            featureservice.UpdateFeature(feature);
         }
 
         [HttpDelete("RemoveFeature/{id}")]
