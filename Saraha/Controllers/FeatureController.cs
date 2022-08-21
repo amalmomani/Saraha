@@ -31,7 +31,7 @@ namespace Saraha.Controllers
         [HttpPost("CreateFeature")]
         public void CreateFeature([FromBody] Feature feature)
         {
-           
+
             featureservice.CreateFeature(feature);
         }
 
@@ -47,7 +47,7 @@ namespace Saraha.Controllers
                     file.CopyTo(ms);
                     fileContent = ms.ToArray();
                 }
-                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                var fileName = Guid.NewGuid().ToString() + "_"+ Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"(fileName).{Path.GetExtension(file.FileName).Replace(".", "")}";
                 var fullPath = Path.Combine("resc", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
@@ -64,7 +64,7 @@ namespace Saraha.Controllers
             }
         }
 
-        [HttpPut("UpdateFeature{id}")]
+        [HttpPut("UpdateFeature")]
         public void UpdateFeature([FromBody] Feature feature)
         {
             featureservice.UpdateFeature(feature);
