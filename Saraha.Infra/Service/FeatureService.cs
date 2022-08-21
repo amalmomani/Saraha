@@ -28,9 +28,9 @@ namespace Saraha.Infra.Service
         {
             repo.CreateFeature(feature);
         }
-        public void UpdateFeature(Feature feature, int id)
+        public void UpdateFeature(Feature feature)
         {
-            repo.UpdateFeature(feature, id);
+            repo.UpdateFeature(feature);
         }
         public List<FeatureSalesDTO> FeatureSales()
         {

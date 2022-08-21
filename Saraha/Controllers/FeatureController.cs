@@ -5,6 +5,7 @@ using Saraha.Core.DTO;
 using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,13 +31,43 @@ namespace Saraha.Controllers
         [HttpPost("CreateFeature")]
         public void CreateFeature([FromBody] Feature feature)
         {
+           
             featureservice.CreateFeature(feature);
         }
 
-        [HttpPut("UpdateFeature{id}")]
-        public void UpdateFeature([FromBody] Feature feature, int id)
+        [HttpPost("CreateImagePath")]
+        public Feature CreateImagePath()
         {
-            featureservice.UpdateFeature(feature, id);
+            try
+            {
+                var file = Request.Form.Files[0];
+                byte[] fileContent;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    fileContent = ms.ToArray();
+                }
+                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"(fileName).{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("resc", attachmentFileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Feature item = new Feature();
+                item.ImagePath = attachmentFileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        [HttpPut("UpdateFeature{id}")]
+        public void UpdateFeature([FromBody] Feature feature)
+        {
+            featureservice.UpdateFeature(feature);
         }
 
         [HttpDelete("RemoveFeature/{id}")]

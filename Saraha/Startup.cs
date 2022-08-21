@@ -90,21 +90,7 @@ namespace Saraha
 
 
 
-            services.AddCors(corsOptions =>
-
-            {
-
-                corsOptions.AddPolicy("policy",
-
-                builder =>
-
-                {
-
-                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-
-                });
-
-            });
+         
 
         }
 

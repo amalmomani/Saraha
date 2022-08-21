@@ -12,7 +12,7 @@ namespace Saraha.Core.Service
 
         public List<Feature> GetAllFeatures();
         public void CreateFeature(Feature feature);
-        public void UpdateFeature(Feature feature, int id);
+        public void UpdateFeature(Feature feature);
         public List<FeatureSalesDTO> FeatureSales();
 
     }

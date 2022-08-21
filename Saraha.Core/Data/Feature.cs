@@ -10,5 +10,6 @@ namespace Saraha.Core.Data
         public string FeatureName { get; set; }
         public decimal? FeaturePrice { get; set; }
         public decimal? FeatureDuration { get; set; }
+        public string ImagePath { get; set; }
     }
 }
