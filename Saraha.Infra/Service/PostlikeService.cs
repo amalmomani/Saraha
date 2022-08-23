@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using Saraha.Core.Service;
 using System;
@@ -33,7 +34,9 @@ namespace Saraha.Infra.Service
 
         }
 
-
-
+        public List<PostLikes> GetPostLikes()
+        {
+            return repo.GetPostLikes();
+        }
     }
 }

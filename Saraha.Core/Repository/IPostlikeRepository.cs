@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,5 +12,7 @@ namespace Saraha.Core.Repository
 
         public List<Postlike> GetAllLikes();
         public void DeleteLike(int id);
+
+        public List<PostLikes> GetPostLikes();
     }
 }

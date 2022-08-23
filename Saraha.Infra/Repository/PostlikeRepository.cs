@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -47,5 +48,10 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.Execute("Like_package.DeleteLike", parameter, commandType: CommandType.StoredProcedure);
         }
 
+        public List<PostLikes> GetPostLikes()
+        {
+            IEnumerable<PostLikes> result = dbContext.Connection.Query<PostLikes>("DTOPackage.PostLikes", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,8 @@ namespace Saraha.Core.Service
         public bool DeleteTestimonial(int id);
         public bool UpdateAcceptingStatus(int isAccepted, int testimonialId);
         public Testimonial GetTestimonialByUserId(int UserId);
+        public List<UserTestemonial> GetUserTestemonial();
+
     }
 }
 

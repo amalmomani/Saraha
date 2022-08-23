@@ -13,5 +13,7 @@ namespace Saraha.Core.Repository
         public void UpdateReport(Report report);
         public void DeleteReport(int? id);
         public List<UserReport> GetUserReport();
+
+        public List<ReportUser> GetReportUser();
     }
 }

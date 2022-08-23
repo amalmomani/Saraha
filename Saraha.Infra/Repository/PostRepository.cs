@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,11 @@ namespace Saraha.Infra.Repository
           //  parameter.Add("@userIdd", post.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Post_package.UpdatePost", parameter, commandType: CommandType.StoredProcedure);
+        }
+        public List<PostUserComment> PostUserComments()
+        {
+            IEnumerable<PostUserComment> result = dbContext.Connection.Query<PostUserComment>("DTOPackage.PostUserComment", commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
     }
 }

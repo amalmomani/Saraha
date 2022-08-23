@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,11 @@ namespace Saraha.Controllers
         public List<Postlike> GetAllLikes()
         {
             return likeService.GetAllLikes();
+        }
+        [HttpGet("PostLikes")]
+        public List<PostLikes> GetPostLikes()
+        {
+            return likeService.GetPostLikes();
         }
 
         [HttpDelete("RemoveLike/{id}")]

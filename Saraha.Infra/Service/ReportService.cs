@@ -38,5 +38,9 @@ namespace Saraha.Infra.Service
         {
             return repo.GetUserReport();
         }
+        public List<ReportUser> GetReportUser()
+        {
+            return repo.GetReportUser();
+        }
     }
 }
