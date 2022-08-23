@@ -16,7 +16,12 @@ namespace Saraha.Core.Repository
         public bool UpdatePremium(int isPremium,int userId);
         public int UsersCount();
         public List<Userprofile> GetActiveUsers();
-        public List<UserPost> GetUserPost();
-      
-        }
+        public List<LoginUsersDTO> GetAllLoginUsers();
+
+        public Userprofile GetUserById(int userId);
+
+
+
+
+    }
 }

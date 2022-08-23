@@ -111,32 +111,23 @@ namespace Saraha.Infra.Repository
 
         }
 
-        public List<UserPost> GetUserPost()
+        public List<LoginUsersDTO> GetAllLoginUsers()
         {
-         
-            IEnumerable<UserPost> result = dbContext.Connection.Query<UserPost>("GetUserPost.UserPost", commandType: CommandType.StoredProcedure);
-            List<UserPost> R = result.ToList();
-            List<string> finalResult = new List<string>();
-            
+            IEnumerable<LoginUsersDTO> result = dbContext.Connection.Query<LoginUsersDTO>("GetAllLoginUsers", commandType: CommandType.StoredProcedure);
 
-
-            //finalResult.Add("User Name: " + R[1].Name + " ***** Image Name: " + R[1].ImageName + " ***** Post Number: " + R.Count);
-
-
-            return R;
+            return result.ToList();
         }
 
+        public Userprofile GetUserById(int userId)
+        {
+            var p = new DynamicParameters();
 
+            p.Add("@UserIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>("User_Package.GetUserById", p,
+              commandType: CommandType.StoredProcedure);
 
-
-
-
-
-
-
-
-
-
+            return result.SingleOrDefault();
+        }
     }
 }

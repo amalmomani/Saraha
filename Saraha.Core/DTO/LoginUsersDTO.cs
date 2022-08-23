@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Text;
 
-namespace Saraha.Core.Data
+namespace Saraha.Core.DTO
 {
-    public partial class Userprofile
+    public class LoginUsersDTO
     {
-        [Key]
         public int Userid { get; set; }
-        [Required]
         public string Username { get; set; }
-
         public string Email { get; set; }
-
         public string Phonenumber { get; set; }
         public string Gender { get; set; }
-        public DateTime? Birthdate { get; set; }
-        public string Country { get; set; }
         public string Imagepath { get; set; }
-        public bool? Is_Premium { get; set; }
+        public int Loginid { get; set; }
+        public bool? Is_Blocked { get; set; }
+
 
     }
 }

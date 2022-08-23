@@ -56,9 +56,14 @@ namespace Saraha.Infra.Service
             return repo.GetActiveUsers();
         }
 
-        public List<UserPost> GetUserPost()
+        public List<LoginUsersDTO> GetAllLoginUsers()
         {
-            return repo.GetUserPost();
+            return repo.GetAllLoginUsers();
+        }
+
+        public Userprofile GetUserById(int userId)
+        {
+            return repo.GetUserById(userId);
         }
     }
 }

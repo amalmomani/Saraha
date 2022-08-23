@@ -18,45 +18,37 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public void Delete(int id)
+       
+
+        public Home GetHome()
+        {
+            IEnumerable<Home> result = dbContext.Connection.Query<Home>("Home_Package.GetHome", commandType: CommandType.StoredProcedure);
+            return result.SingleOrDefault();
+        }
+
+    
+
+        public void UpdateHome(Home home)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@Homeidd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-
-            var result = dbContext.Connection.Execute("Home_Package.deleteHome", parameter, commandType: CommandType.StoredProcedure);
-
-        }
-
-        public List<Home> GetAll()
-        {
-            IEnumerable<Home> result = dbContext.Connection.Query<Home>("Home_Package.getallHome", commandType: CommandType.StoredProcedure);
-            return result.ToList();
-        }
-
-        public void Insert(Home home)
-        {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Homeidd", home.Homeid, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@HomeIdd", home.Homeid, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@Logoo", home.Logo, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Backgroundd", home.Background, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Textt", home.Text, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Aboutusidd", home.Aboutusid, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Contactusidd", home.Contactusid, dbType: DbType.String, direction: ParameterDirection.Input);
-
-            var result = dbContext.Connection.Execute("Home_Package.createHome", parameter, commandType: CommandType.StoredProcedure);
-
-        }
-
-        public void Update(Home home)
-        {
- var parameter = new DynamicParameters();
-            parameter.Add("@Homeidd", home.Homeid, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Logoo", home.Logo, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Backgroundd", home.Background, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Textt", home.Text, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Aboutusidd", home.Aboutusid, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Contactusidd", home.Contactusid, dbType: DbType.String, direction: ParameterDirection.Input);
-
+            parameter.Add("@Slider11", home.Slider1, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Slider22", home.Slider2, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Description11", home.Description1, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Description22", home.Description2, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Emaill", home.Email, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@PhoneNumberr", home.PhoneNumber, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Addresss", home.Address, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Member1_Namee", home.Member1_Name, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Member2_Namee", home.Member2_Name, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Member3_Namee", home.Member3_Name, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Member4_Namee", home.Member4_Name, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Member1_Imagee", home.Member1_Image, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Member2_Imagee", home.Member2_Image, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Member3_Imagee", home.Member3_Image, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Member4_Imagee", home.Member4_Image, dbType: DbType.String, direction: ParameterDirection.Input);
+            
             var result = dbContext.Connection.Execute("Home_Package.UpdateHome", parameter, commandType: CommandType.StoredProcedure);
         }
     }

@@ -120,5 +120,29 @@ namespace Saraha.Infra.Repository
             IEnumerable<Login> result = dbContext.Connection.Query<Login>("Login_Package.UserLogin", parameter, commandType: CommandType.StoredProcedure);
             return result.FirstOrDefault();
         }
+
+        public Login GetLoginByUserId(int userId)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@UserIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Login> result = dbContext.Connection.Query<Login>("Login_Package.GetLoginByUserId", p,
+                 commandType: CommandType.StoredProcedure);
+
+            return result.SingleOrDefault();
+        }
+
+        public void ChangePassword(int loginId, string password)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@LoginIdd", loginId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@Passwordd", password, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            var result = dbContext.Connection.ExecuteAsync("Login_Package.ChangePassword", p,
+                 commandType: CommandType.StoredProcedure);
+
+        }
     }
 }
