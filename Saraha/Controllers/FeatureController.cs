@@ -49,7 +49,7 @@ namespace Saraha.Controllers
                 }
                 var fileName = Guid.NewGuid().ToString() + "_"+ Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"(fileName).{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("resc", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\C_ROAD\\Desktop\\Saraha\\src\\assets", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
