@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using Saraha.Core.Service;
 using System;
@@ -53,6 +54,16 @@ namespace Saraha.Infra.Service
         {
 
             return repo.GetActiveUsers();
+        }
+
+        public List<LoginUsersDTO> GetAllLoginUsers()
+        {
+            return repo.GetAllLoginUsers();
+        }
+
+        public Userprofile GetUserById(int userId)
+        {
+            return repo.GetUserById(userId);
         }
     }
 }

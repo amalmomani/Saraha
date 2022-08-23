@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Service;
 
 namespace Saraha.Controllers
@@ -43,8 +44,12 @@ namespace Saraha.Controllers
         [HttpDelete("delete/{id}")]
         public void DeleteReport(int? id)
         {
-             reportService.DeleteReport(id);
+            reportService.DeleteReport(id);
         }
-
+        [HttpGet("UserReport")]
+        public List<UserReport> GetUserReport()
+        {
+            return reportService.GetUserReport();
+        }
     }
 }

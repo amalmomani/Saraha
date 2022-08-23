@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using Saraha.Core.Service;
 using System;
@@ -22,11 +23,15 @@ namespace Saraha.Infra.Service
         public List<Purchase> GetAllPurchases()
         {
 
-            return this.GetAllPurchases();
+            return repo.GetAllPurchases();
         }
         public void DeletePurchase(int id)
         {
             repo.DeletePurchase(id);
+        }
+        public List<OrderAndAerviceDTO> GetOrders()
+        {
+            return repo.GetOrders();
         }
     }
 }

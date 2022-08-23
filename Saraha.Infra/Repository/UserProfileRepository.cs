@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -110,5 +111,23 @@ namespace Saraha.Infra.Repository
 
         }
 
+        public List<LoginUsersDTO> GetAllLoginUsers()
+        {
+            IEnumerable<LoginUsersDTO> result = dbContext.Connection.Query<LoginUsersDTO>("GetAllLoginUsers", commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+        }
+
+        public Userprofile GetUserById(int userId)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@UserIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>("User_Package.GetUserById", p,
+              commandType: CommandType.StoredProcedure);
+
+            return result.SingleOrDefault();
+        }
     }
 }

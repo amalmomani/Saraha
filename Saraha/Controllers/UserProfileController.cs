@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,10 +28,38 @@ namespace Saraha.Controllers
             return UserProfileService.GetallUserProfile();
         }
         [HttpPost]
-        [ProducesResponseType(typeof(Userprofile), StatusCodes.Status200OK)]
         public void CreateUser([FromBody] Userprofile userprofile)
         {
             UserProfileService.CreateUserProfile(userprofile);
+        }
+
+        [HttpPost("UploadUserImage")]
+        public Userprofile UploadUserImage()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                byte[] fileContent;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    fileContent = ms.ToArray();
+                }
+                var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets", attachmentFileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Userprofile item = new Userprofile();
+                item.Imagepath = attachmentFileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         [HttpPut]
@@ -55,6 +85,18 @@ namespace Saraha.Controllers
         {
 
             return UserProfileService.GetActiveUsers();
+        }
+
+        [HttpGet("GetAllLoginUsers")]
+        public List<LoginUsersDTO> GetAllLoginUsers()
+        {
+            return UserProfileService.GetAllLoginUsers();
+        }
+
+        [HttpGet("GetUserById/{userId}")]
+        public Userprofile GetUserById(int userId)
+        {
+            return UserProfileService.GetUserById(userId);
         }
     }
 }
