@@ -147,9 +147,11 @@ namespace Saraha.Infra.Repository
             message.Subject = "Report Notifcation";
             message.From.Add(from);
             message.To.Add(to);
+
+
             using (var item = new MailKit.Net.Smtp.SmtpClient())
             {
-                item.Connect("smtp.gmail.com", 587, false);
+                item.Connect("smtp.gmail.com", 587, false );
                 item.Authenticate("wshareaa@gmail.com", "raaplatpmlacyfis");
                 item.Send(message);
                 item.Disconnect(true);

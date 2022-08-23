@@ -33,6 +33,12 @@ namespace Saraha.Controllers
         {
              reportService.CreateReport(report);
         }
+        [HttpPost("SendEmail")]
+        //[ProducesResponseType(typeof(Report), StatusCodes.Status200OK)]
+        public void SendEmail([FromBody] EmailReportedDTO user )
+        {
+            reportService.SendEmail(user.ReportedName,user.ReportMessage, user.ReportedEmail);
+        }
 
         [HttpPut]
         [ProducesResponseType(typeof(Report), StatusCodes.Status200OK)]
