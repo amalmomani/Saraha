@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,13 @@ namespace Saraha.Controllers
             purchaseService.DeletePurchase(id);
         }
 
+        [HttpGet("GetOrders")]
+        public List<OrderAndAerviceDTO> GetOrders()
+        {
+            return purchaseService.GetOrders();
+        }
 
-     
+
+
     }
 }

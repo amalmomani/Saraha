@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using Saraha.Core.Service;
 
@@ -32,6 +33,10 @@ namespace Saraha.Infra.Service
         public void UpdateReport(Report report)
         {
              repo.UpdateReport(report);
+        }
+        public List<UserReport> GetUserReport()
+        {
+            return repo.GetUserReport();
         }
     }
 }

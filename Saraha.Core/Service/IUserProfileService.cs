@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Saraha.Core.Service
         public bool UpdatePremium(int isPremium, int userId);
         public int UsersCount();
         public List<Userprofile> GetActiveUsers();
-
-    }
+        public List<UserPost> GetUserPost();
+        
+        }
 }

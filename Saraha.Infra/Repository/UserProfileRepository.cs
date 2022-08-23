@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -109,6 +110,33 @@ namespace Saraha.Infra.Repository
             return result.ToList();
 
         }
+
+        public List<UserPost> GetUserPost()
+        {
+         
+            IEnumerable<UserPost> result = dbContext.Connection.Query<UserPost>("GetUserPost.UserPost", commandType: CommandType.StoredProcedure);
+            List<UserPost> R = result.ToList();
+            List<string> finalResult = new List<string>();
+            
+
+
+            //finalResult.Add("User Name: " + R[1].Name + " ***** Image Name: " + R[1].ImageName + " ***** Post Number: " + R.Count);
+
+
+            return R;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

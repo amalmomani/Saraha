@@ -158,7 +158,14 @@ namespace Saraha.Infra.Repository
 
         }
 
+        public List<UserReport> GetUserReport()
+        {
 
+            IEnumerable<UserReport> result = dbContext.Connection.Query<UserReport>("GetUserReport.UserReport", commandType: CommandType.StoredProcedure);
+            List<UserReport> R = result.ToList();
+            return R;
+
+        }
 
 
 

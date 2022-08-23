@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,14 @@ namespace Saraha.Infra.Repository
             var parameter = new DynamicParameters();
             parameter.Add("@purchaseIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = dbContext.Connection.Execute("Purchase_package.deletePurchase", parameter, commandType: CommandType.StoredProcedure);
+        }
+        public List<OrderAndAerviceDTO> GetOrders()
+        {
+
+            IEnumerable<OrderAndAerviceDTO> result = dbContext.Connection.Query<OrderAndAerviceDTO>("GetOrderService.GetOrders", commandType: CommandType.StoredProcedure);
+            List<OrderAndAerviceDTO> R = result.ToList();
+         
+            return R;
         }
 
 

@@ -47,9 +47,10 @@ namespace Saraha.Controllers
                     file.CopyTo(ms);
                     fileContent = ms.ToArray();
                 }
-                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                string attachmentFileName = $"(fileName).{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("resc", attachmentFileName);
+                //"C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets"
+                var fileName =Guid.NewGuid().ToString()+"_"+Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
@@ -64,7 +65,7 @@ namespace Saraha.Controllers
             }
         }
 
-        [HttpPut("UpdateFeature{id}")]
+        [HttpPut("UpdateFeature")]
         public void UpdateFeature([FromBody] Feature feature)
         {
             featureservice.UpdateFeature(feature);

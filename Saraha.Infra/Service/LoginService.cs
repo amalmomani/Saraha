@@ -13,9 +13,11 @@ namespace Saraha.Infra.Service
     public class LoginService : ILoginService
     {
         private readonly ILoginRepository loginRepository;
-        public LoginService(ILoginRepository loginRepository)
+        private readonly IRoleRepository repo;
+        public LoginService(ILoginRepository loginRepository, IRoleRepository repo)
         {
             this.loginRepository = loginRepository;
+            this.repo = repo;
         }
         public bool CreateLogin(Login login)
         {
@@ -55,7 +57,7 @@ namespace Saraha.Infra.Service
         public string auth(Login login)
         {
             var result = loginRepository.auth(login);
-
+            //var result2 = repo.GetallRoles(role);
             if (result == null)
             {
                 return null;
@@ -69,8 +71,9 @@ namespace Saraha.Infra.Service
                 Subject = new ClaimsIdentity(
                 new Claim[]
                 {
-                    new Claim(ClaimTypes.Email,result.Username),
-                    new Claim(ClaimTypes.Name, 1.ToString())
+                    new Claim(ClaimTypes.Name, result.Username),
+                    //new Claim(ClaimTypes.Name, 1.ToString()),
+                   new Claim(ClaimTypes.Role, result.Roleid.ToString()),
 
                 }
                 ),
