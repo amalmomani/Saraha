@@ -83,6 +83,16 @@ namespace Saraha.Infra.Service
             var generatetoken = tokenhandler.CreateToken(tokenDescirptor);
             return tokenhandler.WriteToken(generatetoken);
         }
+
+        public Login GetLoginByUserId(int userId)
+        {
+            return loginRepository.GetLoginByUserId(userId);
+        }
+
+        public void ChangePassword(int loginId, string password)
+        {
+             loginRepository.ChangePassword(loginId, password);
+        }
     }
 }
 

@@ -65,6 +65,7 @@ namespace Saraha.Controllers
         {
             return loginService.UpdateBlockedStatus(isBlocked, loginId);
         }
+
         [HttpPost("Login")]
         public IActionResult auth([FromBody] Login login)
         {
@@ -78,6 +79,18 @@ namespace Saraha.Controllers
             {
                 return Ok(RESULT);
             }
+        }
+
+        [HttpGet("GetLoginByUserId/{userId}")]
+        public Login GetLoginByUserId(int userId)
+        {
+            return loginService.GetLoginByUserId(userId);
+        }
+
+        [HttpGet("ChangePassword/{loginId}/{password}")]
+        public void ChangePassword(int loginId, string password)
+        {
+            loginService.ChangePassword(loginId, password);
         }
     }
 }

@@ -8,11 +8,8 @@ namespace Saraha.Core.Repository
 {
     public interface IHomeRepository
     {
-        public void Insert(Home home);
-        public void Update(Home home);
-
-        public void Delete(int id);
-
-        public List<Home> GetAll();
+       
+        public void UpdateHome(Home home);
+       public Home GetHome();
     }
 }

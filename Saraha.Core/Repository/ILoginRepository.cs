@@ -15,6 +15,8 @@ namespace Saraha.Core.Repository
         public bool UpdateActiveStatus(int isActive, int loginId);
         public bool UpdateBlockedStatus(int isBlocked, int loginId);
         public Login auth(Login login);
+        public Login GetLoginByUserId(int userId);
+        public void ChangePassword(int loginId, string password);
        
     }
 }
