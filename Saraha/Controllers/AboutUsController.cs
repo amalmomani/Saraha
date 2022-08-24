@@ -21,32 +21,23 @@ namespace Saraha.Controllers
         }
         [HttpGet]
         [ProducesResponseType(typeof(List<Aboutus>), StatusCodes.Status200OK)]
-        public List<Aboutus> GetAllAboutus()
+        public Aboutus GetAboutus()
         {
 
-            return AboutUsService.GetAll();
-        }
-        [HttpPost]
-        [ProducesResponseType(typeof(Aboutus), StatusCodes.Status200OK)]
-        public void createAboutus([FromBody] Aboutus aboutus)
-        {
-            AboutUsService.Insert(aboutus);
+            return AboutUsService.GetAboutUs();
         }
 
+     
         [HttpPut]
         [ProducesResponseType(typeof(Aboutus), StatusCodes.Status200OK)]
         public void UpdateAboutus([FromBody] Aboutus aboutus)
         {
-            AboutUsService.Update(aboutus);
+            AboutUsService.UpdateAboutUs(aboutus);
         }
 
-        [HttpDelete("delete/{id}")]
-        public void DeleteAboutus(int id)
-        {
-            AboutUsService.Delete(id);
-        }
-        [HttpPost("uploadeimage")]
-        public Aboutus uploadeimage()
+        #region Upload Image Methods 
+        [HttpPost("UploadeImagePath")]
+        public Aboutus UploadeImagePath()
         {
 
             try
@@ -58,9 +49,9 @@ namespace Saraha.Controllers
                     file.CopyTo(ms);
                     fileContent = ms.ToArray();
                 }
-                var fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                string attachmentFileName = $"(fileName).{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("resc", attachmentFileName);
+                var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
@@ -75,5 +66,99 @@ namespace Saraha.Controllers
             }
         }
 
+
+        [HttpPost("UploadeFeature1Image")]
+        public Aboutus UploadeFeature1Image()
+        {
+
+            try
+            {
+                var file = Request.Form.Files[0];
+                byte[] fileContent;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    fileContent = ms.ToArray();
+                }
+                var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets", attachmentFileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Aboutus item = new Aboutus();
+                item.Feature1_Image = attachmentFileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+       
+        
+        [HttpPost("UploadeFeature2Image")]
+        public Aboutus UploadeFeature2Image()
+        {
+
+            try
+            {
+                var file = Request.Form.Files[0];
+                byte[] fileContent;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    fileContent = ms.ToArray();
+                }
+                var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets", attachmentFileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Aboutus item = new Aboutus();
+                item.Feature2_Image = attachmentFileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+       
+        
+        [HttpPost("UploadeFeature3Image")]
+        public Aboutus UploadeFeature3Image()
+        {
+
+            try
+            {
+                var file = Request.Form.Files[0];
+                byte[] fileContent;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    fileContent = ms.ToArray();
+                }
+                var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets", attachmentFileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Aboutus item = new Aboutus();
+                item.Feature3_Image = attachmentFileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        #endregion
     }
 }

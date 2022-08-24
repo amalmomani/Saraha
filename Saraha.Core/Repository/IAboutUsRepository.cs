@@ -8,11 +8,7 @@ namespace Saraha.Core.Repository
 {
     public interface IAboutUsRepository
     {
-        public void Insert(Aboutus aboutus);
-        public void Update(Aboutus aboutus);
-
-        public void Delete(int id);
-
-        public List<Aboutus> GetAll();
+        public void UpdateAboutUs(Aboutus aboutus);
+        public Aboutus GetAboutUs();
     }
 }

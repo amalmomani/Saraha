@@ -26,7 +26,7 @@ namespace Saraha.Infra.Repository
             var parameter = new DynamicParameters();
 
             parameter.Add("@MessageContentt", message.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@statuss", message.Status, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Is_Anonn", message.Is_Anon, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@MessageDatee", message.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("@UserFromm", message.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@UserToo", message.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -59,7 +59,7 @@ namespace Saraha.Infra.Repository
             var parameter = new DynamicParameters();
             parameter.Add("@MessageIDD", message.MessageID, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@MessageContentt", message.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@statuss", message.Status, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Is_Anonn", message.Is_Anon, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@MessageDatee", message.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("@UserFromm", message.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@UserToo", message.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -71,6 +71,15 @@ namespace Saraha.Infra.Repository
         public List<UserMessage> GetUserMessage()
         {
             IEnumerable<UserMessage> result = dbContext.Connection.Query<UserMessage>("DTOPackage.UserMessage", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public List<UserMessage> GetUserMessageById(int userId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@userIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<UserMessage> result = dbContext.Connection.Query<UserMessage>("GetUserMessageById",parameter, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
     }

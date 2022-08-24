@@ -11,8 +11,8 @@ namespace Saraha.Core.Data
         [Key]
         public int MessageID { get; set; }
         public string MessageContent { get; set; }
-    
-        public string Status { get; set; }
+
+        public bool Is_Anon { get; set; }
         public DateTime MessageDate { get; set; }
         public int UserFrom { get; set; }
         //[ForeignKey("userFrom")]

@@ -8,6 +8,7 @@ namespace Saraha.Core.DTO
     {
         public string User { get; set; }
         public string Content { get; set; }
+        public string ImagePath { get; set; }
         public int Stars { get; set; }
         public bool is_accepted { get; set; }
     }
