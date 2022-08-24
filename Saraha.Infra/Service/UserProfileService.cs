@@ -15,7 +15,7 @@ namespace Saraha.Infra.Service
         {
             this.repo = repo;
         }
-        public void CreateUserProfile(Userprofile userProfile)
+        public void CreateUserProfile(RegisterDTO userProfile)
         {
             repo.CreateUserProfile(userProfile);
         }

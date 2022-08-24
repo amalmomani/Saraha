@@ -18,20 +18,34 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public void CreateUserProfile(Userprofile userProfile)
+        public void CreateUserProfile(RegisterDTO userProfile)
         {
             var p = new DynamicParameters();
        
-            p.Add("@UserNamee", userProfile.Username, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("@UserNamee", userProfile.Name, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("@Emaill", userProfile.Email, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("@PhoneNumberr", userProfile.Phonenumber, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("@Genderr", userProfile.Gender, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("@Birthdatee", userProfile.Birthdate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             p.Add("@Countryy", userProfile.Country, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("@ImagePathh", userProfile.Imagepath, dbType: DbType.String, direction: ParameterDirection.Input);
+            var result = dbContext.Connection.ExecuteAsync("User_Package.CreateUser", p, commandType: CommandType.StoredProcedure);
+            IEnumerable<Userprofile> users = dbContext.Connection.Query<Userprofile>("User_Package.GetAllUsers", commandType: CommandType.StoredProcedure);
+            var user = users.Where(u => u.Email == userProfile.Email).SingleOrDefault();
+            var pa = new DynamicParameters();
 
-            var result = dbContext.Connection.ExecuteAsync("User_Package.CreateUser", p,
+
+            pa.Add("@UserNamee", userProfile.Username, dbType: DbType.String, direction: ParameterDirection.Input);
+            pa.Add("@Passwordd", userProfile.Password, dbType: DbType.String, direction: ParameterDirection.Input);
+            pa.Add("@UserIdd", user.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@RoleIdd", 2, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var r = dbContext.Connection.ExecuteAsync("Login_Package.CreateLogin", pa,
                 commandType: CommandType.StoredProcedure);
+
+
+
+
         }
 
         public void DeleteUserProfile(int? id)

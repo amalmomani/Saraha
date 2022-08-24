@@ -3,13 +3,14 @@ using Saraha.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Saraha.Core.Service
 {
     public interface IUserProfileService
     {
         public List<Userprofile> GetallUserProfile();
-        public void CreateUserProfile(Userprofile userProfile);
+        public void CreateUserProfile(RegisterDTO userProfile);
         public void UpdateUserProfile(Userprofile userProfile);
         public void DeleteUserProfile(int? id);
         public bool IsEmailExist(string email);

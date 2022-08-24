@@ -27,8 +27,8 @@ namespace Saraha.Controllers
 
             return UserProfileService.GetallUserProfile();
         }
-        [HttpPost]
-        public void CreateUser([FromBody] Userprofile userprofile)
+        [HttpPost ("Register")]
+        public void CreateUser([FromBody] RegisterDTO userprofile)
         {
             UserProfileService.CreateUserProfile(userprofile);
         }

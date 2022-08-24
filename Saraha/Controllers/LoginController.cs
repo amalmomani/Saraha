@@ -26,7 +26,7 @@ namespace Saraha.Controllers
             return loginService.GetallLogins();
         }
 
-        [HttpPost]
+        [HttpPost("log")]
         public bool CreateLogin([FromBody]Login login)
         {
             return loginService.CreateLogin(login);
