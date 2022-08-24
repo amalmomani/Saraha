@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Service;
 
 namespace Saraha.Controllers
@@ -22,8 +23,14 @@ namespace Saraha.Controllers
         [ProducesResponseType(typeof(List<Message>), StatusCodes.Status200OK)]
         public List<Message> GetallMessage()
         {
-
             return messageService.GetallMessage();
+        }
+        [HttpGet("UserMessages")]
+        [ProducesResponseType(typeof(List<UserMessage>), StatusCodes.Status200OK)]
+        public List<UserMessage> GetUserMessages()
+        {
+
+            return messageService.GetUserMessage();
         }
         [HttpPost]
         [ProducesResponseType(typeof(Message), StatusCodes.Status200OK)]

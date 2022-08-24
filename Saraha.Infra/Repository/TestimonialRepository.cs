@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,14 @@ namespace Saraha.Infra.Repository
                             ("Testimonial_Package.GetTestimonialByUserId",p, commandType: CommandType.StoredProcedure);
 
             return result.SingleOrDefault();
+        }
+
+        public List<UserTestemonial> GetUserTestemonial()
+        {
+            IEnumerable<UserTestemonial> result = dbContext.Connection.Query<UserTestemonial>
+                ("DTOPackage.UserTestemonial", commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
         }
 
         public bool UpdateAcceptingStatus(int isAccepted, int testimonialId)

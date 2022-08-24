@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,8 @@ namespace Saraha.Core.Service
 
         public List<Post> GetAll();
         public void PinPost(int id);
+        public List<PostUserComment> PostUserComments();
+
 
     }
 }

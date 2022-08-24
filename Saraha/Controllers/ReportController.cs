@@ -57,5 +57,10 @@ namespace Saraha.Controllers
         {
             return reportService.GetUserReport();
         }
+        [HttpGet("ReportUser")]
+        public List<ReportUser> GetReportUser()
+        {
+            return reportService.GetReportUser();
+        }
     }
 }

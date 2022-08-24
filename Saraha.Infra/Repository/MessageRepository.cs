@@ -6,6 +6,7 @@ using System.Text;
 using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 
 namespace Saraha.Infra.Repository
@@ -67,6 +68,10 @@ namespace Saraha.Infra.Repository
       
         }
 
-     
+        public List<UserMessage> GetUserMessage()
+        {
+            IEnumerable<UserMessage> result = dbContext.Connection.Query<UserMessage>("DTOPackage.UserMessage", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }

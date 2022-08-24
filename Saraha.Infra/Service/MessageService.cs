@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using Saraha.Core.Service;
 
@@ -29,6 +30,10 @@ namespace Saraha.Infra.Service
         public List<Message> GetallMessage()
         {
             return repo.GetallMessage();
+        }
+        public List<UserMessage> GetUserMessage()
+        {
+            return repo.GetUserMessage();
         }
 
         public void UpdateMessage(Message message)

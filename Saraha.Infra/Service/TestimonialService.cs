@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using Saraha.Core.Service;
 using System;
@@ -32,6 +33,11 @@ namespace Saraha.Infra.Service
         public Testimonial GetTestimonialByUserId(int UserId)
         {
             return testimonialRepository.GetTestimonialByUserId(UserId);
+        }
+
+        public List<UserTestemonial> GetUserTestemonial()
+        {
+            return testimonialRepository.GetUserTestemonial();
         }
 
         public bool UpdateAcceptingStatus(int isAccepted, int testimonialId)

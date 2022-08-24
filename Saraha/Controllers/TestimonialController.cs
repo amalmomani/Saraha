@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,12 @@ namespace Saraha.Controllers
         public Testimonial GetTestimonialByUserId(int UserId)
         {
             return testimonialService.GetTestimonialByUserId(UserId);
+        }
+        [HttpGet]
+        [Route("GetUserTestemonial")]
+        public List<UserTestemonial> GetUserTestemonials()
+        {
+            return testimonialService.GetUserTestemonial();
         }
     }
 }

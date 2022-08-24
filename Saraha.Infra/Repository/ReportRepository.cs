@@ -168,16 +168,12 @@ namespace Saraha.Infra.Repository
             return R;
 
         }
-
-
-
-
-
-
-
-
-
-
+        public List<ReportUser> GetReportUser()
+        {
+            IEnumerable<ReportUser> result = dbContext.Connection.Query<ReportUser>("DTOPackage.ReportUser", commandType: CommandType.StoredProcedure);
+            List<ReportUser> R = result.ToList();
+            return R;
+        }
 
 
     }
