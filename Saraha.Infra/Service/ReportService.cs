@@ -43,5 +43,9 @@ namespace Saraha.Infra.Service
             repo.SendEmail(reportedname, reportmsg, reportedemail);
         }
 
+        public List<ReportUser> GetReportUser()
+        {
+            return repo.GetReportUser();
+        }
     }
 }

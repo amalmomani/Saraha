@@ -10,6 +10,7 @@ namespace Saraha.Core.DTO
         public string Content { get; set; }
         public string ImagePath { get; set; }
         public int Stars { get; set; }
+        public int Testimonialid { get; set; }
         public bool is_accepted { get; set; }
     }
 }
