@@ -26,7 +26,7 @@ namespace Saraha.Infra.Repository
             var parameter = new DynamicParameters();
 
             parameter.Add("@MessageContentt", message.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Is_Anonn", message.Is_Anon, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Is_Anonn", message.Is_Anon, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@MessageDatee", message.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("@UserFromm", message.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@UserToo", message.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
