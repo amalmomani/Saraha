@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using Dapper;
 using MimeKit;
@@ -83,79 +84,90 @@ namespace Saraha.Infra.Repository
 
           public void SendEmail(string reportedname ,string reportmsg , string reportedemail)
         {
-           
+            SmtpClient smtpClient = new SmtpClient("smtp-mail.outlook.com", 587); //587
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new System.Net.NetworkCredential("waedshareaa@outlook.com", "W@edW@ed12");
 
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = true;
+
+            MailMessage mail = new MailMessage();
             MimeMessage message = new MimeMessage();
             BodyBuilder builder = new BodyBuilder();
-            MailboxAddress from = new MailboxAddress("Waed", "wshareaa@gmail.com");
-            MailboxAddress to = new MailboxAddress(reportedname, reportedemail);
-            builder.HtmlBody = "<!DOCTYPE html>" +
-                  "<html> " +
-                     "<body style=\"margin-top: 20px;\"> " +
-                     "<table class=\"body - wrap\" style=\"font-family:'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; width: 100 %; background - color: #f6f6f6; margin: 0;\" bgcolor=\"#f6f6f6;\">" +
-                     "<tbody>" +
-                     "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
-                     "<td style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; vertical - align: top; margin: 0; \" valign=\"top\">" + "</td>" +
-                     "<td class=\"container\"width=\"600\"style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; display: block!important; max - width: 600px!important; clear: both!important; margin: 0 auto; \" valign=\"top\">" +
-                     "<div class=\"content\"style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; max - width: 600px; display: block; margin: 0 auto; padding: 20px; \">" +
-                     "<table class=\"main\"width=\"100 %\" cellpadding=\"0\"cellspacing=\"0\" itemprop=\"action\" itemtype=\"http://schema.org/ConfirmAction \"style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-b;\">" +
-                     "<tbody>" +
-                     "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0;\">" +
-                     "<td class=\"content - wrap\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; vertical - align: top; margin: 0; padding: 30px; border: 3px solid #67a8e4;border-radius: 7px; background-color: #fff;\" valign=\"top\">" +
-                     "<meta itemprop=\"name\" content=\"Confirm Email\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
-                     "<table width=\"100 % \"cellpadding=\"0\" cellspacing=\"0\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
-                     "<tbody>" +
-                     "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
-                     "<td class=\"content - block\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; vertical - align: top; margin: 0; padding: 0 0 20px; \" valign=\"top\">" +
-                     "Hi " + "<b>" + reportedname + "</b>" + " hope you doing well :)" +
-                     "</td>" +
-                     "</tr>" +
-                     "<tr style=\"font-family:\'HelveticaNeue\',Helvetica,Arial,sans - serif; box - sizing:border - box; font-size:14px;margin: 0;\">" +
-                     " <td class=\"content - block\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; vertical - align: top; margin: 0; padding: 0 0 20px;\" valign=\"top\">" +
-                     "Please note that you have been reported as: " + "<b>" + reportmsg + "</b>" +"</br>" + "Repeating such actions in Saraha community may result in the permanent deletion of your account." +
-                     "</td>" +
-                     "</tr>" +
-                     "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
-                     "<td class=\"content-block\" itemprop=\"handler\" itemscope=\"\" itemtype=\"http://schema.org/HttpActionHandler \" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;\" valign=\"top\">" +
-                     " <a href=\"https://www.youtube.com/watch?v=Khpzs-7WWeA \" class=\"btn-primary\" itemprop=\"url\" style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #f06292; margin: 0; border-color: #f06292; border-style: solid; border-width: 8px 16px;\">" +
-                     "It's Okay" + "\n" + "No problem ? :)" + "</a>" + "</td>" + " </tr>" +
-                    "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\" >" +
-                    "<td class=\"content-block\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;\" valign=\"top\">" +
-                      "<b>" + "Saraha Live Website" + "</b>" +
-                      " <p>" + "Support Team" + "</p>" +
-                     "</td>" +
-                      "</tr>" +
-                      "<tr style =\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\" >" +
-                      "<td class=\"content-block\" style=\"text-align: center;font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;\" valign=\"top\">" +
-                      "</td>" +
-                     "</tr>" +
-                     " </tbody >" +
-                      "</table >" +
-                       "</td>" +
-                                "</tr >" +
-                            "</tbody >" +
-                        "</table >" +
-                    "</div>" +
-                "</td>" +
-            "</tr>" +
-        "</tbody >" +
-   " </table>" +
-  " </body>" +
-"</html>";
+            //mail.Body = builder.ToMessageBody();
+           
+//            mail.Body = "<!DOCTYPE html>" +
+//                  "<html> " +
+//                     "<body style=\"margin-top: 20px;\"> " +
+//                     "<table class=\"body - wrap\" style=\"font-family:'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; width: 100 %; background - color: #f6f6f6; margin: 0;\" bgcolor=\"#f6f6f6;\">" +
+//                     "<tbody>" +
+//                     "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
+//                     "<td style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; vertical - align: top; margin: 0; \" valign=\"top\">" + "</td>" +
+//                     "<td class=\"container\"width=\"600\"style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; display: block!important; max - width: 600px!important; clear: both!important; margin: 0 auto; \" valign=\"top\">" +
+//                     "<div class=\"content\"style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; max - width: 600px; display: block; margin: 0 auto; padding: 20px; \">" +
+//                     "<table class=\"main\"width=\"100 %\" cellpadding=\"0\"cellspacing=\"0\" itemprop=\"action\" itemtype=\"http://schema.org/ConfirmAction \"style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-b;\">" +
+//                     "<tbody>" +
+//                     "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0;\">" +
+//                     "<td class=\"content - wrap\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; vertical - align: top; margin: 0; padding: 30px; border: 3px solid #67a8e4;border-radius: 7px; background-color: #fff;\" valign=\"top\">" +
+//                     "<meta itemprop=\"name\" content=\"Confirm Email\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
+//                     "<table width=\"100 % \"cellpadding=\"0\" cellspacing=\"0\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
+//                     "<tbody>" +
+//                     "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
+//                     "<td class=\"content - block\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; vertical - align: top; margin: 0; padding: 0 0 20px; \" valign=\"top\">" +
+//                     "Hi " + "<b>" + "waed!!" + "</b>" + " hope you doing well :)" +
+//                     "</td>" +
+//                     "</tr>" +
+//                     "<tr style=\"font-family:\'HelveticaNeue\',Helvetica,Arial,sans - serif; box - sizing:border - box; font-size:14px;margin: 0;\">" +
+//                     " <td class=\"content - block\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; vertical - align: top; margin: 0; padding: 0 0 20px;\" valign=\"top\">" +
+//                     "Please note that you have been reported as: " + "<b>" + "waed!!" + "</b>" + "</br>" + "Repeating such actions in Saraha community may result in the permanent deletion of your account." +
+//                     "</td>" +
+//                     "</tr>" +
+//                     "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans - serif; box - sizing: border - box; font - size: 14px; margin: 0; \">" +
+//                     "<td class=\"content-block\" itemprop=\"handler\" itemscope=\"\" itemtype=\"http://schema.org/HttpActionHandler \" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;\" valign=\"top\">" +
+//                     " <a href=\"https://www.youtube.com/watch?v=Khpzs-7WWeA \" class=\"btn-primary\" itemprop=\"url\" style=\"font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #f06292; margin: 0; border-color: #f06292; border-style: solid; border-width: 8px 16px;\">" +
+//                     "It's Okay" + "\n" + "No problem ? :)" + "</a>" + "</td>" + " </tr>" +
+//                    "<tr style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\" >" +
+//                    "<td class=\"content-block\" style=\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;\" valign=\"top\">" +
+//                      "<b>" + "Saraha Live Website" + "</b>" +
+//                      " <p>" + "Support Team" + "</p>" +
+//                     "</td>" +
+//                      "</tr>" +
+//                      "<tr style =\"font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;\" >" +
+//                      "<td class=\"content-block\" style=\"text-align: center;font-family:\'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;\" valign=\"top\">" +
+//                      "</td>" +
+//                     "</tr>" +
+//                     " </tbody >" +
+//                      "</table >" +
+//                       "</td>" +
+//                                "</tr >" +
+//                            "</tbody >" +
+//                        "</table >" +
+//                    "</div>" +
+//                "</td>" +
+//            "</tr>" +
+//        "</tbody >" +
+//   " </table>" +
+//  " </body>" +
+//"</html>";
 
-            message.Body = builder.ToMessageBody();
-            message.Subject = "Report Notifcation";
-            message.From.Add(from);
-            message.To.Add(to);
+            mail.Subject = "Report Notifcation";
+            mail.Body = reportmsg;
+            mail.From = new MailAddress("waedshareaa@outlook.com", "Saraha Time-no-reply");
+            mail.To.Add(new MailAddress(reportedemail, reportedname ));
+            smtpClient.Send(mail);
 
 
-            using (var item = new MailKit.Net.Smtp.SmtpClient())
-            {
-                item.Connect("smtp.gmail.com", 587, false );
-                item.Authenticate("wshareaa@gmail.com", "raaplatpmlacyfis");
-                item.Send(message);
-                item.Disconnect(true);
-            }
+            //            message.From.Add(from);
+            //            message.To.Add(to);
+
+
+            //            using (var item = new MailKit.Net.Smtp.SmtpClient())
+            //            {
+            //                item.Connect("smtp.live.com", 587, false );
+            //                item.Authenticate("waedshareaa@outlook.com", "W@edW@ed12");
+            //                item.Send(message);
+            //                item.Disconnect(true);
+            //            }
 
 
         }
