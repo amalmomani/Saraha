@@ -10,7 +10,6 @@ namespace Saraha.Core.Data
     {
         [Key]
         public int ActivityID { get; set; }
-        public string Message { get; set; } 
         public int UserID { get; set; }
         [ForeignKey("UserID")]
         public virtual Userprofile UserProfile { get; set; }
@@ -21,6 +20,10 @@ namespace Saraha.Core.Data
         [ForeignKey("CommentId")]
         public virtual Postcomment Postcomment { get; set; }
         public int PostId { get; set; }
+        public string Message { get; set; }
+        public string activityName { get; set; }
+
+
         [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
     }

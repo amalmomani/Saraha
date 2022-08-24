@@ -37,12 +37,26 @@ namespace Saraha.Infra.Repository
         public void Insert(Post post)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@postDatee", post.Postdate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@postDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("@postTextt", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@ImagePathh", post.Imagepath, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@userIdd", post.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@userIdd", 21, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
+            IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
+            var p = posts.Where(p => p.Posttext == post.Posttext && p.Userid==21 ).FirstOrDefault();
+            var pa = new DynamicParameters();
+            pa.Add("@UserIDD", 21, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@CommentIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@PostIDD", p.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
+            pa.Add("@Messagee", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
+
+
+
+            var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
+
         }
 
         public void PinPost(int id)

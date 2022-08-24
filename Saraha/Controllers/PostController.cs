@@ -5,6 +5,7 @@ using Saraha.Core.DTO;
 using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,11 +27,40 @@ namespace Saraha.Controllers
 
             return postService.GetAll();
         }
-        [HttpPost]
+        [HttpPost("CreatePost")]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         public void createPost([FromBody] Post aboutus)
         {
             postService.Insert(aboutus);
+        }
+        [HttpPost("UploadPostImage")]
+        public Home UploadLogo()
+        {
+
+            try
+            {
+                var file = Request.Form.Files[0];
+                byte[] fileContent;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    fileContent = ms.ToArray();
+                }
+                var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
+                string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
+                var fullPath = Path.Combine("C:\\Users\\C_ROAD\\Desktop\\Saraha\\src\\assets\\Images", attachmentFileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Home item = new Home();
+                item.Logo = attachmentFileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         [HttpPut]
