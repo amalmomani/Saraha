@@ -54,15 +54,11 @@ namespace Saraha.Controllers
              messageService.DeleteMessage(id);
         }
 
-
-
-
-
-
-
-
-
-
+        [HttpGet("GetUserMessageById/{userId}")]
+        public List<UserMessage> GetUserMessageById(int userId)
+        {
+            return messageService.GetUserMessageById(userId);
+        }
 
     }
 }

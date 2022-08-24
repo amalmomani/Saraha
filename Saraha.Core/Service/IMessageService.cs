@@ -14,6 +14,8 @@ namespace Saraha.Core.Service
         public void UpdateMessage(Message message);
         public void DeleteMessage(int? id);
         public List<UserMessage> GetUserMessage();
+        public List<UserMessage> GetUserMessageById(int userId);
+
 
     }
 }

@@ -73,5 +73,14 @@ namespace Saraha.Infra.Repository
             IEnumerable<UserMessage> result = dbContext.Connection.Query<UserMessage>("DTOPackage.UserMessage", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+
+        public List<UserMessage> GetUserMessageById(int userId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@userIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<UserMessage> result = dbContext.Connection.Query<UserMessage>("GetUserMessageById",parameter, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }

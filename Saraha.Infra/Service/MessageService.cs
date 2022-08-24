@@ -36,6 +36,11 @@ namespace Saraha.Infra.Service
             return repo.GetUserMessage();
         }
 
+        public List<UserMessage> GetUserMessageById(int userId)
+        {
+            return repo.GetUserMessageById(userId);
+        }
+
         public void UpdateMessage(Message message)
         {
              repo.UpdateMessage(message);
