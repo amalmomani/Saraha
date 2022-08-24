@@ -25,6 +25,8 @@ namespace Saraha.Controllers
         {
             return messageService.GetallMessage();
         }
+
+
         [HttpGet("UserMessages")]
         [ProducesResponseType(typeof(List<UserMessage>), StatusCodes.Status200OK)]
         public List<UserMessage> GetUserMessages()

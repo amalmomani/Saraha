@@ -14,24 +14,16 @@ namespace Saraha.Infra.Service
         {
             this.repo = repo;
         }
-        public void Delete(int id)
+       
+        public Aboutus GetAboutUs()
         {
-            repo.Delete(id);
+            return repo.GetAboutUs(); 
         }
 
-        public List<Aboutus> GetAll()
-        {
-            return repo.GetAll(); 
-        }
 
-        public void Insert(Aboutus aboutus)
+        public void UpdateAboutUs(Aboutus aboutus)
         {
-            repo.Insert(aboutus);
-        }
-
-        public void Update(Aboutus aboutus)
-        {
-            repo.Update(aboutus);
+            repo.UpdateAboutUs(aboutus);
         }
     }
 }

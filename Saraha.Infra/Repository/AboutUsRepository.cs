@@ -19,38 +19,29 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-        public void Delete(int id)
-        {
-            var parameter = new DynamicParameters();
-            parameter.Add("@AboutUsIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-           
-            var result = dbContext.Connection.Execute("AboutUs_Package.DeleteAboutUs", parameter, commandType: CommandType.StoredProcedure);
+      
 
+        public Aboutus GetAboutUs()
+        {
+            IEnumerable<Aboutus> result = dbContext.Connection.Query<Aboutus>("AboutUs_Package.GetAboutUs", commandType: CommandType.StoredProcedure);
+            return result.SingleOrDefault();
         }
 
-        public List<Aboutus> GetAll()
-        {
-            IEnumerable<Aboutus> result = dbContext.Connection.Query<Aboutus>("AboutUs_Package.GetAllAboutUs", commandType: CommandType.StoredProcedure);
-            return result.ToList();
-        }
+      
 
-        public void Insert(Aboutus aboutus)
-        {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Titlee", aboutus.Title, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Subtitlee", aboutus.Subtitle, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@Imagepathh", aboutus.Imagepath, dbType: DbType.String, direction: ParameterDirection.Input);
-          
-            var result = dbContext.Connection.Execute("AboutUs_Package.CreateAboutUs", parameter, commandType: CommandType.StoredProcedure);
-        }
-
-        public void Update(Aboutus aboutus)
+        public void UpdateAboutUs(Aboutus aboutus)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@AboutUsIdd", aboutus.Aboutusid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@Titlee", aboutus.Title, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@Subtitlee", aboutus.Subtitle, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@Imagepathh", aboutus.Imagepath, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Feature11", aboutus.Feature1, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Feature22", aboutus.Feature2, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Feature33", aboutus.Feature3, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Feature1_Imagee", aboutus.Feature1_Image, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Feature2_Imagee", aboutus.Feature2_Image, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Feature3_Imagee", aboutus.Feature3_Image, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("AboutUs_Package.UpdateAboutUs", parameter, commandType: CommandType.StoredProcedure);
         }
