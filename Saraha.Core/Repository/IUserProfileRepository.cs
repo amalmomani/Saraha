@@ -9,7 +9,7 @@ namespace Saraha.Core.Repository
      public interface IUserProfileRepository
     {
         public List<Userprofile> GetallUserProfile();
-        public void CreateUserProfile(Userprofile userProfile);
+        public void CreateUserProfile(RegisterDTO userProfile);
         public void UpdateUserProfile(Userprofile userProfile);
         public void DeleteUserProfile(int? id);
         public bool IsEmailExist(string email);
