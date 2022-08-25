@@ -40,7 +40,7 @@ namespace Saraha.Controllers
             postService.Insert(aboutus);
         }
         [HttpPost("UploadPostImage")]
-        public Home UploadLogo()
+        public Post UploadPostImage()
         {
 
             try
@@ -54,13 +54,13 @@ namespace Saraha.Controllers
                 }
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("C:\\Users\\C_ROAD\\Desktop\\Saraha\\src\\assets\\Images", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets\\Images", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }
-                Home item = new Home();
-                item.Logo = attachmentFileName;
+                Post item = new Post();
+                item.Imagepath = attachmentFileName;
                 return item;
             }
             catch (Exception e)
