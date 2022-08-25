@@ -72,7 +72,10 @@ namespace Saraha.Infra.Service
                 new Claim[]
                 {
                     new Claim(ClaimTypes.Name, result.Username),
-                    //new Claim(ClaimTypes.Name, 1.ToString()),
+                   new Claim("UserId", result.Userid.ToString()),
+                   new Claim("is_Blocked", result.Is_Blocked.ToString()),
+                   new Claim("Is_Verified", result.Is_Verified.ToString()),
+                   new Claim("loginId", result.Loginid.ToString()),
                    new Claim(ClaimTypes.Role, result.Roleid.ToString()),
 
                 }
@@ -96,6 +99,8 @@ namespace Saraha.Infra.Service
         {
              loginRepository.ChangePassword(loginId, password);
         }
+
+        
     }
 }
 

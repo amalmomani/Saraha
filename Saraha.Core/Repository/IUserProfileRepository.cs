@@ -17,10 +17,8 @@ namespace Saraha.Core.Repository
         public int UsersCount();
         public List<Userprofile> GetActiveUsers();
         public List<LoginUsersDTO> GetAllLoginUsers();
-
         public Userprofile GetUserById(int userId);
-
-
+        public List<Userprofile> SearchUser(string username, string country, string gender);
 
 
     }
