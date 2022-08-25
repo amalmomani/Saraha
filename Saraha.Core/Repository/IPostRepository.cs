@@ -17,5 +17,7 @@ namespace Saraha.Core.Repository
         public List<Post> GetAll();
         public void PinPost(int id);
         public List<PostUserComment> PostUserComments();
+        public List<Post> GetPostByUserId(int userId);
+
     }
 }

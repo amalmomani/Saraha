@@ -13,6 +13,6 @@ namespace Saraha.Core.Service
 
         public List<Purchase> GetAllPurchases();
         public void DeletePurchase(int id);
-        public List<OrderAndAerviceDTO> GetOrders();
+        public List<OrderAndServiceDTO> GetOrders();
     }
 }

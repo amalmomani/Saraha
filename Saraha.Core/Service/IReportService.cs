@@ -13,9 +13,6 @@ namespace Saraha.Core.Service
         public void UpdateReport(Report report);
         public void DeleteReport(int? id);
         public List<UserReport> GetUserReport();
-        public List<ReportUser> GetReportUser();
-
-
         public void SendEmail(string reportedname, string reportmsg, string reportedemail);
 
     }

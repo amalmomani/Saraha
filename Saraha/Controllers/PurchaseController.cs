@@ -40,7 +40,7 @@ namespace Saraha.Controllers
         }
 
         [HttpGet("GetOrders")]
-        public List<OrderAndAerviceDTO> GetOrders()
+        public List<OrderAndServiceDTO> GetOrders()
         {
             return purchaseService.GetOrders();
         }

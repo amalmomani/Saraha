@@ -42,5 +42,12 @@ namespace Saraha.Infra.Service
         {
             repo.Update(post);
         }
+        public List<Post> GetPostByUserId(int userId)
+        {
+            return repo.GetPostByUserId(userId);
+
+
+        }
+
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Saraha.Core.DTO
 {
-   public  class OrderAndAerviceDTO
+   public  class OrderAndServiceDTO
     {
         public string username { set; get; }
 

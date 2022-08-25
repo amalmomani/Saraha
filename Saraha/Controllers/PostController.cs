@@ -27,6 +27,12 @@ namespace Saraha.Controllers
 
             return postService.GetAll();
         }
+        [HttpGet("GetPostByUserId/{userId}")]
+        public List<Post> GetPost(int userId)
+        {
+
+            return postService.GetPostByUserId(userId);
+        }
         [HttpPost("CreatePost")]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         public void createPost([FromBody] Post aboutus)

@@ -29,7 +29,7 @@ namespace Saraha.Infra.Service
         {
             repo.DeletePurchase(id);
         }
-        public List<OrderAndAerviceDTO> GetOrders()
+        public List<OrderAndServiceDTO> GetOrders()
         {
             return repo.GetOrders();
         }
