@@ -51,5 +51,15 @@ namespace Saraha.Infra.Repository
             
             var result = dbContext.Connection.Execute("Home_Package.UpdateHome", parameter, commandType: CommandType.StoredProcedure);
         }
-    }
+
+
+      
+
+
+
+
+
+
+
+        }
 }

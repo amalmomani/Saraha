@@ -83,6 +83,11 @@ namespace Saraha.Controllers
 
             return featureservice.FeatureSales();
         }
+        [HttpGet("Chart")]
+        public List<Charts> Chart()
+        {
+            return featureservice.Chart();
 
+        }
     }
 }

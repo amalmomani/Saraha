@@ -38,6 +38,10 @@ namespace Saraha.Infra.Service
 
 
         }
+        public List<Charts> Chart() {
+            return repo.Chart();
+        }
+
 
     }
 }
