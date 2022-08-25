@@ -40,7 +40,7 @@ namespace Saraha.Infra.Repository
             pa.Add("@UserIdd", user.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@RoleIdd", 2, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            var r = dbContext.Connection.ExecuteAsync("Login_Package.CreateLogin", p,
+            var r = dbContext.Connection.ExecuteAsync("Login_Package.CreateLogin", pa,
                 commandType: CommandType.StoredProcedure);
 
 

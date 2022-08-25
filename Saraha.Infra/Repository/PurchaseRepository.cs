@@ -49,11 +49,11 @@ namespace Saraha.Infra.Repository
             parameter.Add("@purchaseIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = dbContext.Connection.Execute("Purchase_package.deletePurchase", parameter, commandType: CommandType.StoredProcedure);
         }
-        public List<OrderAndAerviceDTO> GetOrders()
+        public List<OrderAndServiceDTO> GetOrders()
         {
 
-            IEnumerable<OrderAndAerviceDTO> result = dbContext.Connection.Query<OrderAndAerviceDTO>("GetOrderService.GetOrders", commandType: CommandType.StoredProcedure);
-            List<OrderAndAerviceDTO> R = result.ToList();
+            IEnumerable<OrderAndServiceDTO> result = dbContext.Connection.Query<OrderAndServiceDTO>("GetOrderService.GetOrders", commandType: CommandType.StoredProcedure);
+            List<OrderAndServiceDTO> R = result.ToList();
          
             return R;
         }
