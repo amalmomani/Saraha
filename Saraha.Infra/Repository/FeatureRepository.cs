@@ -10,6 +10,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
+
+
 namespace Saraha.Infra.Repository
 {
   public  class FeatureRepository : IFeatureRepository
@@ -69,7 +71,21 @@ namespace Saraha.Infra.Repository
             IEnumerable<FeatureSalesDTO> result = dbContext.Connection.Query<FeatureSalesDTO>("Feature_package.getFeatureSales", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public List<Charts> Chart()
+        {
+            IEnumerable<Charts> fea = dbContext.Connection.Query<Charts>("ServiceSales", commandType: CommandType.StoredProcedure);
 
+
+
+            List<Charts> dataPoints = fea.ToList();
+            //    dataPoints.Add(new Charts(item.StoreName, StoreProfit));
+
+
+
+            //List<Charts> DataPoints = JsonConvert.SerializeObject(dataPoints);
+            ////JsonConvert.SerializeObject(dataPoints);
+            return dataPoints;
+        }
 
     }
 }

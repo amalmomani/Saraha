@@ -14,7 +14,9 @@ namespace Saraha.Core.Repository
         public void CreateFeature(Feature feature);
         public void UpdateFeature(Feature feature);
         public List<FeatureSalesDTO> FeatureSales();
+        public List<Charts> Chart();
+        
 
 
-    }
+        }
 }
