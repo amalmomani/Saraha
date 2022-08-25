@@ -65,5 +65,10 @@ namespace Saraha.Infra.Service
         {
             return repo.GetUserById(userId);
         }
+
+        public List<Userprofile> SearchUser(string username, string country, string gender)
+        {
+            return repo.SearchUser(username, country, gender);
+        }
     }
 }

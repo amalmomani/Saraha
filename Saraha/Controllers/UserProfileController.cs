@@ -123,5 +123,11 @@ namespace Saraha.Controllers
         {
             return UserProfileService.GetUserById(userId);
         }
+
+        [HttpGet("SearchUser/{username}/{country}/{gender}")]
+        public List<Userprofile> SearchUser(string username, string country, string gender)
+        {
+            return UserProfileService.SearchUser(username, country, gender);
+        }
     }
 }

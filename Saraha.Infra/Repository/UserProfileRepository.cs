@@ -143,5 +143,19 @@ namespace Saraha.Infra.Repository
 
             return result.SingleOrDefault();
         }
+
+        public List<Userprofile> SearchUser(string username, string country, string gender)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@UserNamee", username, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("@Countryy", country, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("@Genderr", gender, dbType: DbType.String, direction: ParameterDirection.Input);
+
+
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>("User_Package.SearchUser",p, commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+        }
     }
 }
