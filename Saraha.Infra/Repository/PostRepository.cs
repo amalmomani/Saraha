@@ -54,7 +54,7 @@ namespace Saraha.Infra.Repository
             parameter.Add("@postDatee", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("@postTextt", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@ImagePathh", post.Imagepath, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@userIdd", 21, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@userIdd", post.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
             IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);

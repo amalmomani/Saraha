@@ -44,6 +44,10 @@ namespace Saraha.Controllers
              likeService.DeleteLike(id);  
         }
 
-
+        [HttpGet("Likescount/{userId}")]
+        public List<Postlike> GetLikeById(int userId)
+        {
+            return likeService.GetLikeById(userId);
+        }
     }
 }

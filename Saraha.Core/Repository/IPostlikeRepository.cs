@@ -14,5 +14,7 @@ namespace Saraha.Core.Repository
         public void DeleteLike(int id);
 
         public List<PostLikes> GetPostLikes();
+
+        public List<Postlike> GetLikeById(int userId);
     }
 }
