@@ -54,14 +54,14 @@ namespace Saraha.Infra.Repository
             parameter.Add("@postDatee", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("@postTextt", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@ImagePathh", post.Imagepath, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@userIdd", 21, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@userIdd", post.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
             IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
             
-            var p = posts.Where(p => p.Posttext == post.Posttext && p.Userid==21 && p.Postdate.ToString() == now.ToString()  ).SingleOrDefault();
+            var p = posts.Where(p => p.Posttext == post.Posttext && p.Userid==post.Userid && p.Postdate.ToString() == now.ToString()  ).SingleOrDefault();
             var pa = new DynamicParameters();
-            pa.Add("@UserIDD", 21, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@UserIDD", post.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@CommentIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@PostIDD", p.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
