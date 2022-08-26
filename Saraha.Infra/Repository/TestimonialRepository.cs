@@ -105,7 +105,7 @@ namespace Saraha.Infra.Repository
             p.Add("@Contentt", testimonial.Content, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("@Starss", testimonial.Stars, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("@UserIdd", testimonial.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-
+            bool status = UpdateAcceptingStatus(0,testimonial.Testimonialid);
             var result = dbContext.Connection.ExecuteAsync("Testimonial_Package.UpdateTestimonial", p,
                 commandType: CommandType.StoredProcedure);
 

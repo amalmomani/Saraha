@@ -9,6 +9,7 @@ namespace Saraha.Core.DTO
       
        
         public string username { set; get; }
+        public string message { set; get; }
         public string ImageName { set; get; }
         public int count { set; get; }
     }
