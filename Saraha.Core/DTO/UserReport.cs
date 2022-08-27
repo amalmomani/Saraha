@@ -6,8 +6,9 @@ namespace Saraha.Core.DTO
 {
    public class UserReport
     {
-      
-       
+
+        
+        public int userId { set; get; }
         public string username { set; get; }
         public string message { set; get; }
         public string ImageName { set; get; }
