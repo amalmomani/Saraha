@@ -72,7 +72,7 @@ namespace Saraha.Controllers
                 //"C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets"
                 var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets\\Images", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
@@ -85,6 +85,8 @@ namespace Saraha.Controllers
             {
                 return null;
             }
+
+            ///// rawan path "C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets"
 
         }
         [HttpPut]
