@@ -53,5 +53,17 @@ namespace Saraha.Infra.Repository
             IEnumerable<PostLikesDTO> result = dbContext.Connection.Query<PostLikesDTO>("DTOPackage.PostLikes", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+
+        public List<Postlike> GetLikeById(int userId)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@UserIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Postlike> result = dbContext.Connection.Query<Postlike>("UserPostLike_Package.GetLikeById", p,
+              commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+        }
     }
 }

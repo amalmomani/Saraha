@@ -59,6 +59,10 @@ namespace Saraha.Controllers
         {
             return messageService.GetUserMessageById(userId);
         }
-
+        [HttpGet("messagecount/{userId}")]
+        public List<Message> GetUserMessageByIdcount(int userId)
+        {
+            return messageService.GetUserMessageByIdcount(userId);
+        }
     }
 }

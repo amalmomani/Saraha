@@ -13,7 +13,7 @@ namespace Saraha.Core.Data
         public int Testimonialid { get; set; }
         public string Content { get; set; }
         public int Stars { get; set; }
-        public bool Is_Accepted { get; set; }
+        public int Is_Accepted { get; set; }
         public int Userid { get; set; }
     }
 }

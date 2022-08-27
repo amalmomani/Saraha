@@ -45,5 +45,9 @@ namespace Saraha.Infra.Service
         {
              repo.UpdateMessage(message);
         }
+        public List<Message> GetUserMessageByIdcount(int userId)
+        {
+            return repo.GetUserMessageByIdcount(userId);
+        }
     }
 }

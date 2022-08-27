@@ -14,5 +14,6 @@ namespace Saraha.Core.Repository
         public void DeleteMessage(int? id);
         public List<UserMessage> GetUserMessage();
         public List<UserMessage> GetUserMessageById(int userId);
+        public List<Message> GetUserMessageByIdcount(int userId);
     }
 }
