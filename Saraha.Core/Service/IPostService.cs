@@ -19,6 +19,8 @@ namespace Saraha.Core.Service
         public List<PostUserComment> PostUserComments();
         public List<PostFullDataDTO> GetPostByUserId(int userId);
         public List<PostLikesDTO> GetPostLikedBy(int postId);
+        public void MessageToPost(Message msg);
+
 
 
 
