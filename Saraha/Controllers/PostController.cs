@@ -28,16 +28,21 @@ namespace Saraha.Controllers
             return postService.GetAll();
         }
         [HttpGet("GetPostByUserId/{userId}")]
-        public List<Post> GetPost(int userId)
+        public List<PostFullDataDTO> GetPost(int userId)
         {
 
             return postService.GetPostByUserId(userId);
         }
-        [HttpPost("CreatePost")]
-        [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
-        public void createPost([FromBody] Post aboutus)
+        [HttpGet("GetPostLikedByPostId/{postId}")]
+        public List<PostLikesDTO> GetLikes(int postId)
         {
-            postService.Insert(aboutus);
+
+            return postService.GetPostLikedBy(postId);
+        }
+        [HttpPost("CreatePost")]
+        public void createPost([FromBody] Post post)
+        {
+            postService.Insert(post);
         }
         [HttpPost("UploadPostImage")]
         public Post UploadPostImage()

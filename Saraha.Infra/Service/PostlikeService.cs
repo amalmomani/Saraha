@@ -34,7 +34,7 @@ namespace Saraha.Infra.Service
 
         }
 
-        public List<PostLikes> GetPostLikes()
+        public List<PostLikesDTO> GetPostLikes()
         {
             return repo.GetPostLikes();
         }

@@ -48,9 +48,9 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.Execute("Like_package.DeleteLike", parameter, commandType: CommandType.StoredProcedure);
         }
 
-        public List<PostLikes> GetPostLikes()
+        public List<PostLikesDTO> GetPostLikes()
         {
-            IEnumerable<PostLikes> result = dbContext.Connection.Query<PostLikes>("DTOPackage.PostLikes", commandType: CommandType.StoredProcedure);
+            IEnumerable<PostLikesDTO> result = dbContext.Connection.Query<PostLikesDTO>("DTOPackage.PostLikes", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
     }

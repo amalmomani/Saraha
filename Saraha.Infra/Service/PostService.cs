@@ -42,12 +42,17 @@ namespace Saraha.Infra.Service
         {
             repo.Update(post);
         }
-        public List<Post> GetPostByUserId(int userId)
+        public List<PostFullDataDTO> GetPostByUserId(int userId)
         {
             return repo.GetPostByUserId(userId);
 
 
         }
+        public List<PostLikesDTO> GetPostLikedBy(int postId)
+        {
+            return repo.GetPostLikedBy(postId);
+        }
+
 
     }
 }
