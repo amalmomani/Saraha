@@ -61,7 +61,7 @@ namespace Saraha.Infra.Repository
             
             var p = posts.Where(p => p.Posttext == post.Posttext && p.Userid==post.Userid && p.Postdate.ToString() == now.ToString()  ).SingleOrDefault();
             var pa = new DynamicParameters();
-            pa.Add("@UserIDD", p.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@UserIDD", post.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@CommentIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@PostIDD", p.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);

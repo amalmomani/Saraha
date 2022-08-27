@@ -34,10 +34,9 @@ namespace Saraha.Controllers
             return postService.GetPostByUserId(userId);
         }
         [HttpPost("CreatePost")]
-        [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
-        public void createPost([FromBody] Post aboutus)
+        public void createPost([FromBody] Post post)
         {
-            postService.Insert(aboutus);
+            postService.Insert(post);
         }
         [HttpPost("UploadPostImage")]
         public Post UploadPostImage()
