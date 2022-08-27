@@ -33,18 +33,28 @@ namespace Saraha.Infra.Repository
             IEnumerable<Post> result = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
-        public List<Post> GetPostByUserId(int userId)
+        public List<PostFullDataDTO> GetPostByUserId(int userId)
         {
 
             var parameter = new DynamicParameters();
             parameter.Add("userIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            IEnumerable<Post> result = dbContext.Connection.Query<Post>("Activity_package_api.GetPostByUserId", parameter, commandType: CommandType.StoredProcedure);
+            IEnumerable<PostFullDataDTO> result = dbContext.Connection.Query<PostFullDataDTO>("Post_package.GetPostInfoByUserId", parameter, commandType: CommandType.StoredProcedure);
 
             return result.ToList();
 
 
         }
+        public List<PostLikesDTO> GetPostLikedBy(int postId)
+        {
 
+            var parameter = new DynamicParameters();
+            parameter.Add("postIdd", postId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<PostLikesDTO> result = dbContext.Connection.Query<PostLikesDTO>("DTOPackage.PostLikes", parameter, commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+
+
+        }
 
         public void Insert(Post post)
         {

@@ -22,7 +22,7 @@ namespace Saraha.Controllers
 
 
         [HttpPost("CreateLike")]
-        public void RemoveLike(Postlike like)
+        public void CreateLike(Postlike like)
         {
             likeService.CreateLike(like);
         }
@@ -33,7 +33,7 @@ namespace Saraha.Controllers
             return likeService.GetAllLikes();
         }
         [HttpGet("PostLikes")]
-        public List<PostLikes> GetPostLikes()
+        public List<PostLikesDTO> GetPostLikes()
         {
             return likeService.GetPostLikes();
         }

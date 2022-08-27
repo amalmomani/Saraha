@@ -11,7 +11,7 @@ namespace Saraha.Core.Data
         public decimal Postid { get; set; }
         public DateTime? Postdate { get; set; }
         public string Posttext { get; set; }
-        public bool? IsPin { get; set; }
+        public bool? Is_Pin { get; set; }
         public string Imagepath { get; set; }
         public decimal? Userid { get; set; }
 

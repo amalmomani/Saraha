@@ -13,7 +13,7 @@ namespace Saraha.Core.Service
 
         public List<Postlike> GetAllLikes();
         public void DeleteLike(int id);
-        public List<PostLikes> GetPostLikes();
-        public List<Postlike> GetLikeById(int userId);
+        public List<PostLikesDTO> GetPostLikes();
+
     }
 }
