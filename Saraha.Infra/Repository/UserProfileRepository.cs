@@ -18,6 +18,7 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
+       
         public void CreateUserProfile(RegisterDTO userProfile)
         {
             var p = new DynamicParameters();
@@ -35,7 +36,7 @@ namespace Saraha.Infra.Repository
             var pa = new DynamicParameters();
 
 
-            pa.Add("@UserNamee", userProfile.Username, dbType: DbType.String, direction: ParameterDirection.Input);
+            pa.Add("@UserNamee", userProfile.Email, dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@Passwordd", userProfile.Password, dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@UserIdd", user.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@RoleIdd", 2, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -43,7 +44,7 @@ namespace Saraha.Infra.Repository
             var r = dbContext.Connection.ExecuteAsync("Login_Package.CreateLogin", pa,
                 commandType: CommandType.StoredProcedure);
 
-
+            
 
 
         }
