@@ -38,9 +38,6 @@ namespace Saraha.Infra.Service
         {
             return repo.GetPostLikes();
         }
-        public List<Postlike> GetLikeById(int userId)
-        {
-            return repo.GetLikeById(userId);
-        }
+     
     }
 }

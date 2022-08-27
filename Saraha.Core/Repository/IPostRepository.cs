@@ -21,5 +21,6 @@ namespace Saraha.Core.Repository
         public List<PostLikesDTO> GetPostLikedBy(int postId);
 
 
+
     }
 }

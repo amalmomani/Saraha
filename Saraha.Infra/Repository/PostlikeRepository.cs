@@ -24,13 +24,26 @@ namespace Saraha.Infra.Repository
 
         public void CreateLike(Postlike post)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@likeDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            parameter.Add("@userIdd", post.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@postIdd", post.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<Postlike> allLikes = dbContext.Connection.Query<Postlike>("Like_package.getallLikes", commandType: CommandType.StoredProcedure);
+            var exist = allLikes.Any(x => x.PostId == post.PostId && x.UserId == post.UserId);
+            Postlike PostLikeUser = allLikes.Where(x => x.PostId == post.PostId && x.UserId == post.UserId).SingleOrDefault();
+            if (!exist)
+            {
 
 
-            var result = dbContext.Connection.Execute("Like_package.createLike", parameter, commandType: CommandType.StoredProcedure);
+
+                var parameter = new DynamicParameters();
+                parameter.Add("@likeDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+                parameter.Add("@userIdd", post.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                parameter.Add("@postIdd", post.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+
+
+
+                var result = dbContext.Connection.Execute("Like_package.createLike", parameter, commandType: CommandType.StoredProcedure);
+            }
+            else
+                DeleteLike(PostLikeUser.LikeId);
 
         }
 

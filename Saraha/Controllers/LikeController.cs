@@ -21,9 +21,12 @@ namespace Saraha.Controllers
         }
 
 
-        [HttpPost("CreateLike")]
-        public void CreateLike(Postlike like)
+        [HttpGet("CreateLike/{userId}/{postId}")]
+        public void CreateLike(int userId ,int postId)
         {
+            Postlike like = new Postlike();
+            like.PostId = postId;
+            like.UserId = userId;
             likeService.CreateLike(like);
         }
 
@@ -44,10 +47,10 @@ namespace Saraha.Controllers
              likeService.DeleteLike(id);  
         }
 
-        [HttpGet("Likescount/{userId}")]
-        public List<Postlike> GetLikeById(int userId)
-        {
-            return likeService.GetLikeById(userId);
-        }
+        //[HttpGet("Likescount/{userId}")]
+        //public List<Postlike> GetLikeById(int userId)
+        //{
+        //    return likeService.GetLikeById(userId);
+        //}
     }
 }
