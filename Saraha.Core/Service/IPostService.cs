@@ -17,7 +17,10 @@ namespace Saraha.Core.Service
         public List<Post> GetAll();
         public void PinPost(int id);
         public List<PostUserComment> PostUserComments();
-        public List<Post> GetPostByUserId(int userId);
+        public List<PostFullDataDTO> GetPostByUserId(int userId);
+        public List<PostLikesDTO> GetPostLikedBy(int postId);
+
+
 
 
 

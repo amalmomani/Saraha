@@ -21,9 +21,12 @@ namespace Saraha.Controllers
         }
 
 
-        [HttpPost("CreateLike")]
-        public void RemoveLike(Postlike like)
+        [HttpGet("CreateLike/{userId}/{postId}")]
+        public void CreateLike(int userId ,int postId)
         {
+            Postlike like = new Postlike();
+            like.PostId = postId;
+            like.UserId = userId;
             likeService.CreateLike(like);
         }
 
@@ -33,7 +36,7 @@ namespace Saraha.Controllers
             return likeService.GetAllLikes();
         }
         [HttpGet("PostLikes")]
-        public List<PostLikes> GetPostLikes()
+        public List<PostLikesDTO> GetPostLikes()
         {
             return likeService.GetPostLikes();
         }

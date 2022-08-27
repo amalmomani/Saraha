@@ -28,10 +28,16 @@ namespace Saraha.Controllers
             return postService.GetAll();
         }
         [HttpGet("GetPostByUserId/{userId}")]
-        public List<Post> GetPost(int userId)
+        public List<PostFullDataDTO> GetPost(int userId)
         {
 
             return postService.GetPostByUserId(userId);
+        }
+        [HttpGet("GetPostLikedByPostId/{postId}")]
+        public List<PostLikesDTO> GetLikes(int postId)
+        {
+
+            return postService.GetPostLikedBy(postId);
         }
         [HttpPost("CreatePost")]
         public void createPost([FromBody] Post post)
@@ -53,7 +59,7 @@ namespace Saraha.Controllers
                 }
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets\\Images", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets\\Images", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);

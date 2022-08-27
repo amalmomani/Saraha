@@ -24,7 +24,7 @@ namespace Saraha.Controllers
 
             return commentservice.GetAllComments();
         }
-        [HttpPost]
+        [HttpPost("CreateComment")]
         public void CreateComment([FromBody] Postcomment comment)
         {
             commentservice.CreateComment(comment);

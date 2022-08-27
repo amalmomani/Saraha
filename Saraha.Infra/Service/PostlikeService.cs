@@ -34,10 +34,11 @@ namespace Saraha.Infra.Service
 
         }
 
-        public List<PostLikes> GetPostLikes()
+        public List<PostLikesDTO> GetPostLikes()
         {
             return repo.GetPostLikes();
         }
+
         public List<Postlike> GetLikeById(int userId)
         {
             return repo.GetLikeById(userId);
