@@ -65,6 +65,8 @@ namespace Saraha.Infra.Repository
             parameter.Add("@postTextt", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@ImagePathh", post.Imagepath, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@userIdd", post.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@postTypee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
+
 
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
             IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
@@ -83,6 +85,34 @@ namespace Saraha.Infra.Repository
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
 
         }
+        public void MessageToPost(Message msg)
+        {
+            DateTime now = DateTime.Now;
+
+            var parameter = new DynamicParameters();
+            parameter.Add("@postDatee", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@postTextt", msg.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@ImagePathh", null, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@userIdd", msg.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@postTypee", "msg", dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+
+            var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
+            IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
+
+            var p = posts.Where(p => p.Posttext == msg.MessageContent && p.Userid == msg.UserTo && p.Postdate.ToString() == now.ToString()).SingleOrDefault();
+            var pa = new DynamicParameters();
+            pa.Add("@UserIDD", msg.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@CommentIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@PostIDD", p.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
+            pa.Add("@Messagee", msg.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
+
+        }
+
 
         public void PinPost(int id)
         {

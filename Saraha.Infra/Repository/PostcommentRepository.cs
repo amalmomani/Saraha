@@ -37,6 +37,7 @@ namespace Saraha.Infra.Repository
 
         public void CreateComment(Postcomment comment)
         {
+            DateTime now = DateTime.Now;
             var parameter = new DynamicParameters();
             parameter.Add("@commentDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("@userIdd", comment.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -46,9 +47,23 @@ namespace Saraha.Infra.Repository
 
 
             var result = dbContext.Connection.Execute("Comment_package.createComment", parameter, commandType: CommandType.StoredProcedure);
+            IEnumerable<Postcomment> comments = dbContext.Connection.Query<Postcomment>("Comment_package.getallComments", commandType: CommandType.StoredProcedure);
+            var comm = comments.Where(c => c.Commenttext == comment.Commenttext && c.Userid == c.Userid && c.Commentdate.ToString() == now.ToString()).SingleOrDefault();
+            var pa = new DynamicParameters();
+            pa.Add("@UserIDD", comment.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@CommentIDD", comm.Commentid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@PostIDD", comm.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
+            pa.Add("@Messagee", comm.Commenttext, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
+
+
+
         }
 
-   
+
 
         public void UpdateComment(Postcomment Comment , int id )
         {
