@@ -21,6 +21,14 @@ namespace Saraha.Infra.Repository
         }
         public void Delete(int id)
         {
+            IEnumerable<Activity> resultActivity = dbContext.Connection.Query<Activity>("Activity_package_api.getallActivity", commandType: CommandType.StoredProcedure);
+
+            var activi = resultActivity.Where(x => x.PostId == id).SingleOrDefault();
+            var parameter1 = new DynamicParameters();
+            parameter1.Add("@ActivityIDD", activi.ActivityID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var resultdelet = dbContext.Connection.ExecuteAsync("Activity_package_api.deleteActivity", parameter1, commandType: CommandType.StoredProcedure);
+
             var parameter = new DynamicParameters();
             parameter.Add("@postIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
