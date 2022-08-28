@@ -22,7 +22,7 @@ namespace Saraha.Core.Repository
         public void MessageToPost(Message msg, string Reply);
 
 
-
+        public List<PostFullDataDTO> Top3Post(int userid);
 
     }
 }

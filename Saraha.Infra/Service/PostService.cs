@@ -58,6 +58,9 @@ namespace Saraha.Infra.Service
 
             repo.MessageToPost(msg, Reply);
         }
-
+        public List<PostFullDataDTO> Top3Post(int userid)
+        {
+            return repo.Top3Post(userid);
+        }
     }
 }
