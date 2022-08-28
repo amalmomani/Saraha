@@ -33,9 +33,9 @@ namespace Saraha.Infra.Service
             repo.Insert(post);
         }
 
-        public void PinPost(int id)
+        public void PinPost(int id, int isPin)
         {
-            repo.PinPost(id);
+            repo.PinPost(id , isPin);
         }
 
         public void Update(Post post)

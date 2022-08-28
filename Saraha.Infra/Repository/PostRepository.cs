@@ -122,10 +122,12 @@ namespace Saraha.Infra.Repository
         }
 
 
-        public void PinPost(int id)
+        public void PinPost(int id , int isPin)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@postIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@isPin", isPin, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
 
             var result = dbContext.Connection.Execute("Post_package.PinPost", parameter, commandType: CommandType.StoredProcedure);
 

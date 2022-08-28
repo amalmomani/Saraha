@@ -45,6 +45,8 @@ namespace Saraha.Controllers
             postService.Insert(post);
         }
         [HttpPost("MsgToPost")]
+        [ProducesResponseType(typeof(Message), StatusCodes.Status200OK)]
+
         public void MessageToPost([FromBody] Message msg )
         {
     
@@ -92,10 +94,10 @@ namespace Saraha.Controllers
         {
             postService.Delete(id);
         }
-        [HttpPut("PinPost/{id}")]
-        public void PinPost(int id)
+        [HttpGet("PinPost/{id}/{isPin}")]
+        public void PinPost(int id,int isPin)
         {
-            postService.PinPost(id);
+            postService.PinPost(id, isPin);
         }
         [HttpGet("PostUserComments")]
         public List<PostUserComment> PostUserComments()
