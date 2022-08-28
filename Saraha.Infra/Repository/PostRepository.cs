@@ -93,7 +93,7 @@ namespace Saraha.Infra.Repository
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
 
         }
-        public void MessageToPost(Message msg)
+        public void MessageToPost(Message msg, string Reply)
         {
             DateTime now = DateTime.Now;
 
@@ -103,7 +103,7 @@ namespace Saraha.Infra.Repository
             parameter.Add("@ImagePathh", null, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@userIdd", msg.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@postTypee", "msg", dbType: DbType.String, direction: ParameterDirection.Input);
-
+            parameter.Add("@Replyy", Reply, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
             IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);

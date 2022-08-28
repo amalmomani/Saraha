@@ -53,10 +53,10 @@ namespace Saraha.Infra.Service
             return repo.GetPostLikedBy(postId);
         }
 
-        public void MessageToPost(Message msg)
+        public void MessageToPost(Message msg, string Reply)
         {
 
-            repo.MessageToPost(msg);
+            repo.MessageToPost(msg, Reply);
         }
 
     }

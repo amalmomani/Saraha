@@ -44,13 +44,16 @@ namespace Saraha.Controllers
         {
             postService.Insert(post);
         }
-        [HttpPost("MsgToPost")]
+        [HttpGet("MsgToPost/{msg}/{userId}/{Reply}")]
         [ProducesResponseType(typeof(Message), StatusCodes.Status200OK)]
 
-        public void MessageToPost([FromBody] Message msg )
+        public void MessageToPost(string msg, int userId, string Reply)
         {
-    
-            postService.MessageToPost(msg);
+            Message m = new Message();
+            m.MessageContent = msg;
+            m.UserTo = userId;
+           
+            postService.MessageToPost(m,Reply);
         }
         [HttpPost("UploadPostImage")]
         public Post UploadPostImage()
