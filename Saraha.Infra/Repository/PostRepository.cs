@@ -102,7 +102,7 @@ namespace Saraha.Infra.Repository
             parameter.Add("@postTextt", msg.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@ImagePathh", null, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@userIdd", msg.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@postTypee", "msg", dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@postTypee", "msg", dbType: DbType.String, direction: ParameterDirection.Input);
 
 
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);

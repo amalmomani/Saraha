@@ -5,6 +5,9 @@ using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Saraha.Controllers
@@ -92,5 +95,40 @@ namespace Saraha.Controllers
         {
             loginService.ChangePassword(loginId, password);
         }
+
+        [HttpGet("SendVerfiyCodeEmail/{email}")]
+        public int SendVerfiyCodeEmail(String email)
+        {
+            Random rand = new Random();
+
+           int codeVerfiy = rand.Next(100000, 999999);
+            string to = email; //To address    
+            string from = "rawanazzam68@gmail.com"; //From address    
+            MailMessage message = new MailMessage(from, to);
+
+            string mailbody = "this is code to verfiy Eamil \n" + codeVerfiy;
+            message.Subject = "Saraha Verfiy Email";
+            message.Body = mailbody;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            try
+            {
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("rawanazzam68@gmail.com", "yugxqzeqsferfxoz");
+                    smtp.EnableSsl = true;
+                    smtp.Send(message);
+                }
+                return codeVerfiy;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+      
     }
 }
