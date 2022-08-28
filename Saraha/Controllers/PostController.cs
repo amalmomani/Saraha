@@ -45,8 +45,9 @@ namespace Saraha.Controllers
             postService.Insert(post);
         }
         [HttpPost("MsgToPost")]
-        public void MessageToPost([FromBody] Message msg)
+        public void MessageToPost(Message msg )
         {
+    
             postService.MessageToPost(msg);
         }
         [HttpPost("UploadPostImage")]
