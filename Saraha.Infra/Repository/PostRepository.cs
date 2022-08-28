@@ -63,6 +63,17 @@ namespace Saraha.Infra.Repository
 
 
         }
+        public List<PostFullDataDTO> Top3Post(int userid)
+        {
+
+            var parameter = new DynamicParameters();
+            parameter.Add("userIdd", userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<PostFullDataDTO> result = dbContext.Connection.Query<PostFullDataDTO>("Top3Post", parameter, commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+
+
+        }
 
         public void Insert(Post post)
         {

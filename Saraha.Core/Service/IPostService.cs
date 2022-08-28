@@ -21,7 +21,7 @@ namespace Saraha.Core.Service
         public List<PostLikesDTO> GetPostLikedBy(int postId);
         public void MessageToPost(Message msg, string Reply);
 
-
+        public List<PostFullDataDTO> Top3Post(int userid);
 
 
 
