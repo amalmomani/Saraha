@@ -11,5 +11,16 @@ namespace Saraha.Core.Data
         public decimal? FeaturePrice { get; set; }
         public decimal? FeatureDuration { get; set; }
         public string ImagePath { get; set; }
+        public string? FeatureDescribtion { get; set; }
+        public decimal? RateStars { get; set; }
+        public decimal? RateCount { get; set; }
+        public decimal? OldPrice { get; set; }
+        public string? VedioLink { get; set; }
+
+
+
+
+
+
     }
 }
