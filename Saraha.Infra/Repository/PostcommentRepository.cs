@@ -54,7 +54,7 @@ namespace Saraha.Infra.Repository
             pa.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@CommentIDD", comm.Commentid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@PostIDD", comm.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
+            pa.Add("@ActivityNamee", "comment", dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@Messagee", comm.Commenttext, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);

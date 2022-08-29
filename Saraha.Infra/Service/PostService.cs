@@ -33,9 +33,9 @@ namespace Saraha.Infra.Service
             repo.Insert(post);
         }
 
-        public void PinPost(int id)
+        public void PinPost(int id, int isPin)
         {
-            repo.PinPost(id);
+            repo.PinPost(id , isPin);
         }
 
         public void Update(Post post)
@@ -53,6 +53,14 @@ namespace Saraha.Infra.Service
             return repo.GetPostLikedBy(postId);
         }
 
+        public void MessageToPost(Message msg, string Reply)
+        {
 
+            repo.MessageToPost(msg, Reply);
+        }
+        public List<PostFullDataDTO> Top3Post(int userid)
+        {
+            return repo.Top3Post(userid);
+        }
     }
 }

@@ -44,6 +44,17 @@ namespace Saraha.Controllers
         {
             postService.Insert(post);
         }
+        [HttpGet("MsgToPost/{msg}/{userId}/{Reply}")]
+        [ProducesResponseType(typeof(Message), StatusCodes.Status200OK)]
+
+        public void MessageToPost(string msg, int userId, string Reply)
+        {
+            Message m = new Message();
+            m.MessageContent = msg;
+            m.UserTo = userId;
+           
+            postService.MessageToPost(m,Reply);
+        }
         [HttpPost("UploadPostImage")]
         public Post UploadPostImage()
         {
@@ -76,9 +87,9 @@ namespace Saraha.Controllers
 
         [HttpPut]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
-        public void UpdatePost([FromBody] Post aboutus)
+        public void UpdatePost([FromBody] Post post)
         {
-            postService.Update(aboutus);
+            postService.Update(post);
         }
 
         [HttpDelete("delete/{id}")]
@@ -86,15 +97,20 @@ namespace Saraha.Controllers
         {
             postService.Delete(id);
         }
-        [HttpPut("PinPost/{id}")]
-        public void PinPost(int id)
+        [HttpGet("PinPost/{id}/{isPin}")]
+        public void PinPost(int id,int isPin)
         {
-            postService.PinPost(id);
+            postService.PinPost(id, isPin);
         }
         [HttpGet("PostUserComments")]
         public List<PostUserComment> PostUserComments()
         {
             return postService.PostUserComments();
+        }
+        [HttpGet("Top3Post/{userid}")]
+        public List<PostFullDataDTO> Top3Post(int userid)
+        {
+            return postService.Top3Post(userid);
         }
     }
 }

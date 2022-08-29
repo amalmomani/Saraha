@@ -21,6 +21,14 @@ namespace Saraha.Infra.Repository
         }
         public void Delete(int id)
         {
+            IEnumerable<Activity> resultActivity = dbContext.Connection.Query<Activity>("Activity_package_api.getallActivity", commandType: CommandType.StoredProcedure);
+
+            var activi = resultActivity.Where(x => x.PostId == id).SingleOrDefault();
+            var parameter1 = new DynamicParameters();
+            parameter1.Add("@ActivityIDD", activi.ActivityID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var resultdelet = dbContext.Connection.ExecuteAsync("Activity_package_api.deleteActivity", parameter1, commandType: CommandType.StoredProcedure);
+
             var parameter = new DynamicParameters();
             parameter.Add("@postIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
@@ -50,6 +58,17 @@ namespace Saraha.Infra.Repository
             var parameter = new DynamicParameters();
             parameter.Add("postIdd", postId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             IEnumerable<PostLikesDTO> result = dbContext.Connection.Query<PostLikesDTO>("DTOPackage.PostLikes", parameter, commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+
+
+        }
+        public List<PostFullDataDTO> Top3Post(int userid)
+        {
+
+            var parameter = new DynamicParameters();
+            parameter.Add("userIdd", userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<PostFullDataDTO> result = dbContext.Connection.Query<PostFullDataDTO>("Top3Post", parameter, commandType: CommandType.StoredProcedure);
 
             return result.ToList();
 
@@ -85,7 +104,7 @@ namespace Saraha.Infra.Repository
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
 
         }
-        public void MessageToPost(Message msg)
+        public void MessageToPost(Message msg, string Reply)
         {
             DateTime now = DateTime.Now;
 
@@ -94,8 +113,8 @@ namespace Saraha.Infra.Repository
             parameter.Add("@postTextt", msg.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@ImagePathh", null, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@userIdd", msg.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("@postTypee", "msg", dbType: DbType.Int32, direction: ParameterDirection.Input);
-
+            parameter.Add("@postTypee", "msg", dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Replyy", Reply, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
             IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
@@ -114,10 +133,12 @@ namespace Saraha.Infra.Repository
         }
 
 
-        public void PinPost(int id)
+        public void PinPost(int id , int isPin)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@postIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@isPin", isPin, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
 
             var result = dbContext.Connection.Execute("Post_package.PinPost", parameter, commandType: CommandType.StoredProcedure);
 
