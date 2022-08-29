@@ -98,6 +98,7 @@ namespace Saraha.Infra.Repository
             pa.Add("@PostIDD", p.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@Messagee", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
 
 

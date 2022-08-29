@@ -26,5 +26,7 @@ namespace Saraha.Core.Data
 
         [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
+
+        public DateTime ActivityDate { get; set; }
     }
 }

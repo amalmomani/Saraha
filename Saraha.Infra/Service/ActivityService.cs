@@ -24,6 +24,11 @@ namespace Saraha.Infra.Service
              repo.DeleteActivity(id);
         }
 
+        public List<Activity> GetActivityByUserId(int userId)
+        {
+            return repo.GetActivityByUserId(userId);
+        }
+
         public List<Activity> GetallActivity()
         {
             return repo.GetallActivity();
