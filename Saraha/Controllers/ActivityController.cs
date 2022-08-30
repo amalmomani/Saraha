@@ -51,5 +51,17 @@ namespace Saraha.Controllers
             return activityService.GetActivityByUserId(userId);
         }
 
+        [HttpGet("GetUserByLikeId/{likeId}")]
+        public Userprofile GetUserByLikeId(int likeId)
+        {
+            return activityService.GetUserByLikeId(likeId);
+        }
+
+        [HttpGet("GetUserByCommentId/{commentId}")]
+        public Userprofile GetUserByCommentId(int commentId)
+        {
+            return activityService.GetUserByCommentId(commentId);
+        }
+
     }
 }

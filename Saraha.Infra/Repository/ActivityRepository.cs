@@ -57,6 +57,26 @@ namespace Saraha.Infra.Repository
             return result.ToList();
         }
 
+        public Userprofile GetUserByCommentId(int commentId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@CommentIdd", commentId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>
+                ("GetPostInfoByCommentId", parameter, commandType: CommandType.StoredProcedure);
+            return result.ToList().SingleOrDefault();
+        }
+
+        public Userprofile GetUserByLikeId(int likeId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@LikeIdd", likeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>
+                ("GetPostInfoByLikeId", parameter, commandType: CommandType.StoredProcedure);
+            return result.ToList().SingleOrDefault();
+        }
+
         public void UpdateActivity(Activity activity)
         {
             var parameter = new DynamicParameters();

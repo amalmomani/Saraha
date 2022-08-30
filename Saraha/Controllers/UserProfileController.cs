@@ -69,10 +69,10 @@ namespace Saraha.Controllers
                     file.CopyTo(ms);
                     fileContent = ms.ToArray();
                 }
-                //"C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets"
                 var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets\\Images", attachmentFileName);
+                var fullPath = Path.Combine("D:\\5.2\\training\\(12)Final Project\\Saraha-master\\Saraha\\src\\assets", attachmentFileName);
+
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);

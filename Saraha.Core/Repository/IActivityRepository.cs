@@ -12,5 +12,9 @@ namespace Saraha.Core.Repository
         public void UpdateActivity(Activity activity);
         public void DeleteActivity(int? id);
         public List<Activity> GetActivityByUserId(int userId);
+
+        public Userprofile GetUserByLikeId(int likeId);
+        public Userprofile GetUserByCommentId(int commentId);
+
     }
 }
