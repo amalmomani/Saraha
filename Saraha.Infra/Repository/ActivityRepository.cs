@@ -41,6 +41,16 @@ namespace Saraha.Infra.Repository
           
         }
 
+        public List<Activity> GetActivityByUserId(int userId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@UserIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Activity> result = dbContext.Connection.Query<Activity>
+                ("Activity_package_api.GetActivityByUserId",parameter, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
         public List<Activity> GetallActivity()
         {
             IEnumerable<Activity> result = dbContext.Connection.Query<Activity>("Activity_package_api.getallActivity", commandType: CommandType.StoredProcedure);
@@ -56,6 +66,7 @@ namespace Saraha.Infra.Repository
             parameter.Add("@LikeIDD", activity.LikeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@CommentIDD", activity.CommentId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@PostIDD", activity.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
             var result = dbContext.Connection.ExecuteAsync("Activity_package_api.UpdateActivity", parameter, commandType: CommandType.StoredProcedure);
       

@@ -45,18 +45,11 @@ namespace Saraha.Controllers
              activityService.DeleteActivity(id);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        [HttpGet("GetActivityByUserId/{userId}")]
+        public List<Activity> GetActivityByUserId(int userId)
+        {
+            return activityService.GetActivityByUserId(userId);
+        }
 
     }
 }
