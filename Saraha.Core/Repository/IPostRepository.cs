@@ -22,7 +22,7 @@ namespace Saraha.Core.Repository
 
         public List<PostLikesDTO> GetPostLikedBy(int postId);
         public void MessageToPost(Message msg, string Reply);
-
+        public Post GetPosById(int postId);
 
         public List<PostFullDataDTO> Top3Post(int userid);
 

@@ -107,6 +107,12 @@ namespace Saraha.Controllers
         {
             return postService.PostUserComments();
         }
+        [HttpGet("PostByUser/{postId}")]
+
+        public Post GetPosById(int postId)
+        {
+            return postService.GetPosById(postId);
+        }
         [HttpGet("CommentsByUser/{postId}")]
         public List<PostUserComment> CommentsByUser(int postId)
         {

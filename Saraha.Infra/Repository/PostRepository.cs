@@ -170,6 +170,12 @@ namespace Saraha.Infra.Repository
             var Comment = result.Where(x => x.postId == postId);
             return Comment.ToList();
         }
+        public Post GetPosById(int postId)
+        {
+            IEnumerable<Post> result = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
+            var post = result.Where(x => x.Postid == postId).FirstOrDefault();
+            return post;
+        }
 
     }
 }
