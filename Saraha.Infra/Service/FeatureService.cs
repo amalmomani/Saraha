@@ -41,6 +41,15 @@ namespace Saraha.Infra.Service
         public List<Charts> Chart() {
             return repo.Chart();
         }
+        public List<string> FeatureName()
+        {
+            return repo.FeatureName();
+        }
+
+        public List<int> FeatureTotalSales()
+        {
+            return repo.FeatureTotalSales();
+        }
 
 
     }

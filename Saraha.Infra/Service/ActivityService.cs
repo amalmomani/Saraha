@@ -34,6 +34,16 @@ namespace Saraha.Infra.Service
             return repo.GetallActivity();
         }
 
+        public Userprofile GetUserByCommentId(int commentId)
+        {
+            return repo.GetUserByCommentId(commentId);
+        }
+
+        public Userprofile GetUserByLikeId(int likeId)
+        {
+            return repo.GetUserByLikeId(likeId);
+        }
+
         public void UpdateActivity(Activity activity)
         {
              repo.UpdateActivity(activity);

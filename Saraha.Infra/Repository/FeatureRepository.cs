@@ -81,6 +81,20 @@ namespace Saraha.Infra.Repository
             IEnumerable<FeatureSalesDTO> result = dbContext.Connection.Query<FeatureSalesDTO>("Feature_package.getFeatureSales", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public List<string> FeatureName()
+        {
+            IEnumerable<string> result = dbContext.Connection.Query<string>("featureName", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public List<int> FeatureTotalSales()
+        {
+            IEnumerable<int> result = dbContext.Connection.Query<int>("featureTotalSales", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+
+
         public List<Charts> Chart()
         {
             IEnumerable<Charts> fea = dbContext.Connection.Query<Charts>("ServiceSales", commandType: CommandType.StoredProcedure);
