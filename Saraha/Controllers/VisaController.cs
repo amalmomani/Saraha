@@ -25,11 +25,17 @@ namespace Saraha.Controllers
 
             return VisaCardServices.GetallVisa();
         }
+        [HttpGet("GetVisa/{card}/{cost}")]
+        [ProducesResponseType(typeof(List<VisaCard>), StatusCodes.Status200OK)]
+        public string GetVisa(string card, int cost)
+        {
+            return VisaCardServices.GetVisa(card,cost);
+        }
 
         [HttpPut]
-        public void UpdateVisa([FromBody] VisaCard visa)
+        public void UpdateVisa([FromBody] VisaCard visa, int cost)
         {
-            VisaCardServices.UpdateVisa(visa);
+            VisaCardServices.UpdateVisa(visa,cost);
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Saraha.Core.Service
     public interface IVisaCardServices
     {
         public List<VisaCard> GetallVisa();
-        public void UpdateVisa(VisaCard visa);
-    }
+        public void UpdateVisa(VisaCard visa, int cost);
+        public string GetVisa(string card, int cost);
+        
+        }
 }

@@ -8,6 +8,8 @@ namespace Saraha.Core.Repository
    public interface IVisaCardRepository
     {
         public List<VisaCard> GetallVisa();
-        public void UpdateVisa(VisaCard visa);
-    }
+        public void UpdateVisa(VisaCard visa, int cost);
+        public string GetVisa(string card, int cost);
+        
+        }
 }
