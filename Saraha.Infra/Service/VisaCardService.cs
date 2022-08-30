@@ -19,9 +19,9 @@ namespace Saraha.Infra.Service
             return repo.GetallVisa();
         }
 
-        public string GetVisa(string card, int cost)
+        public string GetVisa(string card, int cost, int userId, int featureId)
         {
-            return repo.GetVisa(card, cost);
+            return repo.GetVisa(card, cost,userId,featureId);
         }
 
         public void UpdateVisa(VisaCard visa, int cost)

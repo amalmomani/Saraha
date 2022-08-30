@@ -35,7 +35,7 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.ExecuteAsync("VisaApi_package.VisaUpdate", parameter, commandType: CommandType.StoredProcedure);
 
         }
-        public string GetVisa(string card, int cost)
+        public string GetVisa(string card, int cost,int userId, int featureId)
         {
             var message="";
             IEnumerable<VisaCard> result = dbContext.Connection.Query<VisaCard>("VisaApi_package.getallVisa", commandType: CommandType.StoredProcedure);
@@ -47,6 +47,7 @@ namespace Saraha.Infra.Repository
                 {
                     UpdateVisa(cardd, cost);
                     message = "Paid sucessfully";
+                    CreatePurchase(cost, userId, featureId);
                     return message;
                 }
                 else
@@ -59,6 +60,30 @@ namespace Saraha.Infra.Repository
                 message = "Invalid card number";
             return message; 
             }
+        }
+
+
+
+        public void CreatePurchase(int cost , int userId, int featureId)
+        {
+            IEnumerable<Feature> result = dbContext.Connection.Query<Feature>("Feature_package.getallFeatures", commandType: CommandType.StoredProcedure);
+            var f = result.Where(x => x.FeatureId == featureId).FirstOrDefault();
+
+            IEnumerable<Userprofile> result2 = dbContext.Connection.Query<Userprofile>("User_Package.GetAllUsers", commandType: CommandType.StoredProcedure);
+            var u = result2.Where(x=>x.Userid==userId).FirstOrDefault();
+
+
+            var parameter = new DynamicParameters();
+            parameter.Add("@dateFromm", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@datetoo",DateTime.Now.AddDays((int)f.FeatureDuration), dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@PurchaseCostt", cost, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@userIdd",u.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@featureIdd",f.FeatureId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+
+
+            var result3 = dbContext.Connection.Execute("Purchase_package.createPurchase", parameter, commandType: CommandType.StoredProcedure);
+
         }
     }
 }

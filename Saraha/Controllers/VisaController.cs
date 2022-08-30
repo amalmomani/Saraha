@@ -25,11 +25,11 @@ namespace Saraha.Controllers
 
             return VisaCardServices.GetallVisa();
         }
-        [HttpGet("GetVisa/{card}/{cost}")]
+        [HttpGet("GetVisa/{card}/{cost}/{userId}/{featureId}")]
         [ProducesResponseType(typeof(List<VisaCard>), StatusCodes.Status200OK)]
-        public string GetVisa(string card, int cost)
+        public string GetVisa(string card, int cost, int userId, int featureId)
         {
-            return VisaCardServices.GetVisa(card,cost);
+            return VisaCardServices.GetVisa(card,cost,userId,featureId);
         }
 
         [HttpPut]

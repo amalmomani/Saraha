@@ -9,7 +9,7 @@ namespace Saraha.Core.Repository
     {
         public List<VisaCard> GetallVisa();
         public void UpdateVisa(VisaCard visa, int cost);
-        public string GetVisa(string card, int cost);
+        public string GetVisa(string card, int cost, int userId, int featureId);
         
         }
 }
