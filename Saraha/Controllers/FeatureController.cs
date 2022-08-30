@@ -89,5 +89,16 @@ namespace Saraha.Controllers
             return featureservice.Chart();
 
         }
+        [HttpGet("FeatureName")]
+        public List<string> FeatureName()
+        {
+            return featureservice.FeatureName();
+        }
+        [HttpGet("FeatureTotalSales")]
+        public List<int> FeatureTotalSales()
+        {
+            return featureservice.FeatureTotalSales();
+        }
+
     }
 }
