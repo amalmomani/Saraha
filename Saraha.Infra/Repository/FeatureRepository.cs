@@ -48,6 +48,13 @@ namespace Saraha.Infra.Repository
             parameter.Add("@featureDurationn", feature.FeatureDuration, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@ImagePathh", feature.ImagePath, dbType: DbType.String, direction: ParameterDirection.Input);
 
+            parameter.Add("@oldPricee", feature.OldPrice, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            parameter.Add("@featureDescribtionn", feature.FeatureDescribtion, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@videoLinkk", feature.VedioLink, dbType: DbType.String, direction: ParameterDirection.Input);
+
+
+
 
 
             var result = dbContext.Connection.Execute("Feature_package.createFeature", parameter, commandType: CommandType.StoredProcedure);
@@ -61,7 +68,10 @@ namespace Saraha.Infra.Repository
             parameter.Add("@featurePricee", feature.FeaturePrice, dbType: DbType.Double, direction: ParameterDirection.Input);
             parameter.Add("@featureDurationn", feature.FeatureDuration, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@ImagePathh", feature.ImagePath, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@oldPricee", feature.OldPrice, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
+            parameter.Add("@featureDescribtionn", feature.FeatureDescribtion, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@videoLinkk", feature.VedioLink, dbType: DbType.String, direction: ParameterDirection.Input);
 
 
             var result = dbContext.Connection.Execute("Feature_package.updateFeature", parameter, commandType: CommandType.StoredProcedure);
@@ -71,6 +81,20 @@ namespace Saraha.Infra.Repository
             IEnumerable<FeatureSalesDTO> result = dbContext.Connection.Query<FeatureSalesDTO>("Feature_package.getFeatureSales", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public List<string> FeatureName()
+        {
+            IEnumerable<string> result = dbContext.Connection.Query<string>("featureName", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public List<int> FeatureTotalSales()
+        {
+            IEnumerable<int> result = dbContext.Connection.Query<int>("featureTotalSales", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+
+
         public List<Charts> Chart()
         {
             IEnumerable<Charts> fea = dbContext.Connection.Query<Charts>("ServiceSales", commandType: CommandType.StoredProcedure);

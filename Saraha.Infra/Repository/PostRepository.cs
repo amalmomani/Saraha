@@ -62,7 +62,7 @@ namespace Saraha.Infra.Repository
             return result.ToList();
 
 
-        }
+       }
         public List<PostFullDataDTO> Top3Post(int userid)
         {
 
@@ -85,6 +85,8 @@ namespace Saraha.Infra.Repository
             parameter.Add("@ImagePathh", post.Imagepath, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@userIdd", post.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@postTypee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@Replyy", " ", dbType: DbType.String, direction: ParameterDirection.Input);
+
 
 
             var result = dbContext.Connection.Execute("Post_package.createPost", parameter, commandType: CommandType.StoredProcedure);
@@ -98,7 +100,7 @@ namespace Saraha.Infra.Repository
             pa.Add("@PostIDD", p.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@Messagee", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            pa.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
 
 
