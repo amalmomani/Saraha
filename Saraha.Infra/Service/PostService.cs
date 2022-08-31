@@ -62,5 +62,14 @@ namespace Saraha.Infra.Service
         {
             return repo.Top3Post(userid);
         }
+
+        public List<PostUserComment> CommentsByUser(int postId)
+        {
+            return repo.CommentsByUser(postId);
+        }
+        public Post GetPosById(int postId)
+        {
+            return repo.GetPosById(postId);
+        }
     }
 }

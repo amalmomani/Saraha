@@ -163,5 +163,19 @@ namespace Saraha.Infra.Repository
             IEnumerable<PostUserComment> result = dbContext.Connection.Query<PostUserComment>("DTOPackage.PostUserComment", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public List<PostUserComment> CommentsByUser(int postId)
+        {
+            IEnumerable<PostUserComment> result = dbContext.Connection.Query<PostUserComment>("DTOPackage.PostUserComment", commandType: CommandType.StoredProcedure);
+
+            var Comment = result.Where(x => x.postId == postId);
+            return Comment.ToList();
+        }
+        public Post GetPosById(int postId)
+        {
+            IEnumerable<Post> result = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
+            var post = result.Where(x => x.Postid == postId).FirstOrDefault();
+            return post;
+        }
+
     }
 }

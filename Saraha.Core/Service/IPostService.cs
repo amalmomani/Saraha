@@ -23,8 +23,8 @@ namespace Saraha.Core.Service
 
         public List<PostFullDataDTO> Top3Post(int userid);
 
-
-
+        public List<PostUserComment> CommentsByUser(int postId);
+        public Post GetPosById(int postId);
 
     }
 }

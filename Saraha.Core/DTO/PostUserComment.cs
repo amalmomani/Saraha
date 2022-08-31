@@ -7,7 +7,10 @@ namespace Saraha.Core.DTO
     public class PostUserComment
     {
         public string Auther { get; set; }
+        public int postId { get; set; }
         public string CommentFrom { get; set; }
+        public string Image { get; set; }
+        public string UserImage { get; set; }
         public DateTime PostDate { get; set; }
         public string PostText { get; set; }
         public string Is_pin { get; set; }
