@@ -101,7 +101,7 @@ namespace Saraha.Infra.Repository
             pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@Messagee", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-
+            
 
 
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
