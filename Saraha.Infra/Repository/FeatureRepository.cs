@@ -70,8 +70,8 @@ namespace Saraha.Infra.Repository
             parameter.Add("@ImagePathh", feature.ImagePath, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@oldPricee", feature.OldPrice, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            parameter.Add("@featureDescribtionn", feature.FeatureDescribtion, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@videoLinkk", feature.VedioLink, dbType: DbType.String, direction: ParameterDirection.Input);
+           // parameter.Add("@featureDescribtionn", feature.FeatureDescribtion, dbType: DbType.String, direction: ParameterDirection.Input);
+           // parameter.Add("@videoLinkk", feature.VedioLink, dbType: DbType.String, direction: ParameterDirection.Input);
 
 
             var result = dbContext.Connection.Execute("Feature_package.updateFeature", parameter, commandType: CommandType.StoredProcedure);
