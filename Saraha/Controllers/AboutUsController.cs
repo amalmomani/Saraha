@@ -82,7 +82,7 @@ namespace Saraha.Controllers
                 }
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("D:\\5.2\\training\\(12)Final Project\\Saraha-master\\Saraha\\src\\assets", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\Amal\\Desktop\\Saraha\\src\\assets", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
@@ -113,7 +113,7 @@ namespace Saraha.Controllers
                 }
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("D:\\5.2\\training\\(12)Final Project\\Saraha-master\\Saraha\\src\\assets", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\Amal\\Desktop\\Saraha\\src\\assets", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
@@ -144,7 +144,7 @@ namespace Saraha.Controllers
                 }
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("D:\\5.2\\training\\(12)Final Project\\Saraha-master\\Saraha\\src\\assets", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\Amal\\Desktop\\Saraha\\src\\assets", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
