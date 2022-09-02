@@ -17,6 +17,8 @@ namespace Saraha.Core.DTO
 
         public string Likes { set; get; }
         public string Comments { set; get; }
+        public string PostReply { set; get; }
+
         public bool? Is_Pin { get; set; }
 
 

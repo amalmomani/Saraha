@@ -28,7 +28,7 @@ namespace Saraha.Controllers
 
             return featureservice.GetAllFeatures();
         }
-        [HttpPost("CreateFeature")]
+        [HttpGet("CreateFeature")]
         public void CreateFeature([FromBody] Feature feature)
         {
 
@@ -50,7 +50,7 @@ namespace Saraha.Controllers
                 //"C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets"
                 var fileName =Guid.NewGuid().ToString()+"_"+Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("D:\\5.2\\training\\(12)Final Project\\Saraha-master\\Saraha\\src\\assets", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\C_ROAD\\Desktop\\SARAHA-Final\\Saraha\\src\\assets", attachmentFileName);
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);

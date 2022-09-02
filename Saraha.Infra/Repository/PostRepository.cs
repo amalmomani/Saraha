@@ -25,10 +25,11 @@ namespace Saraha.Infra.Repository
 
             var activi = resultActivity.Where(x => x.PostId == id).SingleOrDefault();
             var parameter1 = new DynamicParameters();
-            parameter1.Add("@ActivityIDD", activi.ActivityID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-
-            var resultdelet = dbContext.Connection.ExecuteAsync("Activity_package_api.deleteActivity", parameter1, commandType: CommandType.StoredProcedure);
-
+            if (activi != null)
+            {
+                parameter1.Add("@ActivityIDD", activi.ActivityID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                var resultdelet = dbContext.Connection.ExecuteAsync("Activity_package_api.deleteActivity", parameter1, commandType: CommandType.StoredProcedure);
+            }
             var parameter = new DynamicParameters();
             parameter.Add("@postIdd", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
@@ -101,7 +102,7 @@ namespace Saraha.Infra.Repository
             pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@Messagee", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-
+            
 
 
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
@@ -130,6 +131,7 @@ namespace Saraha.Infra.Repository
             pa.Add("@PostIDD", p.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@Messagee", msg.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
+            pa.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
 
