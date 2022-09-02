@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Saraha.Core.DTO
 {
-    class ToasterDTO
+    public class ToasterDTO
     {
+        public string message { get; set; }
     }
 }

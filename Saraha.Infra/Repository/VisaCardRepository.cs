@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -35,31 +36,52 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.ExecuteAsync("VisaApi_package.VisaUpdate", parameter, commandType: CommandType.StoredProcedure);
 
         }
-        public string GetVisa(string card, int cost,int userId, int featureId)
+        public ToasterDTO GetVisa(string card, int cost,int userId, int featureId)
         {
-            var message="";
+            ToasterDTO mess=new ToasterDTO();
+            Userprofile User = new Userprofile();
             IEnumerable<VisaCard> result = dbContext.Connection.Query<VisaCard>("VisaApi_package.getallVisa", commandType: CommandType.StoredProcedure);
-
+            IEnumerable<Userprofile> result2 = dbContext.Connection.Query<Userprofile>("User_Package.GetAllUsers", commandType: CommandType.StoredProcedure);
+            var user = result2.Where(x => x.Userid == userId).FirstOrDefault();
             var cardd = result.Where(x => x.CardNumber == card).FirstOrDefault();
-            if (cardd != null)
+            if (user.Is_Premium ==true)
             {
-                if (cardd.Balance >= cost)
+                mess.message = "Sorry! You already have this service";
+                return mess;
+            }
+            else 
+            { 
+                if (cardd != null)
                 {
-                    UpdateVisa(cardd, cost);
-                    message = "Paid sucessfully";
-                    CreatePurchase(cost, userId, featureId);
-                    return message;
+                    if (cardd.Balance >= cost)
+                    {
+                        UpdateVisa(cardd, cost);
+                        mess.message = "Paid sucessfully";
+                        CreatePurchase(cost, userId, featureId);
+                        var p = new DynamicParameters();
+
+                        p.Add("@UserIdd", user.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                        
+                        p.Add("@IsPremiumm", 1 , dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+                        var result3 = dbContext.Connection.ExecuteAsync("User_Package.UpdatePremium", p,
+                            commandType: CommandType.StoredProcedure);
+                        return mess;
+                    }
+                    else
+                    {
+                        mess.message = "Not enough balance";
+                        return mess;
+                    }
                 }
                 else
                 {
-                    message = "Not enough balance";
-                    return message;
+                    mess.message = "Invalid card number";
+                    return mess;
                 }
             }
-            else {
-                message = "Invalid card number";
-            return message; 
-            }
+
+          
         }
 
 
