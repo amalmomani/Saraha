@@ -133,6 +133,7 @@ namespace Saraha.Infra.Repository
             return result.SingleOrDefault();
         }
 
+        
         public void ChangePassword(int loginId, string password)
         {
             var p = new DynamicParameters();
@@ -143,6 +144,18 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.ExecuteAsync("Login_Package.ChangePassword", p,
                  commandType: CommandType.StoredProcedure);
 
+        }
+
+        public int GetLoginIdByEmail(string email)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@Emaill", email, dbType: DbType.String, direction: ParameterDirection.Input);
+
+           int result = dbContext.Connection.QuerySingleOrDefault<int>("Login_Package.GetLoginIdByEmail", p,
+                 commandType: CommandType.StoredProcedure);
+
+            return result;
         }
     }
 }

@@ -100,7 +100,10 @@ namespace Saraha.Infra.Service
              loginRepository.ChangePassword(loginId, password);
         }
 
-        
+        public int GetLoginIdByEmail(string email)
+        {
+            return loginRepository.GetLoginIdByEmail(email);
+        }
     }
 }
 
