@@ -42,6 +42,7 @@ namespace Saraha.Controllers
                 rslt.TempFeelsLike = Convert.ToString(weatherInfo.main.feels_like);
                 rslt.TempMax = Convert.ToString(weatherInfo.main.temp_max);
                 rslt.TempMin = Convert.ToString(weatherInfo.main.temp_min);
+                rslt.WeatherIcon = weatherInfo.weather[0].icon;
 
                 var jsonstring = new JavaScriptSerializer().Serialize(rslt);
 

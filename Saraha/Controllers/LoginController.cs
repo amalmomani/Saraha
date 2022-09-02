@@ -73,7 +73,7 @@ namespace Saraha.Controllers
         public IActionResult auth([FromBody] Login login)
         {
             var RESULT = loginService.auth(login);
-
+             
             if (RESULT == null)
             {
                 return Unauthorized();
@@ -129,6 +129,12 @@ namespace Saraha.Controllers
 
         }
 
-      
+        [HttpGet("GetLoginIdByEmail/{email}")]
+        public int GetLoginIdByEmail(string email)
+        {
+            return loginService.GetLoginIdByEmail(email);
+        }
+
+
     }
 }
