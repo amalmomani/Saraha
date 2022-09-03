@@ -71,7 +71,7 @@ namespace Saraha.Infra.Repository
         {
             var p = new DynamicParameters();
 
-            p.Add("@Emaill", email, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@Emaill", email, dbType: DbType.String, direction: ParameterDirection.Input);
 
             int result = dbContext.Connection.QuerySingleOrDefault<int>("User_Package.IsEmailExist", p,
               commandType: CommandType.StoredProcedure);

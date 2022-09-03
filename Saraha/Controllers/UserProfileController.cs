@@ -131,5 +131,12 @@ namespace Saraha.Controllers
         {
             return UserProfileService.SearchUser(username, country, gender);
         }
+
+        [HttpGet("IsEmailExist/{email}")]
+         public bool IsEmailExist(string email)
+        {
+            return UserProfileService.IsEmailExist(email);
+        }
+
     }
 }

@@ -17,6 +17,8 @@ namespace Saraha.Core.Service
         public string auth(Login login);
         public Login GetLoginByUserId(int userId);
         public void ChangePassword(int loginId, string password);
+        public int GetLoginIdByEmail(string email);
+
 
 
 
