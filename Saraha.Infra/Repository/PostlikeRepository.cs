@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
 using Saraha.Core.DTO;
@@ -8,6 +10,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Saraha.Infra.Repository
 {
@@ -15,32 +18,97 @@ namespace Saraha.Infra.Repository
     {
 
         private readonly IDbcontext dbContext;
+        private readonly IHubContext<MessageHub> _hubContext;
 
-        public PostlikeRepository(IDbcontext dbContext)
+        public PostlikeRepository(IDbcontext dbContext , IHubContext<MessageHub> hubContext)
         {
             this.dbContext = dbContext;
+            _hubContext = hubContext;
+
         }
 
+      
 
-        public void CreateLike(Postlike post)
+
+        public  async void CreateLike(Postlike like , int userLogin)
         {
+            DateTime now = DateTime.Now;
             IEnumerable<Postlike> allLikes = dbContext.Connection.Query<Postlike>("Like_package.getallLikes", commandType: CommandType.StoredProcedure);
-            var exist = allLikes.Any(x => x.PostId == post.PostId && x.UserId == post.UserId);
-            Postlike PostLikeUser = allLikes.Where(x => x.PostId == post.PostId && x.UserId == post.UserId).SingleOrDefault();
+
+            var exist = allLikes.Any(x => x.PostId == like.PostId && x.UserId == like.UserId);
+            Postlike PostLikeUser = allLikes.Where(x => x.PostId == like.PostId && x.UserId == like.UserId).SingleOrDefault();
             if (!exist)
             {
 
 
 
                 var parameter = new DynamicParameters();
-                parameter.Add("@likeDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-                parameter.Add("@userIdd", post.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-                parameter.Add("@postIdd", post.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                parameter.Add("@likeDatee",now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+                parameter.Add("@userIdd", like.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                parameter.Add("@postIdd", like.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
 
 
                 var result = dbContext.Connection.Execute("Like_package.createLike", parameter, commandType: CommandType.StoredProcedure);
+                IEnumerable<Postlike> newlikes = dbContext.Connection.Query<Postlike>("Like_package.getallLikes", commandType: CommandType.StoredProcedure);
+
+
+                var likeDone = newlikes.Where(x => x.PostId == like.PostId && x.UserId == like.UserId).SingleOrDefault();
+
+                //Add Like to user Activity Table
+
+                var activity = new DynamicParameters();
+                activity.Add("@UserIDD", like.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                activity.Add("@LikeIDD", likeDone.LikeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                activity.Add("@CommentIDD",null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                activity.Add("@PostIDD", likeDone.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                activity.Add("@ActivityNamee", "like", dbType: DbType.String, direction: ParameterDirection.Input);
+                activity.Add("@Messagee", " ", dbType: DbType.String, direction: ParameterDirection.Input);
+                activity.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+
+                var r = dbContext.Connection.Execute("Activity_package_api.createActivity", activity, commandType: CommandType.StoredProcedure);
+               
+                //Add like to notifications 
+                IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
+                var likedpost = posts.Where(p => p.Postid == likeDone.PostId).SingleOrDefault();
+                var notification = new DynamicParameters();
+                notification.Add("@Messagee", " ", dbType: DbType.String, direction: ParameterDirection.Input);
+
+                notification.Add("@MessageIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@IsRead", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+
+                notification.Add("@CommentIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@LikeIDD", likeDone.LikeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@userFromm", likeDone.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@userToo", likedpost.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@ReportIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@PostIdd", likedpost.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+                notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+                notification.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@Type", "like", dbType: DbType.String, direction: ParameterDirection.Input);
+                var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
+
+
+
+
+
+
+                var noti = new DynamicParameters();
+
+                noti.Add("@UserIdd", userLogin, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                IEnumerable<LikeNotificationDTO> notificationlike = dbContext.Connection.Query<LikeNotificationDTO>("Notifications_package_api.GetLikeNotificationByUserId", noti,
+                  commandType: CommandType.StoredProcedure);
+                var likenoti = notificationlike.Where(n => n.LikeId == likeDone.LikeId && likeDone.LikeDate.ToString() == now.ToString() && n.UserToId == userLogin).SingleOrDefault();
+                if (likenoti != null)
+                {
+                    likenoti.NotificationText = "likes your post";
+                    await _hubContext.Clients.All.SendAsync("MessageReceived", likenoti );
+
+                }
+
             }
             else
                 DeleteLike(PostLikeUser.LikeId);

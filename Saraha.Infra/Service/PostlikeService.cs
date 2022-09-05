@@ -17,10 +17,10 @@ namespace Saraha.Infra.Service
         }
 
 
-        public void CreateLike(Postlike post)
+        public void CreateLike(Postlike post, int userLogin)
 
         {
-             repo.CreateLike(post);
+             repo.CreateLike(post, userLogin);
         }
         public List<Postlike> GetAllLikes()
         {

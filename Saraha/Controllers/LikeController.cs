@@ -21,13 +21,13 @@ namespace Saraha.Controllers
         }
 
 
-        [HttpGet("CreateLike/{userId}/{postId}")]
-        public void CreateLike(int userId ,int postId)
+        [HttpGet("CreateLike/{userId}/{postId}/{userLogIn}")]
+        public void CreateLike(int userId ,int postId,int userLogIn)
         {
             Postlike like = new Postlike();
             like.PostId = postId;
             like.UserId = userId;
-            likeService.CreateLike(like);
+            likeService.CreateLike(like, userLogIn);
         }
 
         [HttpGet("GetLikes")]

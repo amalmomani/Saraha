@@ -9,7 +9,7 @@ namespace Saraha.Core.Service
  public interface IPostlikeService
     {
 
-        public void CreateLike(Postlike post);
+        public void CreateLike(Postlike post, int userLogin);
 
         public List<Postlike> GetAllLikes();
         public void DeleteLike(int id);
