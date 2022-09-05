@@ -23,34 +23,34 @@ namespace Saraha.Infra.Repository
         }
         public void CreateReport(Report report)
         {
-            IEnumerable<Report> reports = dbContext.Connection.Query<Report>("Report_package_api.getallReport", commandType: CommandType.StoredProcedure);
-            bool exist = reports.Any(r => r.UserFrom == report.UserFrom && r.UserTo == report.UserTo);
-            IEnumerable<ReportDetailsDTO> reportdetails = dbContext.Connection.Query<ReportDetailsDTO>("Report_package_api.getReportsDetails", commandType: CommandType.StoredProcedure);
-            var details = reportdetails.Where(r => r.ReporterId == report.UserFrom && r.ReportedId == report.UserTo).SingleOrDefault();
+            //IEnumerable<Report> reports = dbContext.Connection.Query<Report>("Report_package_api.getallReport", commandType: CommandType.StoredProcedure);
+            //bool exist = reports.Any(r => r.UserFrom == report.UserFrom && r.UserTo == report.UserTo);
+            //IEnumerable<ReportDetailsDTO> reportdetails = dbContext.Connection.Query<ReportDetailsDTO>("Report_package_api.getReportsDetails", commandType: CommandType.StoredProcedure);
+            //var details = reportdetails.Where(r => r.ReporterId == report.UserFrom && r.ReportedId == report.UserTo).SingleOrDefault();
 
-            if (exist)
-            {
-                var parameter1 = new DynamicParameters();
+            //if (exist)
+            //{
+            //    var parameter1 = new DynamicParameters();
 
-                parameter1.Add("@ReportIDD", details.ReportId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-                dbContext.Connection.Execute("Report_package_api.updateReportCount", parameter1, commandType: CommandType.StoredProcedure);
-                SendEmail(details.ReportedName, details.Report, details.ReportedEmail);
+            //    parameter1.Add("@ReportIDD", details.ReportId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            //    dbContext.Connection.Execute("Report_package_api.updateReportCount", parameter1, commandType: CommandType.StoredProcedure);
+            //    SendEmail(details.ReportedName, details.Report, details.ReportedEmail);
                
            
-            }
+            //}
 
-            else
-            {
+            //else
+            //{
                 var parameter = new DynamicParameters();
 
                 parameter.Add("@Messagee", report.Message, dbType: DbType.String, direction: ParameterDirection.Input);
                 parameter.Add("@UserFromm", report.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 parameter.Add("@UserToo", report.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 var result = dbContext.Connection.Execute("Report_package_api.createReport", parameter, commandType: CommandType.StoredProcedure);
-                SendEmail(details.ReportedName, details.Report, details.ReportedEmail);
+                //SendEmail(details.ReportedName, details.Report, details.ReportedEmail);
 
               
-            }
+            //}
            
         }
 

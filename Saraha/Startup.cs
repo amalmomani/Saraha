@@ -65,8 +65,6 @@ namespace Saraha
             services.AddScoped<IPurchaseRepository, PurchaseRepository>();
             services.AddScoped<IPostcommentRepository, PostcommentRepository>();
             services.AddScoped<IFeatureRepository, FeatureRepository>();
-            services.AddScoped<IEventRepository, EventRepository>();
-            services.AddScoped<IAddsRepository, AddsRepository>();
 
             services.AddScoped<IVisaCardRepository, VisaCardRepository>();
             services.AddScoped<IVisaCardServices, VisaCardService>();
@@ -89,12 +87,13 @@ namespace Saraha
             services.AddScoped<IPurchaseService, PurchaseService>();
             services.AddScoped<IPostcommentService, PostcommentService>();
             services.AddScoped<IFeatureService, FeatureService>();
+            services.AddScoped<IFollowService, FollowService>();
 
 
 
 
 
-         
+
 
         }
 
