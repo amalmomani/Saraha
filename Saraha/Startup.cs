@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Saraha.Core.Common;
+using Saraha.Core.Data;
 using Saraha.Core.Repository;
 using Saraha.Core.Service;
 using Saraha.Infra.Common;
@@ -88,9 +89,19 @@ namespace Saraha
 
 
 
+            services.AddSignalR();
+            services.AddControllers();
 
 
-         
+            services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowCredentials();
+            }));
+            services.AddSignalR();
+            services.AddControllers();
 
         }
 
@@ -112,6 +123,18 @@ namespace Saraha
             {
                 endpoints.MapControllers();
             });
+
+
+
+            app.UseCors("CorsPolicy");
+
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<MessageHub>("/messageHub");
+            });
+
         }
     }
 }
