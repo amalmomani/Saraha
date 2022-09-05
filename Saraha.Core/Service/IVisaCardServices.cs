@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Saraha.Core.Service
     {
         public List<VisaCard> GetallVisa();
         public void UpdateVisa(VisaCard visa, int cost);
-        public string GetVisa(string card, int cost, int userId, int featureId);
+        public ToasterDTO GetVisa(string card, int cost, int userId, int featureId);
         
         }
 }

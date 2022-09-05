@@ -71,7 +71,7 @@ namespace Saraha.Controllers
                 }
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("C:\\Users\\C_ROAD\\Desktop\\Sarahaaa\\Saraha\\src\\assets", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\Amal\\Desktop\\Saraha\\src\\assets", attachmentFileName);
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
@@ -131,5 +131,12 @@ namespace Saraha.Controllers
         {
             return UserProfileService.SearchUser(username, country, gender);
         }
+
+        [HttpGet("IsEmailExist/{email}")]
+         public bool IsEmailExist(string email)
+        {
+            return UserProfileService.IsEmailExist(email);
+        }
+
     }
 }

@@ -129,6 +129,12 @@ namespace Saraha.Controllers
 
         }
 
-      
+        [HttpGet("GetLoginIdByEmail/{email}")]
+        public int GetLoginIdByEmail(string email)
+        {
+            return loginService.GetLoginIdByEmail(email);
+        }
+
+
     }
 }

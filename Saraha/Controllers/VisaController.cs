@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Service;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Saraha.Controllers
         }
         [HttpGet("GetVisa/{card}/{cost}/{userId}/{featureId}")]
         [ProducesResponseType(typeof(List<VisaCard>), StatusCodes.Status200OK)]
-        public string GetVisa(string card, int cost, int userId, int featureId)
+        public ToasterDTO GetVisa(string card, int cost, int userId, int featureId)
         {
             return VisaCardServices.GetVisa(card,cost,userId,featureId);
         }

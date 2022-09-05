@@ -1,4 +1,5 @@
 ﻿using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using Saraha.Core.Service;
 using System;
@@ -19,7 +20,7 @@ namespace Saraha.Infra.Service
             return repo.GetallVisa();
         }
 
-        public string GetVisa(string card, int cost, int userId, int featureId)
+        public ToasterDTO GetVisa(string card, int cost, int userId, int featureId)
         {
             return repo.GetVisa(card, cost,userId,featureId);
         }
