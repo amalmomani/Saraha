@@ -13,6 +13,7 @@ namespace Saraha.Controllers
     [ApiController]
     public class MessageeController : ControllerBase
     {
+        private int count = 0 ;
         private readonly IHubContext<MessageHub> _hubContext;
 
         public MessageeController(IHubContext<MessageHub> hubContext)
@@ -23,7 +24,12 @@ namespace Saraha.Controllers
         [HttpPost("test/{message}")]
         public async Task<IActionResult> SendMessage(string message)
         {
-            await _hubContext.Clients.All.SendAsync("MessageReceived", message);
+            count = count +1 ;
+           
+            await _hubContext.Clients.All.SendAsync("waed",message);
+            
+                await _hubContext.Clients.All.SendAsync("www", count);
+
             return Ok();
         }
     }

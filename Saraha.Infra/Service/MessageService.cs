@@ -17,9 +17,9 @@ namespace Saraha.Infra.Service
             this.repo = repo;
         }
 
-        public void CreateMessage(Message message)
+        public void CreateMessage(Message message, int userLoggedId)
         {
-             repo.CreateMessage(message);
+             repo.CreateMessage(message, userLoggedId);
         }
 
         public void DeleteMessage(int? id)

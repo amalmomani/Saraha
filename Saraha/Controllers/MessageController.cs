@@ -38,7 +38,7 @@ namespace Saraha.Controllers
         [ProducesResponseType(typeof(Message), StatusCodes.Status200OK)]
         public void CreateMessage([FromBody] Message message)
         {
-             messageService.CreateMessage(message);
+             messageService.CreateMessage(message, 1);
         }
 
         [HttpPut]

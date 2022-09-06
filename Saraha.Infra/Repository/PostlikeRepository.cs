@@ -32,6 +32,7 @@ namespace Saraha.Infra.Repository
 
         public  async void CreateLike(Postlike like , int userLogin)
         {
+           
             DateTime now = DateTime.Now;
             IEnumerable<Postlike> allLikes = dbContext.Connection.Query<Postlike>("Like_package.getallLikes", commandType: CommandType.StoredProcedure);
 
@@ -54,7 +55,7 @@ namespace Saraha.Infra.Repository
                 IEnumerable<Postlike> newlikes = dbContext.Connection.Query<Postlike>("Like_package.getallLikes", commandType: CommandType.StoredProcedure);
 
 
-                var likeDone = newlikes.Where(x => x.PostId == like.PostId && x.UserId == like.UserId).SingleOrDefault();
+                var likeDone = newlikes.Where(x => x.PostId == like.PostId && x.UserId == like.UserId && x.LikeDate.ToString() == now.ToString() && x.UserId == userLogin).SingleOrDefault();
 
                 //Add Like to user Activity Table
 
@@ -98,10 +99,10 @@ namespace Saraha.Infra.Repository
 
                 var noti = new DynamicParameters();
 
-                noti.Add("@UserIdd", userLogin, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                noti.Add("@UserIdd", likedpost.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 IEnumerable<LikeNotificationDTO> notificationlike = dbContext.Connection.Query<LikeNotificationDTO>("Notifications_package_api.GetLikeNotificationByUserId", noti,
                   commandType: CommandType.StoredProcedure);
-                var likenoti = notificationlike.Where(n => n.LikeId == likeDone.LikeId && likeDone.LikeDate.ToString() == now.ToString() && n.UserToId == userLogin).SingleOrDefault();
+                var likenoti = notificationlike.Where(n => n.LikeId == likeDone.LikeId ).SingleOrDefault();
                 if (likenoti != null)
                 {
                     likenoti.NotificationText = "likes your post";
