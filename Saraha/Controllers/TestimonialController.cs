@@ -25,7 +25,7 @@ namespace Saraha.Controllers
         {
             return testimonialService.CreateTestimonial(testimonial);
         }
-        
+
         [HttpPut]
         public bool UpdateTestimonial(Testimonial testimonial)
         {
@@ -57,6 +57,99 @@ namespace Saraha.Controllers
         public Testimonial GetTestimonialByUserId(int UserId)
         {
             return testimonialService.GetTestimonialByUserId(UserId);
+        }
+        [HttpGet("GetOneTestimonial")]
+        public UserTestemonial GetOneTestimonial()
+        {
+
+            List<UserTestemonial> a = new List<UserTestemonial>();
+            a = testimonialService.GetUserTestemonial();
+            List<int> idd = new List<int>();
+
+            foreach (var i in a)
+            {
+                if (i.is_accepted == true)
+                {
+                    idd.Add(i.Testimonialid);
+                }
+            }
+            var random = new Random();
+
+            int index = random.Next(idd.Count);
+            int ad = idd[index];
+
+            var t = a.Where(a => a.Testimonialid == ad && a.is_accepted == true).FirstOrDefault();
+            return t;
+        }
+        [HttpGet("GetOneTestimonial1")]
+        public UserTestemonial GetOneTestimonial1()
+        {
+
+            List<UserTestemonial> a = new List<UserTestemonial>();
+            a = testimonialService.GetUserTestemonial();
+            List<int> idd = new List<int>();
+
+            foreach (var i in a)
+            {
+                if (i.is_accepted == true)
+                {
+                    idd.Add(i.Testimonialid);
+                }
+            }
+            var random = new Random();
+
+            int index = random.Next(idd.Count);
+            int ad = idd[index];
+
+            var t = a.Where(a => a.Testimonialid == ad && a.is_accepted == true).FirstOrDefault();
+            return t;
+        }
+
+        [HttpGet("GetOneTestimonial2")]
+        public UserTestemonial GetOneTestimonial2()
+        {
+
+            List<UserTestemonial> a = new List<UserTestemonial>();
+            a = testimonialService.GetUserTestemonial();
+            List<int> idd = new List<int>();
+
+            foreach (var i in a)
+            {
+                if (i.is_accepted == true)
+                {
+                    idd.Add(i.Testimonialid);
+                }
+            }
+            var random = new Random();
+
+            int index = random.Next(idd.Count);
+            int ad = idd[index];
+
+            var t = a.Where(a => a.Testimonialid == ad && a.is_accepted == true).FirstOrDefault();
+            return t;
+        }
+        [HttpGet("GetOneTestimonial3")]
+        public UserTestemonial GetOneTestimonial3()
+        {
+
+            List<UserTestemonial> a = new List<UserTestemonial>();
+            a = testimonialService.GetUserTestemonial();
+            List<int> idd = new List<int>();
+
+            foreach (var i in a)
+            {
+                if (i.is_accepted == true)
+                {
+                    idd.Add(i.Testimonialid);
+                }
+            }
+            var random = new Random();
+
+            int index = random.Next(idd.Count);
+            int ad = idd[index];
+
+            var t = a.Where(a => a.Testimonialid == ad && a.is_accepted == true).FirstOrDefault();
+            return t;
         }
         [HttpGet]
         [Route("GetUserTestemonial")]
