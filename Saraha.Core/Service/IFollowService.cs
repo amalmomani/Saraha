@@ -15,5 +15,7 @@ namespace Saraha.Core.Service
         public List<Userprofile> GetFollowers(int userTo);
         public void DeleteFollowByUser(int userFrom, int userTo);
         public bool IsFollow(int userFrom, int userTo);
+        public bool IsBlock(int userFrom, int userTo);
+        public void UpdateBlockUser(int userFrom, int userTo, int isBlock);
     }
 }
