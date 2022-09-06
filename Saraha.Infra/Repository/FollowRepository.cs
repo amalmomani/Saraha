@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.SignalR;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
 using Saraha.Core.Repository;
@@ -13,10 +14,14 @@ namespace Saraha.Infra.Repository
     public class FollowRepository : IFollowRepository
     {
         private readonly IDbcontext dbContext;
+        private readonly IHubContext<MessageHub> hubContext;
 
-        public FollowRepository(IDbcontext dbContext)
+
+
+        public FollowRepository(IDbcontext dbContext, IHubContext<MessageHub> hubContext)
         {
             this.dbContext = dbContext;
+            this.hubContext = hubContext;
         }
         public void CreateFollow(Follow follow)
         {
