@@ -45,6 +45,11 @@ namespace Saraha.Infra.Service
             return followRepository.GetFollowing(userFrom);
         }
 
+        public bool IsBlock(int userFrom, int userTo)
+        {
+            return followRepository.IsBlock(userFrom, userTo);
+        }
+
         public bool IsFollow(int userFrom, int userTo)
         {
             return followRepository.IsFollow(userFrom, userTo);
@@ -53,6 +58,11 @@ namespace Saraha.Infra.Service
         public void UpdateBlockStatus(int id, int isBlock)
         {
              followRepository.UpdateBlockStatus(id, isBlock);
+        }
+
+        public void UpdateBlockUser(int userFrom, int userTo, int isBlock)
+        {
+            followRepository.UpdateBlockUser(userFrom, userTo, isBlock);
         }
     }
 }

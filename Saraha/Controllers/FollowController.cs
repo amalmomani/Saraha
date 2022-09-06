@@ -66,5 +66,17 @@ namespace Saraha.Controllers
         {
             followService.UpdateBlockStatus(id, isBlock);
         }
+
+        [HttpGet("IsBlock/{userFrom}/{userTo}")]
+        public bool IsBlock(int userFrom, int userTo)
+        {
+            return followService.IsBlock(userFrom, userTo);
+        }
+
+        [HttpGet("UpdateBlockUser/{userFrom}/{userTo}/{isBlock}")]
+        public void UpdateBlockUser(int userFrom, int userTo, int isBlock)
+        {
+            followService.UpdateBlockUser(userFrom, userTo, isBlock);
+        }
     }
 }

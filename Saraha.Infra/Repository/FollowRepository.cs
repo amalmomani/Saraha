@@ -82,6 +82,19 @@ namespace Saraha.Infra.Repository
             return result.ToList();
         }
 
+        public bool IsBlock(int userFrom, int userTo)
+        {
+            var parameter = new DynamicParameters();
+
+            parameter.Add("@UserFromm", userFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@UserToo", userTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            int result = dbContext.Connection.QuerySingleOrDefault<int>("Follow_Package.IsBlock",
+                parameter, commandType: CommandType.StoredProcedure);
+
+            return result > 0;
+        }
+
         public bool IsFollow(int userFrom, int userTo)
         {
             var parameter = new DynamicParameters();
@@ -104,6 +117,18 @@ namespace Saraha.Infra.Repository
 
 
             var result = dbContext.Connection.Execute("Follow_Package.UpdateBlockStatus", parameter, commandType: CommandType.StoredProcedure);
+        }
+
+        public void UpdateBlockUser(int userFrom, int userTo, int isBlock)
+        {
+            var parameter = new DynamicParameters();
+
+            parameter.Add("@UserFromm", userFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@UserToo", userTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@IsBlockk", isBlock, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+
+            var result = dbContext.Connection.Execute("Follow_Package.UpdateBlockUser", parameter, commandType: CommandType.StoredProcedure);
         }
     }
 }
