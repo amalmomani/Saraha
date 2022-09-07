@@ -150,7 +150,7 @@ namespace Saraha.Infra.Repository
 //  " </body>" +
 //"</html>";
 
-            mail.Subject = "Report Notifcation";
+            mail.Subject = "Saraha Notifcation";
             mail.Body = reportmsg;
             mail.From = new MailAddress("waedshareaa@outlook.com", "Saraha Time-no-reply");
             mail.To.Add(new MailAddress(reportedemail, reportedname ));
