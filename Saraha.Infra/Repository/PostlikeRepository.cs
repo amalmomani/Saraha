@@ -69,12 +69,21 @@ namespace Saraha.Infra.Repository
                 activity.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
                 var r = dbContext.Connection.Execute("Activity_package_api.createActivity", activity, commandType: CommandType.StoredProcedure);
-               
+
                 //Add like to notifications 
+
                 IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
                 var likedpost = posts.Where(p => p.Postid == likeDone.PostId).SingleOrDefault();
+
+                var noti = new DynamicParameters();
+
+                noti.Add("@UserIdd", likedpost.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                IEnumerable<LikeNotificationDTO> notificationlike = dbContext.Connection.Query<LikeNotificationDTO>("Notifications_package_api.GetLikeNotificationByUserId", noti,
+                  commandType: CommandType.StoredProcedure);
+                var likenoti = notificationlike.Where(n => n.LikeId == likeDone.LikeId).SingleOrDefault();
+
                 var notification = new DynamicParameters();
-                notification.Add("@Messagee", " ", dbType: DbType.String, direction: ParameterDirection.Input);
+                notification.Add("@Messagee", likenoti.userFromImage, dbType: DbType.String, direction: ParameterDirection.Input);
 
                 notification.Add("@MessageIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 notification.Add("@IsRead", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -89,7 +98,9 @@ namespace Saraha.Infra.Repository
 
                 notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
                 notification.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
-                notification.Add("@Type", "like", dbType: DbType.String, direction: ParameterDirection.Input);
+                notification.Add("@Ntype", "like", dbType: DbType.String, direction: ParameterDirection.Input);
+                notification.Add("@NotificationTextt", likenoti.UserFrom+ "liked your post", dbType: DbType.String, direction: ParameterDirection.Input);
+
                 var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
 
 
@@ -97,12 +108,7 @@ namespace Saraha.Infra.Repository
 
 
 
-                var noti = new DynamicParameters();
-
-                noti.Add("@UserIdd", likedpost.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-                IEnumerable<LikeNotificationDTO> notificationlike = dbContext.Connection.Query<LikeNotificationDTO>("Notifications_package_api.GetLikeNotificationByUserId", noti,
-                  commandType: CommandType.StoredProcedure);
-                var likenoti = notificationlike.Where(n => n.LikeId == likeDone.LikeId ).SingleOrDefault();
+               
                 if (likenoti != null)
                 {
                     likenoti.NotificationText = "likes your post";

@@ -38,10 +38,18 @@ namespace Saraha.Infra.Repository
 
             var result = dbContext.Connection.Execute("Message_package_api.createMessage", parameter, commandType: CommandType.StoredProcedure);
 
-            //Add like to notifications 
+            //Add message to notifications 
+            var noti = new DynamicParameters();
             IEnumerable<Message> messages = dbContext.Connection.Query<Message>("Message_package_api.getallMessage", commandType: CommandType.StoredProcedure);
             var msg = messages.Where(m => m.MessageContent == message.MessageContent && m.UserFrom == message.UserFrom && m.MessageDate.ToString() == now.ToString()).SingleOrDefault();
 
+
+            noti.Add("@UserIdd", msg.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<MsgNotificationDTO> notificationMsgs = dbContext.Connection.Query<MsgNotificationDTO>("Notifications_package_api.GetMessageNotificationByUserId", noti,
+              commandType: CommandType.StoredProcedure);
+            var msgNoti = notificationMsgs.Where(m => m.MessageId == msg.MessageID).SingleOrDefault();
+
+      
 
             var notification = new DynamicParameters();
             notification.Add("@Messagee",message.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
@@ -59,16 +67,13 @@ namespace Saraha.Infra.Repository
 
             notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             notification.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            notification.Add("@Type", "msg", dbType: DbType.String, direction: ParameterDirection.Input);
+            notification.Add("@NType", msgNoti.UserFromImage, dbType: DbType.String, direction: ParameterDirection.Input);
+            notification.Add("@NotificationTextt", msgNoti.UserFrom + "Sent you message", dbType: DbType.String, direction: ParameterDirection.Input);
+
             var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
 
 
-            var noti = new DynamicParameters();
-
-            noti.Add("@UserIdd", msg.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            IEnumerable<MsgNotificationDTO> notificationMsgs = dbContext.Connection.Query<MsgNotificationDTO>("Notifications_package_api.GetMessageNotificationByUserId", noti,
-              commandType: CommandType.StoredProcedure);
-            var msgNoti = notificationMsgs.Where(m => m.MessageId == msg.MessageID ).SingleOrDefault();
+       
             if (msgNoti != null)
             {
                 msgNoti.NotificationText = "sent you message";

@@ -57,11 +57,17 @@ namespace Saraha.Infra.Repository
                 var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
 
 
+                var noti = new DynamicParameters();
+
+                noti.Add("@UserIdd", follow.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                IEnumerable<FollowNotificationDTO> fls = dbContext.Connection.Query<FollowNotificationDTO>("Notifications_package_api.GetFollowNotificationByUserId", noti,
+                  commandType: CommandType.StoredProcedure);
+                var followw = fls.Where(f => f.FollowId == folllowDone.Id).SingleOrDefault();
 
                 //Add commment to notifications 
 
                 var notification = new DynamicParameters();
-                notification.Add("@Messagee", "Following", dbType: DbType.String, direction: ParameterDirection.Input);
+                notification.Add("@Messagee", followw.UserFromImage, dbType: DbType.String, direction: ParameterDirection.Input);
 
                 notification.Add("@MessageIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 notification.Add("@IsRead", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -76,7 +82,9 @@ namespace Saraha.Infra.Repository
 
                 notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
                 notification.Add("@FollowIdd", folllowDone.Id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-                notification.Add("@Type", "follow", dbType: DbType.String, direction: ParameterDirection.Input);
+                notification.Add("@Ntype", "follow", dbType: DbType.String, direction: ParameterDirection.Input);
+                notification.Add("@NotificationTextt", followw.UserFrom+" started following you", dbType: DbType.String, direction: ParameterDirection.Input);
+
                 var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
 
 
@@ -84,12 +92,6 @@ namespace Saraha.Infra.Repository
 
 
 
-                var noti = new DynamicParameters();
-
-                noti.Add("@UserIdd", follow.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
-                IEnumerable<FollowNotificationDTO> fls = dbContext.Connection.Query<FollowNotificationDTO>("Notifications_package_api.GetFollowNotificationByUserId", noti,
-                  commandType: CommandType.StoredProcedure);
-                var followw = fls.Where(f => f.FollowId == folllowDone.Id).SingleOrDefault();
                 if (followw != null)
                 {
                     followw.NotificationText = "started Following you";

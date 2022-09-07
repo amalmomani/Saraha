@@ -18,5 +18,6 @@ namespace Saraha.Core.Data
         public DateTime NotificationDate { set; get; }
         public int FollowId { set; get; }
         public string NotType { set; get; }
+        public string NotificationText { set; get; }
      }
 }
