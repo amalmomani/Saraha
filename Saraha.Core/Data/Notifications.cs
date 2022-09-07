@@ -17,6 +17,6 @@ namespace Saraha.Core.Data
         public int PostId { set; get; }
         public DateTime NotificationDate { set; get; }
         public int FollowId { set; get; }
-        public int NotType { set; get; }
+        public string NotType { set; get; }
      }
 }

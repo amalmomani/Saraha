@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.SignalR;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
 using Saraha.Core.DTO;
@@ -14,9 +15,12 @@ namespace Saraha.Infra.Repository
     public class UserProfileRepository : IUserProfileRepository
     {
         private readonly IDbcontext dbContext;
-        public UserProfileRepository(IDbcontext dbContext)
+        private readonly IHubContext<MessageHub> hubContext;
+
+        public UserProfileRepository(IDbcontext dbContext, IHubContext<MessageHub> hubContext)
         {
             this.dbContext = dbContext;
+            this.hubContext = hubContext;
         }
        
         public void CreateUserProfile(RegisterDTO userProfile)
@@ -157,6 +161,18 @@ namespace Saraha.Infra.Repository
             IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>("User_Package.SearchUser",p, commandType: CommandType.StoredProcedure);
 
             return result.ToList();
+        }
+        public async void GetNotifiactionByUserId(int userId)
+        {
+            var parameter = new DynamicParameters();
+
+            parameter.Add("@UserIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Notifications> result = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", parameter, commandType: CommandType.StoredProcedure);
+            await hubContext.Clients.All.SendAsync("NotificationReceived", result);
+
+
+
         }
     }
 }

@@ -20,6 +20,8 @@ namespace Saraha.Core.Service
         public List<LoginUsersDTO> GetAllLoginUsers();
         public Userprofile GetUserById(int userId);
         public List<Userprofile> SearchUser(string username, string country, string gender);
+        public void GetNotifiactionByUserId(int userId);
+
 
 
 

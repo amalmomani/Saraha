@@ -1,6 +1,8 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.SignalR;
 using Saraha.Core.Common;
 using Saraha.Core.Data;
+using Saraha.Core.DTO;
 using Saraha.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,12 @@ namespace Saraha.Infra.Repository
    public class PostcommentRepository : IPostcommentRepository
     {
         private readonly IDbcontext dbContext;
+        private readonly IHubContext<MessageHub> hubContext;
 
-        public PostcommentRepository(IDbcontext dbContext)
+        public PostcommentRepository(IDbcontext dbContext , IHubContext<MessageHub> hubContext)
         {
             this.dbContext = dbContext;
+            this.hubContext = hubContext;
         }
 
 
@@ -35,7 +39,7 @@ namespace Saraha.Infra.Repository
             return result.ToList();
         }
 
-        public void CreateComment(Postcomment comment)
+        public async void CreateComment(Postcomment comment)
         {
             DateTime now = DateTime.Now;
             var parameter = new DynamicParameters();
@@ -59,7 +63,48 @@ namespace Saraha.Infra.Repository
             pa.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
+          
+            
+            
+            //Add commment to notifications 
+            IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
+            var postComentedOn = posts.Where(p => p.Postid == comment.Postid ).SingleOrDefault();
+            var notification = new DynamicParameters();
+            notification.Add("@Messagee",comment.Commenttext, dbType: DbType.String, direction: ParameterDirection.Input);
 
+            notification.Add("@MessageIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            notification.Add("@IsRead", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+
+            notification.Add("@CommentIdd", comm.Commentid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            notification.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            notification.Add("@userFromm", comment.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            notification.Add("@userToo", postComentedOn.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            notification.Add("@ReportIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            notification.Add("@PostIdd", postComentedOn.Postid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            notification.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            notification.Add("@Type", "comment", dbType: DbType.String, direction: ParameterDirection.Input);
+            var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
+
+
+
+
+
+
+            var noti = new DynamicParameters();
+
+            noti.Add("@UserIdd", postComentedOn.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<CommentNotificationDTO> notificationcomments = dbContext.Connection.Query<CommentNotificationDTO>("Notifications_package_api.GetCommentNotificationByUserId", noti,
+              commandType: CommandType.StoredProcedure);
+            var commentedcom = notificationcomments.Where(c => c.CommentId == comm.Commentid).SingleOrDefault();
+            if (commentedcom != null)
+            {
+                commentedcom.NotificationText = "commented on your post";
+                await hubContext.Clients.All.SendAsync("MessageReceived", commentedcom);
+
+            }
 
 
         }
