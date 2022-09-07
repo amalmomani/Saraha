@@ -18,7 +18,7 @@ namespace Saraha.Core.DTO
         public string CommentText { set; get; }
         public string UserFrom { set; get; }
         public int UserFromId { set; get; }
-        public int UserFromImage { set; get; }
+        public string UserFromImage { set; get; }
 
 
 

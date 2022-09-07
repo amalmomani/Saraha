@@ -96,7 +96,7 @@ namespace Saraha.Infra.Repository
             var noti = new DynamicParameters();
 
             noti.Add("@UserIdd", postComentedOn.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            IEnumerable<CommentNotificationDTO> notificationcomments = dbContext.Connection.Query<CommentNotificationDTO>("Notifications_package_api.GetLikeNotificationByUserId", noti,
+            IEnumerable<CommentNotificationDTO> notificationcomments = dbContext.Connection.Query<CommentNotificationDTO>("Notifications_package_api.GetCommentNotificationByUserId", noti,
               commandType: CommandType.StoredProcedure);
             var commentedcom = notificationcomments.Where(c => c.CommentId == comm.Commentid).SingleOrDefault();
             if (commentedcom != null)
