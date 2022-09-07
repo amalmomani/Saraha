@@ -27,7 +27,7 @@ namespace Saraha.Controllers
 
             return UserProfileService.GetallUserProfile();
         }
-        [HttpPost ("Register")]
+        [HttpPost("Register")]
         public void CreateUser([FromBody] RegisterDTO userprofile)
         {
             UserProfileService.CreateUserProfile(userprofile);
@@ -103,7 +103,7 @@ namespace Saraha.Controllers
         }
 
         [HttpGet("UserCount")]
-        public int UsersCount ()
+        public int UsersCount()
         {
             return UserProfileService.UsersCount();
         }
@@ -133,10 +133,17 @@ namespace Saraha.Controllers
         }
 
         [HttpGet("IsEmailExist/{email}")]
-         public bool IsEmailExist(string email)
+        public bool IsEmailExist(string email)
         {
             return UserProfileService.IsEmailExist(email);
         }
 
+
+        [HttpGet("Notification/{userId}")]
+        public void Notification(int userId)
+        {
+            UserProfileService.GetNotifiactionByUserId(userId);
+        }
     }
 }
+

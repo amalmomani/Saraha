@@ -70,5 +70,11 @@ namespace Saraha.Infra.Service
         {
             return repo.SearchUser(username, country, gender);
         }
+        public void GetNotifiactionByUserId(int userId)
+        {
+             repo.GetNotifiactionByUserId(userId);
+
+        }
+
     }
 }
