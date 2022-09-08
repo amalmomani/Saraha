@@ -97,7 +97,7 @@ namespace Saraha.Infra.Repository
 
             var parameter = new DynamicParameters();
             parameter.Add("@dateFromm", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            parameter.Add("@datetoo",DateTime.Now.AddDays((int)f.FeatureDuration), dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@datetoo",DateTime.Now.AddMonths((int)f.FeatureDuration), dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("@PurchaseCostt", cost, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@userIdd",u.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@featureIdd",f.FeatureId, dbType: DbType.Int32, direction: ParameterDirection.Input);

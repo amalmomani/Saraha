@@ -22,7 +22,8 @@ namespace Saraha.Infra.Repository
             this.dbContext = dbContext;
             this.hubContext = hubContext;
         }
-       
+
+
         public void CreateUserProfile(RegisterDTO userProfile)
         {
             var p = new DynamicParameters();

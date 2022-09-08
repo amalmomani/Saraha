@@ -53,6 +53,7 @@ namespace Saraha.Infra.Repository
                 pa.Add("@ActivityNamee", "follow", dbType: DbType.String, direction: ParameterDirection.Input);
                 pa.Add("@Messagee", "Following", dbType: DbType.String, direction: ParameterDirection.Input);
                 pa.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+                pa.Add("@FollowIdd", folllowDone.Id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
                 var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
 

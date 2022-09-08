@@ -33,5 +33,15 @@ namespace Saraha.Infra.Service
         {
             return repo.GetOrders();
         }
+
+        public void IsFeatureExpire()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void IsPremiumExpire()
+        {
+            repo.IsPremiumExpire();
+        }
     }
 }

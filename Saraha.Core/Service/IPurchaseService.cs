@@ -14,5 +14,7 @@ namespace Saraha.Core.Service
         public List<Purchase> GetAllPurchases();
         public void DeletePurchase(int id);
         public List<OrderAndServiceDTO> GetOrders();
+        public void IsFeatureExpire();
+        public void IsPremiumExpire();
     }
 }

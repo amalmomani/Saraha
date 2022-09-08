@@ -102,7 +102,8 @@ namespace Saraha.Infra.Repository
             pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@Messagee", post.Posttext, dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            
+            pa.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
 
 
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
@@ -132,6 +133,7 @@ namespace Saraha.Infra.Repository
             pa.Add("@ActivityNamee", "post", dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@Messagee", msg.MessageContent, dbType: DbType.String, direction: ParameterDirection.Input);
             pa.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            pa.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
 

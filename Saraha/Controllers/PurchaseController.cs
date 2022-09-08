@@ -45,7 +45,11 @@ namespace Saraha.Controllers
             return purchaseService.GetOrders();
         }
 
-
+        [HttpGet("IsPremiumExpire")]
+        public void IsPremiumExpire()
+        {
+            purchaseService.IsPremiumExpire();
+        }
 
     }
 }

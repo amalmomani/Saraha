@@ -22,7 +22,7 @@ namespace Saraha.Core.Data
         public int PostId { get; set; }
         public string Message { get; set; }
         public string activityName { get; set; }
-
+        public int FollowId { get; set; }
 
         [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
