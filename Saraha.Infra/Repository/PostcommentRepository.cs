@@ -94,7 +94,7 @@ namespace Saraha.Infra.Repository
             notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             notification.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
             notification.Add("@NType", commentedcom.UserFromImage, dbType: DbType.String, direction: ParameterDirection.Input);
-            notification.Add("@NotificationTextt", commentedcom.UserFrom+" Commented on your post", dbType: DbType.String, direction: ParameterDirection.Input);
+            notification.Add("@NotificationTextt", commentedcom.UserFrom+" Commented On your post", dbType: DbType.String, direction: ParameterDirection.Input);
 
             var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
 
