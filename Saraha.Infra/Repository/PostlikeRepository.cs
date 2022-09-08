@@ -156,7 +156,7 @@ namespace Saraha.Infra.Repository
         }
         public bool CheckIfLiked(int userId , int postId)
         {
-            IEnumerable<Postlike> result = dbContext.Connection.Query<Postlike>("DTOPackage.PostLikes", commandType: CommandType.StoredProcedure);
+            IEnumerable<Postlike> result = dbContext.Connection.Query<Postlike>("Like_package.getallLikes", commandType: CommandType.StoredProcedure);
             var IsLiked = result.Any(l => l.UserId == userId && l.PostId==postId);
                 return IsLiked;
         }
