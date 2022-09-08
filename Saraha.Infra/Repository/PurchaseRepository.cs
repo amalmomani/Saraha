@@ -14,10 +14,10 @@ namespace Saraha.Infra.Repository
    public class PurchaseRepository : IPurchaseRepository
     {
         private readonly IDbcontext dbContext;
-
         public PurchaseRepository(IDbcontext dbContext)
         {
             this.dbContext = dbContext;
+          
         }
 
 
@@ -58,6 +58,28 @@ namespace Saraha.Infra.Repository
             return R;
         }
 
-     
+        public void IsPremiumExpire()
+        {
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>("User_Package.GetAllUsers", commandType: CommandType.StoredProcedure);
+            foreach (Userprofile userprofile in result)
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@UserIdd", userprofile.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                int result1 = dbContext.Connection.QuerySingleOrDefault<int>
+                    ("IsPremiumExpire", parameter, commandType: CommandType.StoredProcedure);
+
+                if (result1 > 0)
+                {
+                    var p = new DynamicParameters();
+
+                    p.Add("@IsPremiumm", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                    p.Add("@UserIdd", userprofile.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+                     dbContext.Connection.ExecuteAsync("User_Package.UpdatePremium", p,
+                      commandType: CommandType.StoredProcedure);
+                }
+            }    
+           
+        }
     }
 }

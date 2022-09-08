@@ -18,7 +18,8 @@ namespace Saraha.Infra.Repository
         {
             this.dbContext = dbContext;
         }
-       
+
+
         public void CreateUserProfile(RegisterDTO userProfile)
         {
             var p = new DynamicParameters();
