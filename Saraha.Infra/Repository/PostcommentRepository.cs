@@ -63,12 +63,20 @@ namespace Saraha.Infra.Repository
             pa.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
             var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
-          
-            
-            
-            //Add commment to notifications 
+
+
+
+            //Add commment to notifications
+            var noti = new DynamicParameters();
             IEnumerable<Post> posts = dbContext.Connection.Query<Post>("Post_package.getallPosts", commandType: CommandType.StoredProcedure);
-            var postComentedOn = posts.Where(p => p.Postid == comment.Postid ).SingleOrDefault();
+            var postComentedOn = posts.Where(p => p.Postid == comment.Postid).SingleOrDefault();
+
+            noti.Add("@UserIdd", postComentedOn.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<CommentNotificationDTO> notificationcomments = dbContext.Connection.Query<CommentNotificationDTO>("Notifications_package_api.GetCommentNotificationByUserId", noti,
+              commandType: CommandType.StoredProcedure);
+            var commentedcom = notificationcomments.Where(c => c.CommentId == comm.Commentid).SingleOrDefault();
+
+          
             var notification = new DynamicParameters();
             notification.Add("@Messagee",comment.Commenttext, dbType: DbType.String, direction: ParameterDirection.Input);
 
@@ -85,7 +93,9 @@ namespace Saraha.Infra.Repository
 
             notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             notification.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            notification.Add("@Type", "comment", dbType: DbType.String, direction: ParameterDirection.Input);
+            notification.Add("@NType", commentedcom.UserFromImage, dbType: DbType.String, direction: ParameterDirection.Input);
+            notification.Add("@NotificationTextt", commentedcom.UserFrom+" Commented on your post", dbType: DbType.String, direction: ParameterDirection.Input);
+
             var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
 
 
@@ -93,12 +103,7 @@ namespace Saraha.Infra.Repository
 
 
 
-            var noti = new DynamicParameters();
-
-            noti.Add("@UserIdd", postComentedOn.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            IEnumerable<CommentNotificationDTO> notificationcomments = dbContext.Connection.Query<CommentNotificationDTO>("Notifications_package_api.GetCommentNotificationByUserId", noti,
-              commandType: CommandType.StoredProcedure);
-            var commentedcom = notificationcomments.Where(c => c.CommentId == comm.Commentid).SingleOrDefault();
+     
             if (commentedcom != null)
             {
                 commentedcom.NotificationText = "commented on your post";

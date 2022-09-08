@@ -27,7 +27,7 @@ namespace Saraha.Controllers
 
             return UserProfileService.GetallUserProfile();
         }
-        [HttpPost ("Register")]
+        [HttpPost("Register")]
         public void CreateUser([FromBody] RegisterDTO userprofile)
         {
             UserProfileService.CreateUserProfile(userprofile);
@@ -71,7 +71,7 @@ namespace Saraha.Controllers
                 }
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("C:\\Users\\Amal\\Desktop\\Saraha\\src\\assets", attachmentFileName);
+                var fullPath = Path.Combine("D:\\5.2\\training\\(12)Saraha Project\\Saraha vs code\\Saraha\\src\\assets", attachmentFileName);
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
@@ -103,7 +103,7 @@ namespace Saraha.Controllers
         }
 
         [HttpGet("UserCount")]
-        public int UsersCount ()
+        public int UsersCount()
         {
             return UserProfileService.UsersCount();
         }
@@ -133,10 +133,17 @@ namespace Saraha.Controllers
         }
 
         [HttpGet("IsEmailExist/{email}")]
-         public bool IsEmailExist(string email)
+        public bool IsEmailExist(string email)
         {
             return UserProfileService.IsEmailExist(email);
         }
 
+
+        [HttpGet("Notification/{userId}")]
+        public void Notification(int userId)
+        {
+            UserProfileService.GetNotifiactionByUserId(userId);
+        }
     }
 }
+
