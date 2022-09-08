@@ -52,7 +52,7 @@ namespace Saraha.Infra.Repository
 
             var result = dbContext.Connection.Execute("Comment_package.createComment", parameter, commandType: CommandType.StoredProcedure);
             IEnumerable<Postcomment> comments = dbContext.Connection.Query<Postcomment>("Comment_package.getallComments", commandType: CommandType.StoredProcedure);
-            var comm = comments.Where(c => c.Commenttext == comment.Commenttext && c.Userid == c.Userid && c.Commentdate.ToString() == now.ToString()).SingleOrDefault();
+            var comm = comments.Where(c => c.Commenttext == comment.Commenttext && c.Userid == comment.Userid && c.Commentdate.ToString() == now.ToString()).SingleOrDefault();
             var pa = new DynamicParameters();
             pa.Add("@UserIDD", comment.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pa.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);

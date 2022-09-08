@@ -154,5 +154,11 @@ namespace Saraha.Infra.Repository
 
             return result.ToList();
         }
+        public bool CheckIfLiked(int userId , int postId)
+        {
+            IEnumerable<Postlike> result = dbContext.Connection.Query<Postlike>("DTOPackage.PostLikes", commandType: CommandType.StoredProcedure);
+            var IsLiked = result.Any(l => l.UserId == userId && l.PostId==postId);
+                return IsLiked;
+        }
     }
 }
