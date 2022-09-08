@@ -6,6 +6,7 @@ namespace Saraha.Core.Data
 {
    public class Notifications
     {
+        public int NotificationId { set; get; }
         public string Message { set; get; }
         public int MessageId { set; get; }
         public int Is_Read { set; get; }

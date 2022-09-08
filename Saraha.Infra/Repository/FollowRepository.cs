@@ -97,7 +97,13 @@ namespace Saraha.Infra.Repository
                 {
                     followw.NotificationText = "started Following you";
                     await hubContext.Clients.All.SendAsync("MessageReceived", followw);
+                    var paramete = new DynamicParameters();
+                    paramete.Add("@UserIdd", follow.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
+                    IEnumerable<Notifications> nots = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", paramete, commandType: CommandType.StoredProcedure);
+                    await hubContext.Clients.All.SendAsync("NotificationReceived", nots);
+                    var notsCount = nots.Where(x => x.Is_Read == 0).ToList().Count();
+                    await hubContext.Clients.All.SendAsync("NotCount", notsCount);
                 }
             }
             else

@@ -171,20 +171,26 @@ namespace Saraha.Infra.Repository
 
             IEnumerable<Notifications> result = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", parameter, commandType: CommandType.StoredProcedure);
             await hubContext.Clients.All.SendAsync("NotificationReceived", result);
-
+            var notsCount = result.Where(x => x.Is_Read == 0).ToList().Count();
+            await hubContext.Clients.All.SendAsync("NotCount", notsCount);
 
         }
-        public async  void UpdateNotIsRead( int userId )
+        public async  void UpdateNotIsRead( int userId ,int  notificationId)
         {
+            var p = new DynamicParameters();
+            p.Add("@NotificationIdd", notificationId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
-             var result = dbContext.Connection.ExecuteAsync("Notifications_package_api.UpdateNotification",commandType: CommandType.StoredProcedure);
+
+            var result = dbContext.Connection.ExecuteAsync("Notifications_package_api.UpdateNotification",p,commandType: CommandType.StoredProcedure);
 
             var parameter = new DynamicParameters();
             parameter.Add("@UserIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             IEnumerable<Notifications> nots = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", parameter, commandType: CommandType.StoredProcedure);
             await hubContext.Clients.All.SendAsync("NotificationReceived", nots);
+            var notsCount = nots.Where(x => x.Is_Read == 0).ToList().Count();
+            await hubContext.Clients.All.SendAsync("NotCount", notsCount);
 
 
 

@@ -79,7 +79,13 @@ namespace Saraha.Infra.Repository
                 msgNoti.NotificationText = "sent you message";
                 msgNoti.Title = "New Message";
                 await this.hubContext.Clients.All.SendAsync("MessageReceived", msgNoti);
+                var paramete = new DynamicParameters();
+                paramete.Add("@UserIdd", userLoggedId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
+                IEnumerable<Notifications> nots = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", paramete, commandType: CommandType.StoredProcedure);
+                await hubContext.Clients.All.SendAsync("NotificationReceived", nots);
+                var notsCount = nots.Where(x => x.Is_Read == 0).ToList().Count();
+                await hubContext.Clients.All.SendAsync("NotCount", notsCount);
             }
 
 
