@@ -75,6 +75,10 @@ namespace Saraha.Infra.Service
              repo.GetNotifiactionByUserId(userId);
 
         }
+        public void UpdateNotIsRead(int userId)
+        {
+            repo.UpdateNotIsRead(userId);
+        }
 
     }
 }

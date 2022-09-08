@@ -43,5 +43,10 @@ namespace Saraha.Infra.Service
         {
             return repo.GetLikeById(userId);
         }
+        public bool CheckIfLiked(int userId, int postId)
+        {
+            return repo.CheckIfLiked(userId, postId);
+        }
+
     }
 }

@@ -52,5 +52,10 @@ namespace Saraha.Controllers
         {
             return likeService.GetLikeById(userId);
         }
+        [HttpGet("IsLike/{userId}/{postId}")]
+        public bool IsLiked(int userId,int postId)
+        {
+            return likeService.CheckIfLiked(userId , postId);
+        }
     }
 }

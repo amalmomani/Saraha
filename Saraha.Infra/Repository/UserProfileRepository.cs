@@ -173,6 +173,23 @@ namespace Saraha.Infra.Repository
             await hubContext.Clients.All.SendAsync("NotificationReceived", result);
 
 
+        }
+        public async  void UpdateNotIsRead( int userId )
+        {
+
+
+             var result = dbContext.Connection.ExecuteAsync("Notifications_package_api.UpdateNotification",commandType: CommandType.StoredProcedure);
+
+            var parameter = new DynamicParameters();
+            parameter.Add("@UserIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Notifications> nots = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", parameter, commandType: CommandType.StoredProcedure);
+            await hubContext.Clients.All.SendAsync("NotificationReceived", nots);
+
+
+
+
+
 
         }
     }

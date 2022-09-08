@@ -20,6 +20,8 @@ namespace Saraha.Core.Repository
         public Userprofile GetUserById(int userId);
         public List<Userprofile> SearchUser(string username, string country, string gender);
         public void GetNotifiactionByUserId(int userId);
+        public void UpdateNotIsRead(int userId);
+
 
 
 

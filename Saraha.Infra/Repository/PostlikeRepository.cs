@@ -100,7 +100,7 @@ namespace Saraha.Infra.Repository
                 notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
                 notification.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 notification.Add("@Ntype", "like", dbType: DbType.String, direction: ParameterDirection.Input);
-                notification.Add("@NotificationTextt", likenoti.UserFrom+ "liked your post", dbType: DbType.String, direction: ParameterDirection.Input);
+                notification.Add("@NotificationTextt", likenoti.UserFrom+ " Liked Your Post", dbType: DbType.String, direction: ParameterDirection.Input);
 
                 var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
 
@@ -153,6 +153,12 @@ namespace Saraha.Infra.Repository
               commandType: CommandType.StoredProcedure);
 
             return result.ToList();
+        }
+        public bool CheckIfLiked(int userId , int postId)
+        {
+            IEnumerable<Postlike> result = dbContext.Connection.Query<Postlike>("Like_package.getallLikes", commandType: CommandType.StoredProcedure);
+            var IsLiked = result.Any(l => l.UserId == userId && l.PostId==postId);
+                return IsLiked;
         }
     }
 }
