@@ -77,6 +77,16 @@ namespace Saraha.Infra.Repository
             return result.ToList().SingleOrDefault();
         }
 
+        public Userprofile GetUserByFollowId(int followId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@FollowIdd", followId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Userprofile> result = dbContext.Connection.Query<Userprofile>
+                ("GetUserInfoByFollowId", parameter, commandType: CommandType.StoredProcedure);
+            return result.ToList().SingleOrDefault();
+        }
+
         public void UpdateActivity(Activity activity)
         {
             var parameter = new DynamicParameters();

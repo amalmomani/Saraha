@@ -39,6 +39,11 @@ namespace Saraha.Infra.Service
             return repo.GetUserByCommentId(commentId);
         }
 
+        public Userprofile GetUserByFollowId(int followId)
+        {
+            return repo.GetUserByFollowId(followId);
+        }
+
         public Userprofile GetUserByLikeId(int likeId)
         {
             return repo.GetUserByLikeId(likeId);
