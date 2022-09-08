@@ -16,8 +16,7 @@ namespace Saraha.Core.Service
         public List<PostLikesDTO> GetPostLikes();
         public List<Postlike> GetLikeById(int userId);
         public bool CheckIfLiked(int userId, int postId);
-
-
+        public void DeleteLikeByUserPostId(int userId, int postId);
 
     }
 }

@@ -48,5 +48,9 @@ namespace Saraha.Infra.Service
             return repo.CheckIfLiked(userId, postId);
         }
 
+        public void DeleteLikeByUserPostId(int userId, int postId)
+        {
+             repo.DeleteLikeByUserPostId(userId, postId);
+        }
     }
 }

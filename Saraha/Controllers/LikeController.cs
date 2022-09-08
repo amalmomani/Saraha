@@ -57,5 +57,11 @@ namespace Saraha.Controllers
         {
             return likeService.CheckIfLiked(userId , postId);
         }
+
+        [HttpGet("DeleteLikeByUserPostId/{userId}/{postId}")]
+        public void DeleteLikeByUserPostId(int userId, int postId)
+        {
+            likeService.DeleteLikeByUserPostId(userId, postId);
+        }
     }
 }
