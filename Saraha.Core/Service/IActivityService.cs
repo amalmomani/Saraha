@@ -14,6 +14,7 @@ namespace Saraha.Core.Service
         public List<Activity> GetActivityByUserId(int userId);
         public Userprofile GetUserByLikeId(int likeId);
         public Userprofile GetUserByCommentId(int commentId);
+        public Userprofile GetUserByFollowId(int followId);
 
 
     }

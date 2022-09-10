@@ -63,5 +63,11 @@ namespace Saraha.Controllers
             return activityService.GetUserByCommentId(commentId);
         }
 
+        [HttpGet("GetUserByFollowId/{followId}")]
+        public Userprofile GetUserByFollowId(int followId)
+        {
+            return activityService.GetUserByFollowId(followId);
+        }
+
     }
 }

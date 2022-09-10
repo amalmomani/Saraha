@@ -32,9 +32,9 @@ namespace Saraha.Infra.Repository
             var fDone = allFollows.Where(f => f.UserFrom == follow.UserFrom && f.UserTo == f.UserTo && f.FollowDate.ToString() == now.ToString()).SingleOrDefault();
 
 
-            var exist = allFollows.Any(f => f.UserFrom == follow.UserFrom && f.UserTo == follow.UserTo);
-            if (!exist)
-            {
+            //var exist = allFollows.Any(f => f.UserFrom == follow.UserFrom && f.UserTo == follow.UserTo);
+            //if (!exist)
+            //{
 
                 parameter.Add("@UserFromm", follow.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 parameter.Add("@UserToo", follow.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);

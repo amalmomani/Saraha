@@ -63,7 +63,7 @@ namespace Saraha.Infra.Repository
                 activity.Add("@UserIDD", like.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 activity.Add("@LikeIDD", likeDone.LikeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 activity.Add("@CommentIDD",null, dbType: DbType.Int32, direction: ParameterDirection.Input);
-                activity.Add("@PostIDD", likeDone.PostId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                activity.Add("@PostIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 activity.Add("@ActivityNamee", "like", dbType: DbType.String, direction: ParameterDirection.Input);
                 activity.Add("@Messagee", " ", dbType: DbType.String, direction: ParameterDirection.Input);
                 activity.Add("@ActivityDatee", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);

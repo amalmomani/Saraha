@@ -15,6 +15,7 @@ namespace Saraha.Core.Repository
 
         public Userprofile GetUserByLikeId(int likeId);
         public Userprofile GetUserByCommentId(int commentId);
+        public Userprofile GetUserByFollowId(int followId);
 
     }
 }
