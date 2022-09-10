@@ -105,9 +105,7 @@ namespace Saraha.Infra.Repository
                     var notsCount = nots.Where(x => x.Is_Read == 0).ToList().Count();
                     await hubContext.Clients.All.SendAsync("NotCount", notsCount);
                 }
-            }
-            else
-                DeleteFollow(fDone.Id);
+ 
 
 
 
