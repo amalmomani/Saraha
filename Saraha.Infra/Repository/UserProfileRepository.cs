@@ -171,7 +171,7 @@ namespace Saraha.Infra.Repository
 
             IEnumerable<Notifications> result = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", parameter, commandType: CommandType.StoredProcedure);
             await hubContext.Clients.All.SendAsync("NotificationReceived", result);
-            var notsCount = result.Where(x => x.Is_Read == 0).ToList().Count();
+            var notsCount = result.Where(x => x.Is_Read == 0 && x.UserTo == userId).ToList().Count();
             await hubContext.Clients.All.SendAsync("NotCount", notsCount);
 
         }

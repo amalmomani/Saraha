@@ -13,7 +13,7 @@ namespace Saraha.Core.Data
         public int CommentId { set; get; }
         public int LikeId { set; get; }
         public int UserFrom { set; get; }
-        public int UseTo { set; get; } 
+        public int UserTo { set; get; } 
         public int ReportId { set; get; }
         public int PostId { set; get; }
         public DateTime NotificationDate { set; get; }
