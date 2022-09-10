@@ -15,6 +15,8 @@ namespace Saraha.Core.Repository
         public List<Postlike> GetLikeById(int userId);
         public List<PostLikesDTO> GetPostLikes();
         public bool CheckIfLiked(int userId, int postId);
+        public void DeleteLikeByUserPostId(int userId, int postId);
+
 
     }
 }

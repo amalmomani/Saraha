@@ -81,7 +81,7 @@ namespace Saraha.Infra.Repository
                 notification.Add("@ReportIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 notification.Add("@PostIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-                notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
                 notification.Add("@FollowIdd", folllowDone.Id, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 notification.Add("@Ntype", "follow", dbType: DbType.String, direction: ParameterDirection.Input);
                 notification.Add("@NotificationTextt", followw.UserFrom+" Started Following You", dbType: DbType.String, direction: ParameterDirection.Input);

@@ -167,5 +167,14 @@ namespace Saraha.Infra.Repository
             var IsLiked = result.Any(l => l.UserId == userId && l.PostId==postId);
                 return IsLiked;
         }
+
+        public void DeleteLikeByUserPostId(int userId, int postId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@UserIdd", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@PostIdd", postId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = dbContext.Connection.Execute("Like_package.DeleteLikeByUserPostId", parameter, commandType: CommandType.StoredProcedure);
+        }
     }
 }
