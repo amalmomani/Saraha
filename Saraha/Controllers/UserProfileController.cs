@@ -145,10 +145,10 @@ namespace Saraha.Controllers
             UserProfileService.GetNotifiactionByUserId(userId);
         }
 
-        [HttpGet("UpdateNot/{userId}")]
-        public void UpdateNot(int userId)
+        [HttpGet("UpdateNot/{userId}/{notificationId}")]
+        public void UpdateNot(int userId,int notificationId)
         {
-            UserProfileService.UpdateNotIsRead(userId);
+            UserProfileService.UpdateNotIsRead(userId, notificationId);
         }
     }
 }

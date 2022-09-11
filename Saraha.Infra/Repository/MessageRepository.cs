@@ -67,8 +67,22 @@ namespace Saraha.Infra.Repository
 
             notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             notification.Add("@FollowIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            notification.Add("@NType", msgNoti.UserFromImage, dbType: DbType.String, direction: ParameterDirection.Input);
-            notification.Add("@NotificationTextt", msgNoti.UserFrom + " Sent you message", dbType: DbType.String, direction: ParameterDirection.Input);
+            if (msg.Is_Anon)
+
+                notification.Add("@NType", null, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            else
+                notification.Add("@NType", msgNoti.UserFromImage, dbType: DbType.String, direction: ParameterDirection.Input);
+
+
+
+
+            if (msg.Is_Anon)
+            
+                notification.Add("@NotificationTextt",  "Someone sent you a message", dbType: DbType.String, direction: ParameterDirection.Input);
+            
+            else
+                notification.Add("@NotificationTextt", msgNoti.UserFrom + " sent you a message", dbType: DbType.String, direction: ParameterDirection.Input);
 
             var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
 
@@ -79,7 +93,13 @@ namespace Saraha.Infra.Repository
                 msgNoti.NotificationText = "sent you message";
                 msgNoti.Title = "New Message";
                 await this.hubContext.Clients.All.SendAsync("MessageReceived", msgNoti);
+                var paramete = new DynamicParameters();
+                paramete.Add("@UserIdd", msg.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
+                IEnumerable<Notifications> nots = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", paramete, commandType: CommandType.StoredProcedure);
+                await hubContext.Clients.All.SendAsync("NotificationReceived", nots);
+                var notsCount = nots.Where(x => x.Is_Read == 0).ToList().Count();
+                await hubContext.Clients.All.SendAsync("NotCount", notsCount);
             }
 
 

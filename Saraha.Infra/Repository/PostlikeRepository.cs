@@ -114,6 +114,13 @@ namespace Saraha.Infra.Repository
                 {
                     likenoti.NotificationText = "likes your post";
                     await _hubContext.Clients.All.SendAsync("MessageReceived", likenoti );
+                        var paramete = new DynamicParameters();
+                           paramete.Add("@UserIdd", like.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+                             IEnumerable<Notifications> nots = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", paramete, commandType: CommandType.StoredProcedure);
+                              await _hubContext.Clients.All.SendAsync("NotificationReceived", nots);
+                    var notsCount = nots.Where(x => x.Is_Read == 0).ToList().Count();
+                                await _hubContext.Clients.All.SendAsync("NotCount", notsCount) ;
 
                 }
 

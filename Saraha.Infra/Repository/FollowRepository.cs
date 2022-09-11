@@ -58,50 +58,54 @@ namespace Saraha.Infra.Repository
                 var r = dbContext.Connection.Execute("Activity_package_api.createActivity", pa, commandType: CommandType.StoredProcedure);
 
 
-            var noti = new DynamicParameters();
+                var noti = new DynamicParameters();
 
-            noti.Add("@UserIdd", follow.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            IEnumerable<FollowNotificationDTO> fls = dbContext.Connection.Query<FollowNotificationDTO>("Notifications_package_api.GetFollowNotificationByUserId", noti,
-              commandType: CommandType.StoredProcedure);
-            var followw = fls.Where(f => f.FollowId == folllowDone.Id).SingleOrDefault();
+                noti.Add("@UserIdd", follow.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                IEnumerable<FollowNotificationDTO> fls = dbContext.Connection.Query<FollowNotificationDTO>("Notifications_package_api.GetFollowNotificationByUserId", noti,
+                  commandType: CommandType.StoredProcedure);
+                var followw = fls.Where(f => f.FollowId == folllowDone.Id).SingleOrDefault();
 
-            //Add commment to notifications 
+                //Add commment to notifications 
 
-            var notification = new DynamicParameters();
-            notification.Add("@Messagee", followw.UserFromImage, dbType: DbType.String, direction: ParameterDirection.Input);
+                var notification = new DynamicParameters();
+                notification.Add("@Messagee", followw.UserFromImage, dbType: DbType.String, direction: ParameterDirection.Input);
 
-            notification.Add("@MessageIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            notification.Add("@IsRead", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@MessageIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@IsRead", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
-            notification.Add("@CommentIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            notification.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            notification.Add("@userFromm", follow.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            notification.Add("@userToo", follow.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            notification.Add("@ReportIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            notification.Add("@PostIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@CommentIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@LikeIDD", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@userFromm", follow.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@userToo", follow.UserTo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@ReportIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                notification.Add("@PostIdd", null, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             notification.Add("@NotDate", now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
                 notification.Add("@FollowIdd", folllowDone.Id, dbType: DbType.Int32, direction: ParameterDirection.Input);
                 notification.Add("@Ntype", "follow", dbType: DbType.String, direction: ParameterDirection.Input);
                 notification.Add("@NotificationTextt", followw.UserFrom+" Started Following You", dbType: DbType.String, direction: ParameterDirection.Input);
 
-            var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
+                var not = dbContext.Connection.Execute("Notifications_package_api.createNotfication", notification, commandType: CommandType.StoredProcedure);
 
 
 
 
 
 
-            if (followw != null)
-            {
-                followw.NotificationText = "started Following you";
-                await hubContext.Clients.All.SendAsync("MessageReceived", followw);
+                if (followw != null)
+                {
+                    followw.NotificationText = "started Following you";
+                    await hubContext.Clients.All.SendAsync("MessageReceived", followw);
+                    var paramete = new DynamicParameters();
+                    paramete.Add("@UserIdd", follow.UserFrom, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            }
-            //}
-            //else
-            //    DeleteFollow(fDone.Id);
+                    IEnumerable<Notifications> nots = dbContext.Connection.Query<Notifications>("Notifications_package_api.GetNotificationByUserId", paramete, commandType: CommandType.StoredProcedure);
+                    await hubContext.Clients.All.SendAsync("NotificationReceived", nots);
+                    var notsCount = nots.Where(x => x.Is_Read == 0).ToList().Count();
+                    await hubContext.Clients.All.SendAsync("NotCount", notsCount);
+                }
+ 
 
 
 
