@@ -17,6 +17,7 @@ namespace learn.core.Data
         public string TempMax { get; set; }
         public string TempMin { get; set; }
         public string WeatherIcon { get; set; }
+        public DateTime Date { get; set; }
     }
 
 }

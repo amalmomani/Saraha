@@ -11,6 +11,7 @@ namespace Saraha.Core.DTO
         public string Email { get; set; }
         public string Phonenumber { get; set; }
         public string Gender { get; set; }
+        public string Country { get; set; }
         public string Imagepath { get; set; }
         public int Loginid { get; set; }
         public bool? Is_Blocked { get; set; }

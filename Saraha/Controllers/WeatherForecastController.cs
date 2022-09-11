@@ -39,8 +39,8 @@ namespace Saraha.Controllers
             .ToArray();
         }
 
-        [HttpPost("weather/{city}")]
-        public String WeatherDetail(string city)
+        [HttpGet("weather/{city}")]
+        public ResultViewModel WeatherDetail(string city)
         {
 
             string appId = "55bbe76c3dd83bfa7da364f69c92a8d1";
@@ -66,10 +66,10 @@ namespace Saraha.Controllers
                 rslt.TempFeelsLike = Convert.ToString(weatherInfo.main.feels_like);
                 rslt.TempMax = Convert.ToString(weatherInfo.main.temp_max);
                 rslt.TempMin = Convert.ToString(weatherInfo.main.temp_min);
-
+                rslt.Date =DateTime.Now.Date;
                 var jsonstring = new JavaScriptSerializer().Serialize(rslt);
 
-                return jsonstring;
+                return rslt;
 
             }
 
