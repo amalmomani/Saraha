@@ -53,7 +53,7 @@ namespace Saraha.Infra.Repository
             { 
                 if (cardd != null)
                 {
-                    if (cardd.ExpirationDate == Expir && cardd.ExpirationDate >= DateTime.Today)
+                    if (cardd.ExpirationDate.Date == Expir.Date && cardd.ExpirationDate.Date >= DateTime.Now.Date)
                     {
                         if (cardd.Balance >= cost)
                         {
