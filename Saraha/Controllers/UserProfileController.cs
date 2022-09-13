@@ -36,30 +36,7 @@ namespace Saraha.Controllers
         [HttpPost("UploadUserImage")]
         public Userprofile UploadUserImage()
         {
-            //try
-            //{
-            //    var file = Request.Form.Files[0];
-            //    byte[] fileContent;
-            //    using (var ms = new MemoryStream())
-            //    {
-            //        file.CopyTo(ms);
-            //        fileContent = ms.ToArray();
-            //    }
-            //    var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
-            //    string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-            //    var fullPath = Path.Combine("C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets", attachmentFileName);
-            //    using (var stream = new FileStream(fullPath, FileMode.Create))
-            //    {
-            //        file.CopyTo(stream);
-            //    }
-            //    Userprofile item = new Userprofile();
-            //    item.Imagepath = attachmentFileName;
-            //    return item;
-            //}
-            //catch (Exception e)
-            //{
-            //    return null;
-            //}
+            
             try
             {
                 var file = Request.Form.Files[0];
@@ -71,7 +48,7 @@ namespace Saraha.Controllers
                 }
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileNameWithoutExtension(file.FileName);
                 string attachmentFileName = $"{fileName}.{Path.GetExtension(file.FileName).Replace(".", "")}";
-                var fullPath = Path.Combine("C:\\Users\\DELL\\Desktop\\Saraha\\src\\assets", attachmentFileName);
+                var fullPath = Path.Combine("C:\\Users\\Lenovo\\Desktop\\Saraha\\src\\assets", attachmentFileName);
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
