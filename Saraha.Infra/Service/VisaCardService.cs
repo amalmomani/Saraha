@@ -20,9 +20,9 @@ namespace Saraha.Infra.Service
             return repo.GetallVisa();
         }
 
-        public ToasterDTO GetVisa(string card, int cost, int userId, int featureId)
+        public ToasterDTO GetVisa(string card, DateTime Expir, int cost, int userId, int featureId)
         {
-            return repo.GetVisa(card, cost,userId,featureId);
+            return repo.GetVisa(card, Expir, cost,userId,featureId);
         }
 
         public void UpdateVisa(VisaCard visa, int cost)

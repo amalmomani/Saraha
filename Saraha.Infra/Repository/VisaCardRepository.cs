@@ -36,7 +36,7 @@ namespace Saraha.Infra.Repository
             var result = dbContext.Connection.ExecuteAsync("VisaApi_package.VisaUpdate", parameter, commandType: CommandType.StoredProcedure);
 
         }
-        public ToasterDTO GetVisa(string card, int cost,int userId, int featureId)
+        public ToasterDTO GetVisa(string card, DateTime Expir,int cost,int userId, int featureId)
         {
             ToasterDTO mess=new ToasterDTO();
             Userprofile User = new Userprofile();
@@ -53,27 +53,37 @@ namespace Saraha.Infra.Repository
             { 
                 if (cardd != null)
                 {
-                    if (cardd.Balance >= cost)
+                    if (cardd.ExpirationDate == Expir && cardd.ExpirationDate >= DateTime.Today)
                     {
-                        UpdateVisa(cardd, cost);
-                        mess.message = "Paid sucessfully";
-                        CreatePurchase(cost, userId, featureId);
-                        var p = new DynamicParameters();
+                        if (cardd.Balance >= cost)
+                        {
+                            UpdateVisa(cardd, cost);
+                            mess.message = "Paid sucessfully";
+                            CreatePurchase(cost, userId, featureId);
+                            var p = new DynamicParameters();
 
-                        p.Add("@UserIdd", user.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-                        
-                        p.Add("@IsPremiumm", 1 , dbType: DbType.Int32, direction: ParameterDirection.Input);
+                            p.Add("@UserIdd", user.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-                        var result3 = dbContext.Connection.ExecuteAsync("User_Package.UpdatePremium", p,
-                            commandType: CommandType.StoredProcedure);
-                        return mess;
+                            p.Add("@IsPremiumm", 1, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+                            var result3 = dbContext.Connection.ExecuteAsync("User_Package.UpdatePremium", p,
+                                commandType: CommandType.StoredProcedure);
+                            return mess;
+                        }
+                        else
+                        {
+                            mess.message = "Not enough balance";
+                            return mess;
+                        }
                     }
                     else
                     {
-                        mess.message = "Not enough balance";
+                        mess.message = "Sorry ! your card is expire!";
                         return mess;
                     }
+
                 }
+
                 else
                 {
                     mess.message = "Invalid card number";

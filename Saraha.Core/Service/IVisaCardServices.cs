@@ -10,7 +10,8 @@ namespace Saraha.Core.Service
     {
         public List<VisaCard> GetallVisa();
         public void UpdateVisa(VisaCard visa, int cost);
-        public ToasterDTO GetVisa(string card, int cost, int userId, int featureId);
-        
+        public ToasterDTO GetVisa(string card, DateTime Expir, int cost, int userId, int featureId);
+
+
         }
 }

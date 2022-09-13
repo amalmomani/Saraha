@@ -26,11 +26,11 @@ namespace Saraha.Controllers
 
             return VisaCardServices.GetallVisa();
         }
-        [HttpGet("GetVisa/{card}/{cost}/{userId}/{featureId}")]
+        [HttpGet("GetVisa/{card}/{Expir}/{cost}/{userId}/{featureId}")]
         [ProducesResponseType(typeof(List<VisaCard>), StatusCodes.Status200OK)]
-        public ToasterDTO GetVisa(string card, int cost, int userId, int featureId)
+        public ToasterDTO GetVisa(string card, DateTime Expir, int cost, int userId, int featureId)
         {
-            return VisaCardServices.GetVisa(card,cost,userId,featureId);
+            return VisaCardServices.GetVisa(card, Expir,cost, userId,featureId);
         }
 
         [HttpPut]
