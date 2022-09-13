@@ -103,7 +103,7 @@ namespace Saraha.Controllers
 
            int codeVerfiy = rand.Next(100000, 999999);
             string to = email; //To address    
-            string from = "rawanazzam68@gmail.com"; //From address    
+            string from = "rawanazzam153@gmail.com"; //From address    
             MailMessage message = new MailMessage(from, to);
 
             string mailbody = "this is code to verfiy Eamil \n" + codeVerfiy;
