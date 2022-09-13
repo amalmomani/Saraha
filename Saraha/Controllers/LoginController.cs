@@ -115,7 +115,7 @@ namespace Saraha.Controllers
             {
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
-                    smtp.Credentials = new NetworkCredential("rawanazzam68@gmail.com", "pcquxtnhnbcesyum");
+                    smtp.Credentials = new NetworkCredential("rawanazzam153@gmail.com", "txbsybthtlsjqmll");
                     smtp.EnableSsl = true;
                     smtp.Send(message);
                 }
